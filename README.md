@@ -17,7 +17,7 @@ A hélice ela é ligeiramente curvada de modo que ela crie um ângulo (AoA - Ang
 
 Uma outra teoria que é muito utilizada, mas a qual não é muito eficiente para explicar esse caso é pelo princípio de Bernoulli, onde, devido ao formato curvado da hélice/asa o ar acaba se dividindo em duas massas de ar, uma para cima a qual acaba convergindo com outras o que gera uma maior velocidade e por consequência uma menor pressão e uma para baixo com maior velocidade e maior pressão. Essas diferenças entre pressões faz com que a aeronave seja "sugada para cima".![img](https://static.sciencelearn.org.nz/images/images/000/000/671/embed/Airflow-v4.png?1572924268)
 
-![img](https://github.com/SkyRats/workshops/blob/master/doc/velocity_core.png)
+![img](https://github.com/SkyRats/workshops/blob/master/doc/Bernoulli.PNG)
 
 ### Movimentos
 
