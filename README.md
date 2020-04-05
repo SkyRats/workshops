@@ -487,7 +487,7 @@ sudo updatedb
 
 The source command reads and executes commands from the file specified as its argument in the current shell environment. It is useful to load functions, variables and configuration files into shell scripts.
 
-## Git, seu lindo
+## 9. Git, seu lindo
 
 Já atualizaram o Android de vocês para a versão 11.4.1? Já se perguntaram  como os desenvolvedores mantém registro de todas as mudanças entre as  diferentes verões do sistema? E se alguma coisa der errado? Como  voltamos atrás?. A resposta pra essas e muitas outras perguntas é, **usando o Git**,  o Git é um "sistema de controle de versões distribuído ... usado para  registrar o histórico de edições de qualquer tipo de arquivo"- O git serve para registrar histórico de edições de *qualquer tipo de arquivo*, **incluindo esse workshop** :smile:
 
