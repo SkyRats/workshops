@@ -1,4 +1,4 @@
-# Linux Terminal
+# Linux Basics
 
 ## 1. Árvore de Diretórios
 
