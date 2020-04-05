@@ -538,14 +538,13 @@ O comando acima vai associar o repositório local do seu PC com o endereço espe
 * `git push -u origin master` (u de set-upstream)
 
 
-
 ## Uma palavra sobre _branches_
 * Para clonar uma *branch* específica de um repositório, use `git clone  https://github.com/blablablabl -b [nome_da_branch]`
 * Estou trabalhando em uma _branch_, como mudo para outra?
 `git checkout [nome_da_branch]`
 
 
-### Uma palavra sobre o *.gitignore*
+### O **.gitignore**
   O .gitignore é um arquivo dentro do repositório que especifica ao github arquivos que não devem ser rastreados, ou "sincronizados com a nuvem" - um bom exemplo de onde usaremos isso é nos repositórios build e devel gerados pelo *catkin_ws* durante a compilação, eles possuem endereços locais do seu computador e não funcionarão no computador alheio.
 Geralmente, ignoramos arquivos de log, arquivos temporários de sistema, saídas compiladas, executáveis, etc
 
@@ -563,6 +562,25 @@ Nesse arquivo .gitignore, podemos adicionar
 
 * O arquivo .gitignore não precisa ser commitado, mas é recomendado
 
+### Além desses comandos...
+* git stash
+* git mv
+* git reset
+* git rm
+* git bisect
+* git grep
+* git log
+* git show
+* git status
+* git diff
+* git merge
+* git rebase
+* git fetch
+
+### Uma boa prática, symlinks
+
+
+`ln -s [endereço global do repositório] [endereço global do workspace]`
 
 #### Best argument ever
 
