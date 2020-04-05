@@ -483,9 +483,9 @@ sudo updatedb
 
 ### Source
 
-​	Todos os comandos que executamos no terminal são definidos em algum lugar
+​	Todos os comandos que executamos no terminal são definidos em algum lugar, o comando **source** le e usa comandos de um arquivo para serem interpretados pelo terminal atual.
+Podemos usar o source para definir nosso ambiente de trabalho, setando variáveis e configurações
 
-The source command reads and executes commands from the file specified as its argument in the current shell environment. It is useful to load functions, variables and configuration files into shell scripts.
 
 ## 9. Git, seu lindo
 
