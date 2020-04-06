@@ -50,9 +50,31 @@ Mas como a máquina pega essas instruções em alto nível que foram digitadas, 
     * 7 bits pro expoente
 
 #### Declaração
-* 
-#### Uso
+Em C++, precisamos **declarar** as variáveis, e seus tamanhos devem ser, a priori, definidos para que a máquina aloque a memória necessária para as variáveis.
 
+```C++
+int contador;
+int contador = 0;
+```
+### PONTO E VIRGULA, SEMPRE!
+Quando definimos uma variável o seu conteúdo não é conhecido, então é uma boa prática **inicializar as variáveis antes do seu uso**.
+#### Uso
+```C++
+int C=0; // inicializando a variável
+
+//Jeito 1 de incrementar variáveis
+C = C + 1;
+//Jeito equivalente
+C++;
+//Jeito equivalente
+C += 1;
+
+//O mesmo vale para subtrações, produtos e divisões
+C = C - 1;
+C--;
+C -= 1;
+// São 3 modos equivalentes de fazer a mesma operação
+```
 ### Entrada e Saída básicas
 
 #### Hello, drone
