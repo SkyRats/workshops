@@ -69,6 +69,17 @@ int contador = 0;
 ### PONTO E VIRGULA, SEMPRE!
 Quando definimos uma variável o seu conteúdo não é conhecido, então é uma boa prática **inicializar as variáveis antes do seu uso**.
 #### Uso
+* Operadores
+    * Soma - `+`
+    * Subtração - `-`
+    * Produto - `*`
+    * Divisão - `/`
+    * Negação - `!`
+    * AND - `&&`
+    * OR - `||`
+    * Comparação `>=`, `<=`, `==`
+
+* Variáveis numéricas
 ```C++
 int C=0; // inicializando a variável
 
@@ -85,7 +96,58 @@ C--;
 C -= 1;
 // São 3 modos equivalentes de fazer a mesma operação
 ```
+* Variáveis booleanas
+```C++
+bool decision = false; // inicializando a variável
+
+decision != decision;
+// Depois dessa operação, decision vale true
+```
+```C++
+bool verao, chuva;
+
+sair = verao && !chuva; // sair, se for verão e não houver chuva
+
+if(sair) {
+    /* . . . */
+}
+```
+Booleanos a partir de comparações
+```C++
+float altura;
+
+/* . . . */
+
+bool pousou;
+pousou = (altura <= 0.3);
+
+if (pousou) {
+    desarmar(drone); // Meramente ilustrativo rs
+}
+else {
+    // desarma não, tio
+}
+```
+
 ### Entrada e Saída básicas
+Para lidar com entradas e saídas básicas, podemos usar a biblioteca iostream. 
+
+```C++
+import <iostream>
+using namespace std;
+
+int main() {
+    int entrada;
+    
+    cin >> entrada;
+    cout << "A entrada foi" << entrada << endl;
+
+    return 0;
+}
+```
+
+~~Na prática, não usaremos muito entradas pelo terminal, e as saídas idealmente são feitas com o ROS na maioria dos nossos programas.~~
+
 
 #### Hello, drone
 
