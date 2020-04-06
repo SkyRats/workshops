@@ -34,20 +34,23 @@ Mas como a máquina pega essas instruções em alto nível que foram digitadas, 
 ### Variáveis - Estruturas de Dados Fundamentais
 #### Tipos
 
-| Tipo de variável | Tamanho |
-| ------------- |:-------------:|
-|   bool    | 1 bit  |
-|    char   | 1 byte |
-|    int   | centered  |
-* bool
-* int
-* float
-* double
-* char - 1 byte
-* string
-* 
-#### Declaração
+| Tipo de variável | Tamanho | Range |
+| --------- |:--------:| :----------:|
+|   bool    |   1 bit  |
+|    char   |   1 byte |
+|    int    |  4 bytes | 	-2,147,483,648 to 2,147,483,647 |
+|unsigned int | 4 bytes | 0 to 4,294,967,295 |
+|float|4 bytes|1.175494e-38 a 3.402823e+38 (**8.5677e+14 mols**)|
+|double|8 bytes|-inifinito a +infinito|
+|void|||
+|string|||
 
+* Não existem números reais em sistemas digitais, um float é feito de ints!
+    * 24 dígitos de mantissa
+    * 7 bits pro expoente
+
+#### Declaração
+* 
 #### Uso
 
 ### Entrada e Saída básicas
