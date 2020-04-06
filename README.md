@@ -113,6 +113,15 @@ for (auto& x : foo().items()) { /* .. */ }
 
 Um ponteiro é uma variável capaz de armazenar um endereço de memória ou o endereço de outra variável.
 
+Funcionamento básico de um computador que utiliza a **Arquitetura de von Neumann**
+
+<center><img
+    src="/media/vonNeumann.png"
+    width="430"
+    height="222"
+    alt="von Neumann Archtecture"
+/></center>
+
 #### Bhascara - retornar 2 raizes
 
 ### Recursão
