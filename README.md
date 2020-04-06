@@ -31,6 +31,16 @@ Mas como a máquina pega essas instruções em alto nível que foram digitadas, 
 
 ## O C++
 
+C++ foi desenvolvido por Bjarne Stroustrup at Bell Labs in 1979, com o objetivo de ser uma extensão à linguagem C.
+
+Ele pode ser usado para criar aplicações de alta performance e ao mesmo tempo permite um alto nível de controle dos recursos do sistema e memória aos programadores.
+
+Por que usamos C++?
+
+Sendo uma das liguagens de programação mais utilizadas, tão usada que é geralemnte encontrada em sistemas operacionais, GUI's (Graphical User Interface) e sistemas embarcados. Ele também é uma linguagem orientada à objetos, dandn uma estrutura bem definida para programas e permitindo o reuso de códigos, diminuindo custos de desenvolvimento.
+
+Como o C++ se aproxima bastante de linguagens como C# e Java, é relativamente fácil para programadores incalar entre essas linguagens
+
 ### Variáveis - Estruturas de Dados Fundamentais
 #### Tipos
 
@@ -93,7 +103,6 @@ for (auto& x : foo().items()) { /* .. */ }
 
 #### do ... while
 
-
 #### Fatorial
 
 ### Funções
@@ -101,6 +110,8 @@ for (auto& x : foo().items()) { /* .. */ }
 ### Arrays
 
 ### Ponteiros
+
+Um ponteiro é uma variável capaz de armazenar um endereço de memória ou o endereço de outra variável.
 
 #### Bhascara - retornar 2 raizes
 
