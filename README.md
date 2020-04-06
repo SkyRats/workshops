@@ -111,16 +111,27 @@ for (auto& x : foo().items()) { /* .. */ }
 
 ### Ponteiros
 
-Um ponteiro é uma variável capaz de armazenar um endereço de memória ou o endereço de outra variável.
-
-Funcionamento básico de um computador que utiliza a **Arquitetura de von Neumann**
+Antes de entendermos de fato os *Ponteiros* vamos mostrar melhor como um computador funciona esquematicamente. A arquitetura mais conhecida que descreve o funcionamento básico de um computador que é utilizada até hoje é a **Arquitetura de von Neumann**:
 
 <div align="center"><img
     src="/media/vonNeumann.png"
-    width="859"
-    height="444"
+    width="659"
+    height="344"
     alt="von Neumann Archtecture"
 /></div>
+
+Mais detalhadamente poderiamos ilustrar a memória separada em seus respectivos endereços, onde cada endereço pode armazenar um valor qualquer ou uma instrução:
+
+
+<div align="center"><img
+    src="/media/vonNeumann2.png"
+    width="614"
+    height="425"
+    alt="von Neumann Archtecture"
+/></div>
+
+
+Um ponteiro é uma variável capaz de armazenar um endereço de memória ou o endereço de outra variável.
 
 #### Bhascara - retornar 2 raizes
 
