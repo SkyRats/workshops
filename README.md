@@ -6,14 +6,28 @@ _"...conjunto de regras sintáticas e semânticas, de implementação de um cód
 Java, C, C++, C#, Python, Javascript, PhP... **Qual a diferença?**
 ![alt text](./media/languages.gif "programming languages GIF")
 
-Mas como a máquina executa essas instruções?
+Mas como a máquina pega essas instruções em alto nível que foram digitadas, e as executa?
 
 ### Principais abordagens: 
 * Compilação - C, C++, C#, Java
+    * Há um **compilador** (um programa), que lê o texto do seu código, sabendo das regras de sintaxe da linguagem, e o traduz para um arquivo em código de máquina.
+    * Na prática, desenvolvendo em linguagens compiladas, sempre que quisermos rodar o que está sendo escrito, precisamos compilar. 
 * Intepretação - Pyhton, PHP, JavaScript, Ruby
-* Outros... 
+    * Há um... **interpretador** (outro programa), que lê, linha por linha de código da linguagem interpretada, e executa o comando **enquanto faz a leitura**.
+    * Cruamente, as linguagens interpretadas são conhecidas por terem uma performance pior que as compiladas, porém existem técnicas para contornar isso.
+* Outros...
+    * Just-in-time compilation [olha q belezinha](http://numba.pydata.org/)
+    * Structured programming
+
 
 ### Paradigmas de Programação
+* Imperativo
+
+* Orientado a Objetos (OO)
+
+* Orientado a Eventos
+
+* Declarativo, Estrutural e muitos outros
 
 ## O C++
 
