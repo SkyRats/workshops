@@ -151,19 +151,117 @@ int main() {
 
 #### Hello, drone
 
-### Condicionais
-#### if/else
+### Blocos de Código
+
+​	Blocos de código são conjuntos de instruções separados geralmente por `{ }`. Os que estudaremos aqui são alguns tipos de blocos **Condicionais**, **Loops** e **Funções**.
+
+#### Condicionais
+
+​	Para executarmos este tipo de bloco precisamos de uma condição. Geralmente é uma expressão que possui um resultado booleano (veradeiro ou falso).  Para realizar essa tarefa em linhas de código usamos o comando **if**.
+
+**Sintaxe:**
+
+```C++
+if(<condição>) {
+	<comando1>;
+	<comando2>;
+		...
+}
+```
+
+​		Assim, os comandos apresntados apenas serão executados se a <condição> for verdadeira.
+
+​		Podemos também acrescentar comandos em caso de a condição não seja satisfeita. Para isso usamos o comando **else**.
+
+**Sintaxe:**
+
+```C++
+if(<condição>) {
+<comando1>;
+<comando2>;
+	...
+}
+
+else {
+<outro_comando1>;
+<outro_comando2>;
+	...
+}
+```
+
+
+
+**Obs:** Caso apenas exista 1 comando a ser executado dentro do **if** ou do **else** pode-se remover oscolchetes `{ }`.
+
+
 
 ### Loops
-#### while
 
-#### for
+​	Loops são estruturas cuja função é repetir o mesmo bloco de código até que uma determinada condição seja satisfeita. Os comandos mais comuns  são **for**, **while** e **do while**. Veremos como os três funcionam.
+
+
+
+#### 	while
+
+​		Enquanto uma dada condição for verdadeira esse bloco de código irá se repetir. Tome cuidado para não criar loops infinitos com condições que nunca se tornarão falsas.
+
+​	**Sintaxe:**
+
+```C++
+while(<condição>) {
+<comando1>;
+<comando2>;
+	...
+}
+```
+
+#### 	
+
+#### 	do while
+
+​		Funciona de maneira semelhante ao **while**, mas a verificação da condição é realizada no final do loop, e não no início como no comando anterior. Assim, a primeira iteração (repetição) sempre irá ocorrer independente da condição.
+
+**Sintaxe:**
+
+```C++
+do {
+<comando1>;
+<comando2>;
+	...
+} while (<condição>);
+```
+
+#### 	
+
+#### 	for
+
+​		Muitas vezes usamos um contador como condição para a interrupção de um loop. Quando nos deparamos com esse tipo de situação é convencional usarmos o laço de repetição **for**.
+
+**Sintaxe:**
+
+```C++
+for(<inicialização_do_contador>; <condição_do_contador>; <atualização_do_contador>){
+<comando1>;
+<comando2>;
+	...
+}
+```
+
+​		Geralmente usamos uma variável inteira que chamamos de `i` para o contador, inicializando-a com o valor `0` e somando `1` em cada iteração, ficando assim:
+
+```C++
+for (int i = 0; <condição>; i++){
+<comando1>;
+<comando2>;
+	...
+}
+```
+
+
 
 ```C++
 for (auto& x : foo().items()) { /* .. */ }
 ```
-
-#### do ... while
 
 #### Fatorial
 
@@ -176,7 +274,7 @@ for (auto& x : foo().items()) { /* .. */ }
 Antes de entendermos de fato os *Ponteiros* vamos mostrar melhor como um computador funciona esquematicamente. A arquitetura mais conhecida que descreve o funcionamento básico de um computador que é utilizada até hoje é a **Arquitetura de von Neumann**:
 
 <div align="center"><img
-    src="/media/vonNeumann.png"
+    src="./media/vonNeumann.png"
     width="659"
     height="344"
     alt="von Neumann Archtecture"
@@ -185,7 +283,7 @@ Antes de entendermos de fato os *Ponteiros* vamos mostrar melhor como um computa
 Mais detalhadamente poderiamos ilustrar a memória separada em seus respectivos endereços, onde cada endereço pode armazenar um valor qualquer ou uma instrução:
 
 <div align="center"><img
-    src="/media/vonNeumann2.png"
+    src="./media/vonNeumann2.png"
     width="614"
     height="425"
     alt="von Neumann Archtecture"
