@@ -294,7 +294,78 @@ cout << i;
 
 ### Funções
 
+​	Funções são blocos que possuem um **nome** e através desse podem ser evocados. Sua utilidade é reaproveitar trechos de código de maneira a manter seu projeto organizado, compacto, de fácil manutenção e compreensão.
+
+​	A `main() {}` é conhecida como a função principal do seu código. É ela a primeira das funções a serem executadas. A partir dela você pode chamar outras funções que você criou ou funções de uma determinada biblioteca.
+
+**Sintaxe:**
+
+```c++
+<tipo_a_ser_retornado> <nome_da_função> (<lista_de_parâmetros>){
+    return <variável>;
+}
+```
+
+​	Este é o que pode ser considerado como o *cabeçalho* de uma função.
+
+​	As funções podem retornar valores que podem ser atribuídos à variáveis na `main()`. Quando a função retorna algum tipo de valor devemos informar no campo `<tipo_a_ser_retornado>` o tipo do valor, podendo ser `int`, `float`, `char` , etc. Se a sua função não retorna nenhum tipo de valor o campo deve ser preenchido com `void` para informar ao computador que não haverá retorno de nenhum valor.
+​	O campo `<nome_da_função>` deve ser preenchido com qualquer nome arbitráro. Escolha um nome sugestivo, que diga o que a função faz. Este será o nome que iremos nos referenciar quando chamarmos a função na `main()`.
+​	As funções podem também podem receber variáveis e trabalhar com elas. Caso seja o caso, deve ser informado o tipo das variáveis recebidas e o nome delas no campo `<lista_de_parâmetros>`.
+
+​	Tudo o que vimos até aqui é valido dentro das funções: podemos declarar variáveis e usar outros blocos de código.
+
+
+
+**Exemplo:** Escreva uma função que calcula uma potência dado uma *base* e um *expoente*.
+
+```c++
+int potencia (int base, int expoente){
+
+    // CRIANDO A VARIÁVEL POT E INICIALIZANDO COM O VALOR DE 1 //
+int pot;
+pot = 1;
+
+    // CALCULANDO A POTÊNCIA DE BASE^EXPOENTE // 
+for (int i = 0; i < expoente; i++){
+	pot *= base;
+}
+
+    //RETORNO DO VALOR DA POTENCIA //
+return pot;
+}
+
+
+
+int main(){
+    int base, expoente, resultado;
+    base = 2;
+    expoente = 4;
+    resultado = potencia(base, expoente);
+}
+
+```
+
+​	Neste exemplo temos a função `potencia`. Ela recebe os parâmetros inteiros `base` e `expoente` da `main()` e retorna o valor de uma variável do tipo `int`.  Olhando para a `main()` podemos ver que a variável `resultado` receberá o valor de retorno da função `potencia`. No caso acima será `16`.
+
+​	Imagine que ao longo de um programa precisamos calcular diversas vezes uma potencia com base em dois numeros (base e expoente). Com esta função implementada podemos poupar diversas linhas de código, pois é só chamar a função.
+
+
+
 ### Arrays
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Ponteiros
 
