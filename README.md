@@ -133,7 +133,7 @@ else {
 Para lidar com entradas e saídas básicas, podemos usar a biblioteca iostream. 
 
 ```C++
-import <iostream>
+#include <iostream>;
 using namespace std;
 
 int main() {
@@ -215,8 +215,6 @@ while(<condição>) {
 }
 ```
 
-#### 	
-
 #### 	do while
 
 ​		Funciona de maneira semelhante ao **while**, mas a verificação da condição é realizada no final do loop, e não no início como no comando anterior. Assim, a primeira iteração (repetição) sempre irá ocorrer independente da condição.
@@ -230,8 +228,6 @@ do {
 	...
 } while (<condição>);
 ```
-
-#### 	
 
 #### 	for
 
