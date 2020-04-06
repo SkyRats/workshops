@@ -422,6 +422,8 @@ int main(){
 
 </br>
 
+#### Ponteiros e Vetores
+
 Um vetor funciona como um ponteiro. A variável aponta para a primeira posição do vetor.
 
 ```c++
