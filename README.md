@@ -543,6 +543,22 @@ O comando acima vai associar o repositório local do seu PC com o endereço espe
 * Estou trabalhando em uma _branch_, como mudo para outra?
 `git checkout [nome_da_branch]`
 
+* Quero fazer o _merge_ de duas branches, basta usar o comando `git merge [segunda_branch]`, enquanto estiver trabalhando na **primeira branch**
+
+* Exemplo:
+	* Criamos uma nova branch `git checkout -b newbranch`
+
+	`Switched to a new branch 'newbranch'`
+
+	* Depois de trabalhar na **newbranch** e fazer os commits, digamos que queremos fazer um **merge** da **newbranch** na branch **master**, então precisamos ir para a branch master, com `git checkout master`
+	
+	`Switched to branch 'master'`
+
+	* E então, fazemos o **merge** de lá, com o comando `git merge newbranch`
+
+	A partir desse ponto, a branch **newbranch** não será mais ultilizada, e existirá somente como um histórico de versões.
+
+
 
 ### O **.gitignore**
   O .gitignore é um arquivo dentro do repositório que especifica ao github arquivos que não devem ser rastreados, ou "sincronizados com a nuvem" - um bom exemplo de onde usaremos isso é nos repositórios build e devel gerados pelo *catkin_ws* durante a compilação, eles possuem endereços locais do seu computador e não funcionarão no computador alheio.
