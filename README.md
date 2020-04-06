@@ -184,7 +184,6 @@ Antes de entendermos de fato os *Ponteiros* vamos mostrar melhor como um computa
 
 Mais detalhadamente poderiamos ilustrar a memória separada em seus respectivos endereços, onde cada endereço pode armazenar um valor qualquer ou uma instrução:
 
-
 <div align="center"><img
     src="/media/vonNeumann2.png"
     width="614"
@@ -192,8 +191,161 @@ Mais detalhadamente poderiamos ilustrar a memória separada em seus respectivos 
     alt="von Neumann Archtecture"
 /></div>
 
-
 Um ponteiro é uma variável capaz de armazenar um endereço de memória ou o endereço de outra variável.
+
+<div align="center"><img
+    src="/media/ponteiro.png"
+    alt="von Neumann Archtecture"
+/></div>
+
+Podemos nos referir à *Ponteiros* como "Apontadores", pois eles apontam para endereços de memória.
+
+#### Declaração
+
+```c++
+<Tipo> *p;
+```
+
+```c++
+int *p1;
+double *p2;
+```
+
+#### Operador *&*
+
+O operador **&** obtém o endereço de uma variável.
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int main(){
+
+    int i = 100;        // inicializa a variavel i
+    double j = 5.5;     // inicializa a variavel j
+
+    cout << &i << endl;     // imprime "0x6afef4"
+    cout << &j << endl;     // imprime "0x6afef8"
+
+    int *p1;        // inicializa o ponteiro p1
+    double *p2;     // inicializa o ponteiro p2
+
+    p1 = &i;        // atribui o endereco da variavel i ao ponteiro p1 
+    p2 = &j;        // atribui o endereco da variavel j ao ponteiro p2
+
+    cout << p1 << endl;     // imprime "0x6afef4" pois p1 aponta para i
+    cout << p2 << endl;     // imprime "0x6afef8" pois p2 aponta para j
+
+    return 0;
+}
+```
+
+Observando o programa acima, notamos que podemos acessar os endereços de memória das variáveis com o operador *&*, e é por isso que sempre que formos atribuir endereços de memórias à ponteiros precisamos utilizar este operador.
+
+#### Operador *
+
+O operador <strong>*</strong> permite obter o valor apontado pelo ponteiro
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int main(){
+    int i  = 5;
+    int *p = &i;
+
+    cout << i << endl;      // imprime "5"
+    cout << *p << endl;     // imprime "5" por ser o valor do endereco que o ponteiro armazenou
+
+    // tambem e possivel usa-lo para alterar o valor do endereco apontado
+
+    *p = 10
+
+    cout << *p << endl;
+    cout << i << endl;
+
+    return 0;
+}
+```
+
+#### NULL
+
+O NULL está definido em várias bibliotecas e ele representa "nenhum" valor ou o valor "nulo".
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int main(){
+    int *p2;
+    p2 = NULL;
+
+    if(p2 == NULL){
+        cout << "Null" << endl;
+    }
+
+    return 0;
+}
+```
+
+O NULL está definido em `<iostream>`.
+
+</br>
+
+***Obs:** É possível ter ponteiros de ponteiros:
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int main(){
+    int i = 100;
+    int *p1 = &i;
+
+    int **p2;
+    p2 = &p1;
+
+    cout << i << end;       // imprime "100" que e o valor de i
+    cout << *p1 << endl;    // imprime "100" que e o valor que esta no endereco apontado por p1
+    cout << **p2 << endl;   // imprime "100" que e o valor apontado pelo apontador apontado por p2
+}
+```
+
+<div align="center"><img
+    src="/media/ponteiroDePonteiro.png"
+    alt="von Neumann Archtecture"
+/></div>
+
+****Obs:** É possível ter mais de um ponteiro apontando para o mesmo valor
+
+</br>
+
+Um vetor funciona como um ponteiro. A variável aponta para a primeira posição do vetor.
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int main(){
+    int a1[] = {1, 2, 5};
+    int *p = a1;
+
+    cout << p[0] << endl;       // imprime "1"
+    cout << p[2] << endl;       // imprime "5"
+}
+```
+
+<div align="center"><img
+    src="/media/ponteiroVetor.png"
+    alt="von Neumann Archtecture"
+/></div>
+
+> Em C++ não é possível retornar vetores. Mas é possível retornar um ponteiro.
 
 #### Bhascara - retornar 2 raizes
 
