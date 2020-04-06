@@ -31,9 +31,21 @@ Mas como a máquina pega essas instruções em alto nível que foram digitadas, 
 
 ## O C++
 
-### Variáveis
+### Variáveis - Estruturas de Dados Fundamentais
 #### Tipos
 
+| Tipo de variável | Tamanho |
+| ------------- |:-------------:|
+|   bool    | 1 bit  |
+|    char   | 1 byte |
+|    int   | centered  |
+* bool
+* int
+* float
+* double
+* char - 1 byte
+* string
+* 
 #### Declaração
 
 #### Uso
