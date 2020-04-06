@@ -181,7 +181,6 @@ if(<condição>) {
 <comando2>;
 	...
 }
-
 else {
 <outro_comando1>;
 <outro_comando2>;
@@ -193,7 +192,18 @@ else {
 
 **Obs:** Caso apenas exista 1 comando a ser executado dentro do **if** ou do **else** pode-se remover oscolchetes `{ }`.
 
+**Exemplo:** Escreva um programa que recebe dois valores *x* e *y* e imprime o maior deles (daremos aqui apenas a parte que nos interessa da resolução para fixar os conceitos vistos). 
 
+```c++
+if (x > y){
+maior = x;
+} 
+else{
+maior = y;
+}
+```
+
+​	Assim a variável `maior` irá receber o maior valor entre as variáveis `x` e `y`.
 
 ### Loops
 
@@ -215,7 +225,18 @@ while(<condição>) {
 }
 ```
 
-#### 	
+​	**Exemplo:** Faça um laço de repetição que calcula a *n-ésima* potência de um número *x* qualquer
+
+```c++
+int i = 1;
+int pot = x;
+while(i < n){
+	pot *= x;
+	i++;
+}
+```
+
+ 
 
 #### 	do while
 
@@ -259,9 +280,15 @@ for (int i = 0; <condição>; i++){
 
 
 
-```C++
-for (auto& x : foo().items()) { /* .. */ }
+**Exemplo:**
+
 ```
+for (int i = 0; i < 5; i++){
+cout << i;
+}
+```
+
+​	Deste modo imprimimos os números `0-4`.
 
 #### Fatorial
 
