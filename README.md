@@ -117,8 +117,8 @@ Funcionamento básico de um computador que utiliza a **Arquitetura de von Neuman
 
 <div align="center"><img
     src="/media/vonNeumann.png"
-    width="430"
-    height="222"
+    width="859"
+    height="444"
     alt="von Neumann Archtecture"
 /></div>
 
