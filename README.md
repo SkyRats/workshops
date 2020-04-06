@@ -161,7 +161,7 @@ int main() {
 
 **Sintaxe:**
 
-```
+```C++
 if(<condição>) {
 	<comando1>;
 	<comando2>;
@@ -175,7 +175,7 @@ if(<condição>) {
 
 **Sintaxe:**
 
-```
+```C++
 if(<condição>) {
 <comando1>;
 <comando2>;
@@ -207,7 +207,7 @@ else {
 
 ​	**Sintaxe:**
 
-```
+```C++
 while(<condição>) {
 <comando1>;
 <comando2>;
@@ -223,7 +223,7 @@ while(<condição>) {
 
 **Sintaxe:**
 
-```
+```C++
 do {
 <comando1>;
 <comando2>;
@@ -239,7 +239,7 @@ do {
 
 **Sintaxe:**
 
-```
+```C++
 for(<inicialização_do_contador>; <condição_do_contador>; <atualização_do_contador>){
 <comando1>;
 <comando2>;
@@ -249,7 +249,7 @@ for(<inicialização_do_contador>; <condição_do_contador>; <atualização_do_c
 
 ​		Geralmente usamos uma variável inteira que chamamos de `i` para o contador, inicializando-a com o valor `0` e somando `1` em cada iteração, ficando assim:
 
-```
+```C++
 for (int i = 0; <condição>; i++){
 <comando1>;
 <comando2>;
@@ -274,7 +274,7 @@ for (auto& x : foo().items()) { /* .. */ }
 Antes de entendermos de fato os *Ponteiros* vamos mostrar melhor como um computador funciona esquematicamente. A arquitetura mais conhecida que descreve o funcionamento básico de um computador que é utilizada até hoje é a **Arquitetura de von Neumann**:
 
 <div align="center"><img
-    src="/media/vonNeumann.png"
+    src="./media/vonNeumann.png"
     width="659"
     height="344"
     alt="von Neumann Archtecture"
@@ -284,7 +284,7 @@ Mais detalhadamente poderiamos ilustrar a memória separada em seus respectivos 
 
 
 <div align="center"><img
-    src="/media/vonNeumann2.png"
+    src="./media/vonNeumann2.png"
     width="614"
     height="425"
     alt="von Neumann Archtecture"
