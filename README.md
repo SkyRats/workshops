@@ -353,14 +353,17 @@ int main(){
 
 ### Arrays
 
-*Arrays* ou também *Vetores*, são bem conhecidos e usados no mundo das linguagens de programação. Em C++ o conceito deles não muda, ainda continuam sendo um conjunto ordenado de variáveis de um mesmo tipo.
+*Arrays* são bem conhecidos e utilizados em diversas linguagens de programação. Em C++ o conceito deles não muda, ainda continuam sendo um conjunto ordenado de variáveis utilizadas para armazenar diversos valores de um mesmo tipo (`int`, ` float`,  `char`). Assim, com apenas um array você pode armazear o valor de *n* variáveis do mesmo tipo onde cada uma recebe um índice, e através dele você pode fazer uso desta variável.
 
 <div align="center"><img
     src="media/vetor.png"
     alt="exemplo vetor"
 /></div>
 
-Vamos ver um exemplo da sixtaxe em C++ para declararmos e inicializarmos um vetor:
+​	No exemplo da imagem acima temos um array do tipo `int` que armazena um total de **5** valores. O índice de cada valor é indicado entre colchetes. Note que o primeiro índice é `0`.
+
+
+Vamos ver um exemplo da sixtaxe em C++ para declararmos e inicializarmos o vetor ilustrado acima:
 
 ```c++
 #include <iostream>
@@ -374,9 +377,24 @@ int main(){
 }
 ```
 
-**OBS:** o tamanho do vetor do arranjo deve ser uma constante (não pode ser uma variável)
 
-- Veremos futuramente como trabalhar com vetores de tamanho variável
+**Sintaxe:**
+
+```c++
+
+
+//DECLARANDO UM ARRAY//
+
+<tipo> <nome_do_array> [<tamanho_do_array>];
+
+
+// INICIALIZAÇÃO DO ARRAY //
+array[0] = 10;
+array[1]= 123;
+array[2] = 321;
+```
+
+**Exemplo**
 
 ```c++
 #include <iostream>
@@ -385,7 +403,7 @@ using namespace std;
 
 int main(){
  /* int tamanho = 5
-    int numeros[tamanho]; -> isso estaria errado */
+    int numeros[tamanho]; -> isso estaria errado pois o tamanho nao pode ser variavel */
 
     int numeros[5]; // isso esta certo
 
@@ -410,6 +428,13 @@ int main(){
     return 0;
 }
 ```
+
+Note que uma vez declarado os valores dentro das chaves `[ ]` se refere ao **índice** do array. Assim, podemos atribuir valores para cada índice.
+
+Desta maneira, caso precisamos trabalhar com grandes quantidades de valores podemos usar arrays para poupar a declaração de muitas variáveis.
+
+> Obs: o tamanho do vetor do arranjo deve ser uma constante (não pode ser uma variável)
+> - Veremos futuramente como trabalhar com vetores de tamanho variável
 
 </br>
 
