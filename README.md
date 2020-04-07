@@ -653,7 +653,7 @@ Em todas as funções recursivas existe:
 
 #### Fatorial++
 
-Um bom exemplo para ilustrar a recursividade é a função fatorial, pois é possível fazer dos dois modos, com ou sem recursividade. Sem recursividade poderia ser feito assim:
+Um bom exemplo para ilustrar a recursividade é a função `fatorial`, pois é possível fazer dos dois modos, com ou sem recursividade. Sem recursividade poderia ser feito assim:
 
 ```c++
 #include <iostream>
@@ -686,7 +686,11 @@ int main(){
 }
 ```
 
-Se analisarmos a função factorial, o caso básico é o teste de igualdade a zero (zerop n), o resultado imediato é 1, e o passo recursivo é (* n (fact (- n 1)))
+Se analisarmos a função fatorial, o caso básico é o teste de igualdade a zero, o resultado imediato é 1, e o passo recursivo é (n * (fact (n- 1))). Sendo assim também podemos escrever a mesma função da segunite forma:
+
+```c++
+
+```
 
 
 ### Usando Bibliotecas
