@@ -339,6 +339,8 @@ int main(){
     base = 2;
     expoente = 4;
     resultado = potencia(base, expoente);
+
+    return 0;
 }
 
 ```
@@ -351,19 +353,65 @@ int main(){
 
 ### Arrays
 
+*Arrays* ou também *Vetores*, são bem conhecidos e usados no mundo das linguagens de programação. Em C++ o conceito deles não muda, ainda continuam sendo um conjunto ordenado de variáveis de um mesmo tipo.
 
+<div align="center"><img
+    src="media/vetor.png"
+    alt="exemplo vetor"
+/></div>
 
+Vamos ver um exemplo da sixtaxe em C++ para declararmos e inicializarmos um vetor:
 
+```c++
+#include <iostream>
 
+using namespace std;
 
+int main(){
+    int x[] = {15, -29, 54, -1, 3};
 
+    return 0;
+}
+```
 
+**OBS:** o tamanho do vetor do arranjo deve ser uma constante (não pode ser uma variável)
 
+- Veremos futuramente como trabalhar com vetores de tamanho variável
 
+```c++
+#include <iostream>
 
+using namespace std;
 
+int main(){
+ /* int tamanho = 5
+    int numeros[tamanho]; -> isso estaria errado */
 
+    int numeros[5]; // isso esta certo
 
+    int n0 = 53;
+    int n1 = 48;
+    int n2 = 91;        // aqui atribuimos valores a 5 variaveis
+    int n3 = 15;
+    int n4 = 30;
+
+    numeros[0] = n0;
+    numeros[1] = n1;
+    numeros[2] = n2;    // aqui alocamos os valores das variaveis nas posicoes do vetor
+    numeros[3] = n3;
+    numeros[4] = n4;
+
+    for(int i = 0; i < 4; i++){
+        cout << " " << numeros[i] << " ";   // imprime cada elemento do vetor
+    }
+
+    cout << endl;       // pula linha
+
+    return 0;
+}
+```
+
+</br>
 
 ### Ponteiros
 
@@ -382,14 +430,14 @@ Mais detalhadamente poderiamos ilustrar a memória separada em seus respectivos 
     src="./media/vonNeumann2.png"
     width="614"
     height="425"
-    alt="von Neumann Archtecture"
+    alt="von Neumann Archtecture scheme"
 /></div>
 
 Um ponteiro é uma variável capaz de armazenar um endereço de memória ou o endereço de outra variável.
 
 <div align="center"><img
     src="/media/ponteiro.png"
-    alt="von Neumann Archtecture"
+    alt="Ponteiro"
 /></div>
 
 Podemos nos referir à *Ponteiros* como "Apontadores", pois eles apontam para endereços de memória.
@@ -401,8 +449,16 @@ Podemos nos referir à *Ponteiros* como "Apontadores", pois eles apontam para en
 ```
 
 ```c++
-int *p1;
-double *p2;
+#include <iostream>
+
+using namespace std;
+
+int main(){
+    int *p1;
+    double *p2;
+
+    return 0;
+}
 ```
 
 #### Operador *&*
@@ -506,12 +562,14 @@ int main(){
     cout << i << end;       // imprime "100" que e o valor de i
     cout << *p1 << endl;    // imprime "100" que e o valor que esta no endereco apontado por p1
     cout << **p2 << endl;   // imprime "100" que e o valor apontado pelo apontador apontado por p2
+
+    return 0;
 }
 ```
 
 <div align="center"><img
     src="/media/ponteiroDePonteiro.png"
-    alt="von Neumann Archtecture"
+    alt="Ponteiro de ponteiros"
 /></div>
 
 ****Obs:** É possível ter mais de um ponteiro apontando para o mesmo valor
@@ -533,12 +591,14 @@ int main(){
 
     cout << p[0] << endl;       // imprime "1"
     cout << p[2] << endl;       // imprime "5"
+
+    return 0;
 }
 ```
 
 <div align="center"><img
     src="/media/ponteiroVetor.png"
-    alt="von Neumann Archtecture"
+    alt="Vetor e ponteiro"
 /></div>
 
 > Em C++ não é possível retornar vetores. Mas é possível retornar um ponteiro.
