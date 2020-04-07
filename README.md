@@ -351,19 +351,47 @@ int main(){
 
 ### Arrays
 
+​	Arrays são estruturas indexadas utilizadas para armazenar diversos valores de um mesmo tipo (`int`, ` float`,  `char`). Assim, com apenas um array você pode armazear o valor de *n* variáveis do mesmo tipo onde cada uma recebe um índice, e através dele você pode fazer uso desta variável. Visualizando: 
+
+![Java ArrayIndexOutOfBoundsException - Causes & Fixes | Nullbeans.com](https://lh3.googleusercontent.com/proxy/_Rxk9wqGAFA6s5Db3HWYNkPgyHv0r3LbirzM9YlgmSRff1Eh2FiVroYU4_VjQT3DJpksoEOgxYxzxThP36FSpCEsXJB0RHGxilEvv4fDWYECfPFhFmPZJQ)
+
+​	No exemplo da imagem acima temos um array do tipo `int` que armazena um total de **7** valores. O índice de cada valor é indicado abaixo de cada valor. Note que o primeiro índice é `0`.
+
+​	Desta maneira, caso precisamos trabalhar com grandes quantidades de valores podemos usar arrays para poupar a declaração de muitas variáveis.
 
 
 
+**Sintaxe:**
 
+```c++
+//DECLARANDO UM ARRAY//
 
+<tipo> <nome_do_array> [<tamanho_do_array>];
+```
 
+**Exemplo:**
 
+```c++
+int array1[2];
+float array2[10];
+char array3[50];
+```
 
+​	Desta maneira criamos 3 arrays, todos de tipos e tamanhos diferentes.
 
+​	Após declarado o array podemos acessar manualmente os valores que seus índices armazenam:
 
+```c++
+// 	DECLARAÇÃO DO ARRAY //
+int array[3];
 
+// INICIALIZAÇÃO DO ARRAY //
+array[0] = 10;
+array[1]= 123;
+array[2] = 321;
+```
 
-
+​	Note que uma vez declarado os valores dentro das chaves `[ ]` se refere ao **índice** do array. Assim, podemos atribuir valores para cada índice.
 
 ### Ponteiros
 
