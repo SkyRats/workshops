@@ -133,7 +133,7 @@ else {
 Para lidar com entradas e saídas básicas, podemos usar a biblioteca iostream. 
 
 ```C++
-import <iostream>
+#include <iostream>;
 using namespace std;
 
 int main() {
@@ -251,8 +251,6 @@ do {
 	...
 } while (<condição>);
 ```
-
-#### 	
 
 #### 	for
 
