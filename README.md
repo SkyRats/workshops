@@ -356,7 +356,7 @@ int main(){
 *Arrays* são bem conhecidos e utilizados em diversas linguagens de programação. Em C++ o conceito deles não muda, ainda continuam sendo um conjunto ordenado de variáveis utilizadas para armazenar diversos valores de um mesmo tipo (`int`, ` float`,  `char`). Assim, com apenas um array você pode armazear o valor de *n* variáveis do mesmo tipo onde cada uma recebe um índice, e através dele você pode fazer uso desta variável.
 
 <div align="center"><img
-    src="media/vetor.png"
+    src="./media/vetor.png"
     alt="exemplo vetor"
 /></div>
 
@@ -461,7 +461,7 @@ Mais detalhadamente poderiamos ilustrar a memória separada em seus respectivos 
 Um ponteiro é uma variável capaz de armazenar um endereço de memória ou o endereço de outra variável.
 
 <div align="center"><img
-    src="/media/ponteiro.png"
+    src="./media/ponteiro.png"
     alt="Ponteiro"
 /></div>
 
@@ -593,7 +593,7 @@ int main(){
 ```
 
 <div align="center"><img
-    src="/media/ponteiroDePonteiro.png"
+    src="./media/ponteiroDePonteiro.png"
     alt="Ponteiro de ponteiros"
 /></div>
 
@@ -622,7 +622,7 @@ int main(){
 ```
 
 <div align="center"><img
-    src="/media/ponteiroVetor.png"
+    src="./media/ponteiroVetor.png"
     alt="Vetor e ponteiro"
 /></div>
 
