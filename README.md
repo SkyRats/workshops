@@ -288,7 +288,7 @@ cout << i;
 
 ​	Deste modo imprimimos os números `0-4`.
 
-#### Fatorial
+#### Execício - Fatorial
 
 ### Funções
 
@@ -348,6 +348,17 @@ int main(){
 ​	Neste exemplo temos a função `potencia`. Ela recebe os parâmetros inteiros `base` e `expoente` da `main()` e retorna o valor de uma variável do tipo `int`.  Olhando para a `main()` podemos ver que a variável `resultado` receberá o valor de retorno da função `potencia`. No caso acima será `16`.
 
 ​	Imagine que ao longo de um programa precisamos calcular diversas vezes uma potencia com base em dois numeros (base e expoente). Com esta função implementada podemos poupar diversas linhas de código, pois é só chamar a função.
+
+
+#### Bibliotecas
+
+As bibliotecas são caracterizadas como um conjunto de rotinas padronizadas da linguagem, as bibliotecas contém **funções** de entrada/saída e processamento de informações.
+Dentro deste contexto, quando queremos mostrar uma mensagem na tela (`print` / `cout` / `printf`), você não tem que produzir uma função inteira ou criar um comando novo, basta importar uma biblioteca de I/O (entrada e saída) (#include <stdio.h>) e utilizar uma função de saída de dados desta biblioteca.
+
+Alem de facilitar nossa vida, é nas bibliotecas que o compilador irá verificar se as funções que você digitou não contem nenhum erro de sintaxe, ou seja, se você escreveu o comando corretamente.
+
+- Biblioteca padrão C = `<stdio.h>`
+- Biblioteca padrão C++ = `<iostream>`
 
 
 
@@ -632,7 +643,55 @@ int main(){
 
 ### Recursão
 
+Uma função recursiva é uma função que se refere a si própria. A ideia consiste em utilizar a própria função que estamos a definir na sua definição.
+
+Em todas as funções recursivas existe:
+- Um passo básico (ou mais) cujo resultado é imediatamente conhecido.
+- Um passo recursivo em que se tenta resolver um sub-problema do problema inicial.
+
+
+
 #### Fatorial++
+
+Um bom exemplo para ilustrar a recursividade é a função `fatorial`, pois é possível fazer dos dois modos, com ou sem recursividade. Sem recursividade poderia ser feito assim:
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int fatorial(int n){
+    int fatorial = 1;
+
+    if(n == 0){
+        return fatorial;
+    }else{
+        for(int i = 1; n >= i; i++){
+            fatorial *= i;
+        }
+        
+        return fatorial;
+    }
+}
+
+int main(){
+    int i, x;
+
+    cout << "Entre com um numero natural: ";
+    cin >> x;
+
+    cout << x << "! = " << fatorial(x) << endl;
+
+    return 0;
+}
+```
+
+Se analisarmos a função fatorial, o caso básico é o teste de igualdade a zero, o resultado imediato é 1, e o passo recursivo é (n * (fact (n- 1))). Sendo assim também podemos escrever a mesma função da segunite forma:
+
+```c++
+
+```
+
 
 ### Usando Bibliotecas
 
