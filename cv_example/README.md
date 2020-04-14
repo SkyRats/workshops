@@ -34,7 +34,7 @@ chmod +x install_opencv.sh
     * É útil para visualizar a imagem
     * Quando `[tempo] = 0`, ela espera por tempo indeterminado
 * `!image.data` retorna um booleano que informa se a imagem está vazia
-* Informações adicionais sobre as funções do OpenCV podem ser encontradas [aqui](https://docs.opencv.org/master/d0/de1/group__core.html)
+* Informações adicionais sobre as funções do OpenCV podem ser encontradas [aqui](https://docs.opencv.org/master/d0/de1/group__core.html) e [aqui também](https://docs.opencv.org/2.4/modules/highgui/doc/reading_and_writing_images_and_video.html)
 * A função `imagem.at<uchar>(linha, coluna)` retorna o valor do pixel (i, j) da imagem.
     Repare que a imagem não é tratada como somente uma matriz - graças ao OpenCV -, então a sintaxe será ligeiramente diferente.
     (Caso ela fosse uma matriz comum de inteiros, acessaríamos seus 
