@@ -182,3 +182,64 @@ Bus::~Bus(){
     cout <<"BUS DESTROYED" << endl;
 }
 ```
+
+### Cast
+
+A cast is a special operator that forces one data type to be converted into another.
+
+An exemple of Cast in C or C++ can be like this: 
+
+```c++
+float b = 10.5;
+int a = (int) b;
+```
+
+### Cast Hierarchy
+
+* Upcast
+    * Converts from a derived class to a base class
+    * Implicit conversion
+    * Subclasses have at least the same methods that their derived classes
+* Downcast
+    * Converts from a Subclass to a derived class
+    * Explicit conversion
+    * Not always we can use the object with derived class's type
+
+There are two ways that we can cast objects: **Static** and **Dynamic**.
+
+#### Static Cast
+
+Here I'm just going to give you an example of `static_cast`, but it importante to say that it is an UNSAFE method.
+
+```c++
+class Vehicle {/*implementation*/};
+
+class Bus : class Vehicle {/*implementation*/};
+
+void f(Bus* v1, Vehicle* v2){
+    
+    Vehicle* v3 = static_cast<Vehicle*>(v1); // safe conversion because
+                                             // Bus have all fields and 
+                                             // methods as Vehicle
+
+    
+    Bus* v4 = static_cast<Bus*>(v2);    // Unsafe conversion because
+                                        // Bus have fields and methods
+                                        // that re not in Vehicle
+}
+
+Vehicle* v = new Vehicle();
+
+Bus* b = static_cast<Bus*>(v);
+```
+
+It is unsafe because it doesn't check in runtime if the conversion is valid. For example:
+
+```c++
+
+```
+
+You can find more information about static cast [here](https://docs.microsoft.com/en-us/cpp/cpp/static-cast-operator?view=vs-2019)
+
+
+#### Dynamic Cast

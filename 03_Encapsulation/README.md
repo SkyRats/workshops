@@ -22,7 +22,7 @@ In inheritance (we will discuss this later in other topics), it is important to 
 
 ### Getters and Setter Methods
 
-Getters and Setters allow you to effectively protect your data. This is a technique used greatly when creating classes. For each variable, a get method will return its value and a set method will set the value.
+Getters and Setters allow you to effectively protect your data. This is a technique used greatly when creating classes. For each variable, a `get` method will return its value and a `set` method will change its value.
 
 Check out the **example** below:
 
@@ -55,7 +55,7 @@ class Employee {
 int main() {
   Employee* MrFeather;
   MrFeather.setSalary(50000);
-  cout << MrFeather.getSalary();
+  cout << MrFeather.getSalary() << endl;
   return 0;
 }
 ```
@@ -64,7 +64,7 @@ int main() {
 
 Organization may be something that we could not give so much importance for basic programs like the example above, but when we are making or we are part of a bigger project with hundereds, thousands or even millions of lines of code or classes this is the most important virtue so we can continue developing and sharing this development with other people.
 
-In C++ we organize our files in three main files, the **HEADER** files which have the extension `.h` on their names. so if the name of the file is "example" the header file's name is `example.h`. There's also the **SOURCE** files which have the extension `.cpp`, so the example's source file nasme is `example.cpp`. And finally the code which is going to be the executable program, the `main.cpp`.
+In C++ we organize our files in three main files, the **HEADER** files which have the extension `.h` on their names. So if the name of the file is "example" the header file's name is `example.h`. There're also the **SOURCE** files which have the extension `.cpp`, so the example's source file name is `example.cpp`. And finally the `main.cpp` which is going to be the executable program.
 
 **NOTE:** All the .cpp files must be compiled, since they include the header files we don't need to compile the .h files
 
@@ -111,19 +111,18 @@ using namespace std;
 int main() {
   Employee* MrFeather;
   MrFeather.setSalary(50000);
-  cout << MrFeather.getSalary();
-
+  cout << MrFeather.getSalary() << endl;
   return 0;
 }
 ```
 
 ### #ifndef Directives
 
-The #ifndef directive has the following syntax:
+The ```#ifndef``` directive has the following syntax:
 
-> #ifndef identifier newline
+> #ifndef identifier
 
-This directive checks to see if the identifier is not currently defined.
+This directive checks if the identifier is not already defined.
 
 So it is very useful, if not mandatory, for our OOP files in C++, because sometimes we have to include classes which include other common classes, and it is literally a waste of time to include classes more than once (**and it does not build!**). So that's why we use ifndef directives in our files.
 
