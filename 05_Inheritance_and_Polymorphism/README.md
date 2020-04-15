@@ -183,6 +183,74 @@ Bus::~Bus(){
 }
 ```
 
+### Polymorphism
+
+The word **polymorphism** means having many forms. Typically, polymorphism occurs when there is a hierarchy of classes and they are related by inheritance.
+
+C++ polymorphism means that a call to a member function will cause a different function to be executed depending on the type of object that invokes the function.
+
+For example:
+
+```c++
+#include <iostream> 
+using namespace std;
+ 
+class Shape {
+   protected:
+      int width, height;
+      
+   public:
+      Shape( int a = 0, int b = 0){
+        width = a;
+        height = b;
+      }
+      int area() {
+        cout << "Parent class area: " <<endl;
+        return 0;
+      }
+};
+
+class Rectangle: public Shape {
+   public:
+      Rectangle( int a = 0, int b = 0) : Shape(a, b) { }
+      
+      int area () { 
+         cout << "Rectangle class area :" <<endl;
+         return (width * height); 
+      }
+};
+
+class Triangle: public Shape {
+   public:
+      Triangle( int a = 0, int b = 0):Shape(a, b) { }
+      
+      int area () { 
+         cout << "Triangle class area :" <<endl;
+         return (width * height / 2); 
+      }
+};
+
+int main() {
+   Shape *shape;
+   Rectangle rec(10,7);
+   Triangle  tri(10,5);
+
+   // store the address of Rectangle
+   shape = &rec;
+   
+   // call rectangle area.
+   shape->area();
+
+   // store the address of Triangle
+   shape = &tri;
+   
+   // call triangle area.
+   shape->area();
+   
+   return 0;
+}
+```
+
 ### Cast
 
 A cast is a special operator that forces one data type to be converted into another.
@@ -194,7 +262,7 @@ float b = 10.5;
 int a = (int) b;
 ```
 
-### Cast Hierarchy
+#### Cast Hierarchy
 
 * Upcast
     * Converts from a derived class to a base class
@@ -235,11 +303,11 @@ Bus* b = static_cast<Bus*>(v);
 
 It is unsafe because it doesn't check in runtime if the conversion is valid. For example:
 
-```c++
-
-```
-
 You can find more information about static cast [here](https://docs.microsoft.com/en-us/cpp/cpp/static-cast-operator?view=vs-2019)
 
 
 #### Dynamic Cast
+
+In C++/CX, a compile time and runtime check are performed with `dynamic_cast`.
+
+It will no longer throw an exception when type-id is an interior pointer to a value type, with the cast failing at runtime. The cast will now return the 0 pointer (NULL) value instead of throwing.
