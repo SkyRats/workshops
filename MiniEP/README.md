@@ -128,7 +128,7 @@ virtual ~CompeticaoSimples();
 Modalidade* getModalidade();
 ```
 
-* O método *“getModalidade()”* deve retornar a única modalidade desta competição.
+* O método **“getModalidade()”** deve retornar a única modalidade desta competição.
 
 ### CompeticaoMultimodalidades:
 
@@ -147,7 +147,7 @@ list<Modalidade*>* getModalidades();
 
 ### Main:
 
-A ** Main() ** deve pedir as informações necessárias para armazenar as informações e depois chamar o método **imprimir()** das classes **CompeticaoSimples()** e **CompeticaoMultimodalidades**.
+A **Main()** deve pedir as informações necessárias para armazenar as informações e depois chamar o método **imprimir()** das classes **CompeticaoSimples()** e **CompeticaoMultimodalidades**.
 
 Um exemplo do terminal com as infromações pedidas e a resposta dos métodos pode ser visto a seguir:
 
