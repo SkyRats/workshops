@@ -82,35 +82,35 @@ virtual void imprimir();
 
 * Se for uma competição multimodalidades, o  método **“imprimir()”** deve printar no terminal da seguinte forma:
 
-Competicao: <Nome da competição>
+Competicao: < Nome da competição >
 Nomes das equipes participantes: 
 
-       <Equipe1>
+       < Equipe1 >
           |
-    <Equipe(Total)>
+    < Equipe(Total) >
 
-Modalidade 1: <Modalidade 1>
+Modalidade 1: < Modalidade 1 >
 Equipes participantes:
 
-     <Equipe1>
+     < Equipe1 >
          |
-     <EquipeN>
+     < EquipeN >
 
-Modalidade x: <Modalidade x>
+Modalidade x: < Modalidade x >
 Equipes participantes:
 
-    <Equipe1>
+    < Equipe1 >
         |
-    <EquipeM>
+    < EquipeM >
 	
 * Caso seja uma competição simples:
 
-Competicao: <Nome da competição>
-Modalidade: <Modalidade >
+Competicao: < Nome da competição >
+Modalidade: < Modalidade >
 Equipes participantes:
-    <Equipe1>
+    < Equipe1 >
         |
-    <EquipeN>
+    < EquipeN >
 	
 ### Classe CompeticaoSimples:
 
