@@ -35,7 +35,7 @@ virtual void imprimir();
 
 *Equipe: < nome da equipe >*
 
-### Modalidade:
+### 2. Modalidade:
 
 No caso de uma competição de Drones, podemos considerar 2 tipos mais comuns de modalidades: “Indoor” e “Outdoor”. Em competições como a IMAV, as equipes podem escolher participar somente de uma modalidade ou das duas modalidades.
 
@@ -55,7 +55,7 @@ virtual int getQuantidadeDeEquipes();
 
 * O método **“getQuantidadeDeEquipes()”** deve retornar um inteiro com a quantidade de equipes participantes;
 
-### Classe Competicao:
+### 3. Competicao:
 
 Existem vários tipos de competições de drones, por exemplo: IMAV, Cobruf Drones, Drone racing etc. Mas nem sempre tais competições possuem as modalidades “Indoor” e “Outdoor”, elas podem possuir somente uma dessas ou até mais que três tipos de modalidades diferentes.
 
@@ -118,7 +118,7 @@ Equipes participantes:
         |
     < EquipeN >
 	
-### Classe CompeticaoSimples:
+### 4. CompeticaoSimples:
 
 A CompeticaoSimples é um subtipo de Competicao em que só há uma Modalidade. Note que agora o construtor deve possuir um argumento a mais, a modalidade. Com isso, ela deve ter os seguintes métodos públicos específicos a essa classe (e eventuais métodos que foram definidos como abstratos em Competicao):
 
@@ -130,7 +130,7 @@ Modalidade* getModalidade();
 
 * O método **“getModalidade()”** deve retornar a única modalidade desta competição.
 
-### CompeticaoMultimodalidades:
+### 5. CompeticaoMultimodalidades:
 
 A CompeticaoMultimodalidades é um subtipo de Competicao em que é possível ter várias Modalidades. Para permitir a adição das modalidades, será usado um list, da biblioteca padrão. Com isso, ela deve ter os seguintes métodos públicos específicos a essa classe (e eventuais métodos que foram definidos como abstratos em Competicao):
 
@@ -145,7 +145,7 @@ list<Modalidade*>* getModalidades();
 
 * O método **“getModalidades()”** deve retornar a lista de modalidades adicionadas.
 
-### Main:
+### 6. Main:
 
 A **Main()** deve pedir as informações necessárias para armazenar as informações e depois chamar o método **imprimir()** das classes **CompeticaoSimples()** e **CompeticaoMultimodalidades**.
 
