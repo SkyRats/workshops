@@ -83,6 +83,7 @@ virtual void imprimir();
 * Se for uma competição multimodalidades, o  método **“imprimir()”** deve printar no terminal da seguinte forma:
 
 Competicao: < Nome da competição >
+
 Nomes das equipes participantes: 
 
        < Equipe1 >
@@ -90,6 +91,7 @@ Nomes das equipes participantes:
     < Equipe(Total) >
 
 Modalidade 1: < Modalidade 1 >
+
 Equipes participantes:
 
      < Equipe1 >
@@ -97,6 +99,7 @@ Equipes participantes:
      < EquipeN >
 
 Modalidade x: < Modalidade x >
+
 Equipes participantes:
 
     < Equipe1 >
@@ -106,8 +109,11 @@ Equipes participantes:
 * Caso seja uma competição simples:
 
 Competicao: < Nome da competição >
+
 Modalidade: < Modalidade >
+
 Equipes participantes:
+
     < Equipe1 >
         |
     < EquipeN >
@@ -148,13 +154,13 @@ Um exemplo do terminal com as infromações pedidas e a resposta dos métodos po
 #### Terminal para uma competição simples:
 
 <img 
-    src="images/CompSimplesOut.png"
+    src="/images/CompSimplesOut.png"
     alt="CompeticaoSimles"
 />
 
 #### Terminal para uma competição multimodalidades:
 
 <img 
-    src="images/CompMultOut.png"
+    src="/images/CompMultOut.png"
     alt="CompeticaoMultimodalidades"
 />
