@@ -33,7 +33,7 @@ virtual void imprimir();
 * O método **“getNome()”** deve retornar uma string com o nome da Equipe;
 * O método **“imprimir()”** deve printar no terminal da seguinte forma:
 
-*Equipe: <nome da equipe>*
+*Equipe: < nome da equipe >*
 
 ### Modalidade:
 
