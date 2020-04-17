@@ -27,7 +27,7 @@ Usamos o ROS conforme as necessidades do projeto em que estamos trabalhando. Pod
 
 ## Como funciona o ROS?
 
-
+O funcionamento do ROS é representado por um Grafo de comunicação, em que cada programa é um . 
 
 
 
