@@ -6,9 +6,9 @@ using namespace std;
 Shape::Shape(int width, int height) : width (width), height (height){
 }
 
-void Shape::area(){
+/*void Shape::area(){
    cout << "Shape area: " << getWidth() * getHeight() << endl;
-}
+}*/
 
 void Shape::setWidth(int w){
    this->width = w;

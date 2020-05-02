@@ -3,6 +3,14 @@
 #include <iostream>
 using namespace std;
 
+Employee::Employee(){
+    this->salary = 0;
+}
+
+Employee::~Employee(){
+    cout << "objeto destruido" << endl;
+}
+
 void Employee::setSalary(int s){
     salary = s;
       // The public setSalary() method takes a parameter (s) and 

@@ -9,9 +9,10 @@ class Shape {
       Shape(int width, int height);
 
       void setWidth(int w);
-      int getWidth();
       void setHeight(int h);
+
       int getHeight();
+      int getWidth();
 
       void area();
 };

@@ -71,9 +71,13 @@ To call the Constructor above (with the `salary`parameter), we should have the `
 using namespace std;
 
 int main() {
-  Employee* MrFeather(50000);
+  Employee* MrFeather = new Employee(50000);
 
-  cout << MrFeather.getSalary(); // it prints 50000
+  if(MrFeather != NULL){
+    cout << "o objeto foi criado com sucesso" << endl;
+  }
+
+  cout << MrFeather->getSalary(); // it prints 50000
 
   return 0;
 }
@@ -112,11 +116,11 @@ So now that we already have our *Destructor*, the way to "use" it, is by typing 
 using namespace std;
 
 int main() {
-  Employee* MrFeather(50000); // we create our object here
+  Employee* MrFeather = new Employee(50000); // we create our object here
 
-  cout << MrFeather.getSalary(); // it prints 50000
+  cout << MrFeather->getSalary(); // it prints 50000
 
-  delete MrFeather; // we destroy our object here
+  //delete MrFeather; // we destroy our object here
 
   return 0;
 }

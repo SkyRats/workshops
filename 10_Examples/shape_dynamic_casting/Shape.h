@@ -13,7 +13,7 @@ class Shape{
     
     string getName();
 
-    virtual void get_info();
+    virtual void get_info() = 0;
 };
 
 #endif // SHAPE_H

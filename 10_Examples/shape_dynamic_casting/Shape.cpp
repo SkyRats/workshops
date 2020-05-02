@@ -10,6 +10,6 @@ string Shape::getName(){
     return s_name;
 }
 
-void Shape::get_info(){
+/*void Shape::get_info(){
     cout << getName() << endl;
-}
+}*/

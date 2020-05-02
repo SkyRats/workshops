@@ -200,40 +200,45 @@ class Shape {
       int width, height;
       
    public:
-      Shape( int a = 0, int b = 0){
-        width = a;
-        height = b;
+      Shape(int a, int b) : width (a), height (b){
       }
+
       int area() {
-        cout << "Parent class area: " <<endl;
-        return 0;
+        cout << "Parent class area: ";
+        return (this->width * this->height);
       }
 };
 
 class Rectangle: public Shape {
    public:
-      Rectangle( int a = 0, int b = 0) : Shape(a, b) { }
+      Rectangle( int a, int b) : Shape(a, b){
+        
+      }
       
-      int area () { 
-         cout << "Rectangle class area :" <<endl;
-         return (width * height); 
+      int area (){ 
+         cout << "Rectangle class area :";
+         return (this->width * this->height); 
       }
 };
 
 class Triangle: public Shape {
    public:
-      Triangle( int a = 0, int b = 0):Shape(a, b) { }
+      Triangle( int a, int b):Shape(a, b){
+
+      }
       
       int area () { 
-         cout << "Triangle class area :" <<endl;
-         return (width * height / 2); 
+         cout << "Triangle class area :";
+         return (this->width * this->height / 2); 
       }
 };
 
 int main() {
    Shape *shape;
-   Rectangle rec(10,7);
-   Triangle  tri(10,5);
+
+
+   Rectangle* rec(10,7);
+   Triangle*  tri(10,5);
 
    // store the address of Rectangle
    shape = &rec;
@@ -259,7 +264,7 @@ An exemple of Cast in C or C++ can be like this:
 
 ```c++
 float b = 10.5;
-int a = (int) b;
+int a = (int) b; // or int a = int(b);
 ```
 
 #### Cast Hierarchy
