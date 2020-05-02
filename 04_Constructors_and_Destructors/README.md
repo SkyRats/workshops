@@ -61,6 +61,26 @@ Employee::Employee(int salary) : salary (salary){
 * It still uses the attribute's name as parameters
   * It makes reading easier for who **uses** the constructor
 
+3. Option 3 - Use Python! Python is way more **coxa**
+
+
+```python
+class Employee:
+  def __init__(self, name, salary):
+    self.__salary = salary
+    self.name = name
+    
+  def set_salary(self, new_value):
+    self.__salary = new_value
+  
+  def __get_salary(self, new_value):
+    return self.__salary
+
+  def present(self):
+    print("Hey there, name is {} and I earn {}".format(self.name, self.__salary))
+```
+
+
 ### Calling Constructors
 
 To call the Constructor above (with the `salary`parameter), we should have the `main.cpp` like this:
