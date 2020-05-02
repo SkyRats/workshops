@@ -54,8 +54,10 @@ class Employee {
 
 int main() {
   Employee* MrFeather;
-  MrFeather.setSalary(50000);
-  cout << MrFeather.getSalary() << endl;
+
+  MrFeather->setSalary(50000);
+  cout << MrFeather->getSalary() << endl;
+
   return 0;
 }
 ```
