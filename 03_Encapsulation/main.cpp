@@ -6,9 +6,9 @@ using namespace std;
 int main() {
   Employee* MrFeather[3]; // creates a vector of 3 employees
 
-MrFeather[0] = new Employee();
-MrFeather[1] = new Employee();
-MrFeather[2] = new Employee();
+  MrFeather[0] = new Employee();
+  MrFeather[1] = new Employee();
+  MrFeather[2] = new Employee();
 
   MrFeather[0]->setSalary(50000); // set the salary of the first employee to 50000
   MrFeather[1]->setSalary(25000); // set the salary of the second employee to 25000
