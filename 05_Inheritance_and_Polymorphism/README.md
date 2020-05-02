@@ -277,6 +277,9 @@ There are two ways that we can cast objects: **Static** and **Dynamic**.
 
 #### Static Cast
 
+##### Syntax
+ > new_type *newPtr =  static_cast< new_type >(ptr);
+
 Here I'm just going to give you an example of `static_cast`, but it importante to say that it is an UNSAFE method.
 
 ```c++
@@ -308,6 +311,14 @@ You can find more information about static cast [here](https://docs.microsoft.co
 
 #### Dynamic Cast
 
-In C++/CX, a compile time and runtime check are performed with `dynamic_cast`.
+##### Syntax
+ > new_type *newPtr =  dynamic_cast< new_type >(ptr);
 
-It will no longer throw an exception when type-id is an interior pointer to a value type, with the cast failing at runtime. The cast will now return the 0 pointer (NULL) value instead of throwing.
+**Dynamic casting** is, primarily, used to safely downcast, but it can also be used for upcasting.
+
+It is important to say that `dynamic_cast` checks consistency at runtime. Consequently, it is slower than `static_cast`.
+
+Using the example of the classes above - `Shape`, `Rectangle` and `Triangle` - we're going to show how *dynamic casting* can be implemented, check it out in `Examples` directory
+
+
+> To use dynamic_cast<new_type>(ptr) the base class should contain at least one virtual method.
