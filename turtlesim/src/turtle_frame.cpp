@@ -269,8 +269,7 @@ bool TurtleFrame::clearCallback(std_srvs::Empty::Request&, std_srvs::Empty::Resp
   return true;
 }
 
-bool TurtleFrame::resetCallback(std_srvs::Empty::Request&, std_srvs::Empty::Response&)
-{
+bool TurtleFrame::resetCallback(std_srvs::Empty::Request&, std_srvs::Empty::Response&)  {
   ROS_INFO("Resetting turtlesim.");
   turtles_.clear();
   id_counter_ = 0;
@@ -278,5 +277,4 @@ bool TurtleFrame::resetCallback(std_srvs::Empty::Request&, std_srvs::Empty::Resp
   clear();
   return true;
 }
-
 }
