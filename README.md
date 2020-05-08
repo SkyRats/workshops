@@ -29,7 +29,9 @@ Usamos o ROS conforme as necessidades do projeto em que estamos trabalhando. Pod
 
 O funcionamento do ROS é representado por um **Grafo de comunicação**, que organiza a interação entre os programas através de tópicos e serviços.
 
-# GRAFOS? defina (BARROS)
+![grafo](images/grafo.png)
+
+Grafos são estruturas muito utilizadas na computação e na matemática, e consistem em um conjunto de **vértices** ou **nós** ligados por **arestas**. Na prática, eles funcionam como uma forma de abstração, isto é, uma forma de compreender e modelar um sistema. No caso do ROS, o grafo representa a comunicação: os nós são os programas, e as arestas representam vias de comunicação entre eles.
 
 Para iniciar o ROS, usamos o comando `roscore` em um terminal
 
@@ -59,7 +61,9 @@ Veja que o programa roda e abre a linda janelinha do turtlesim. Examinando novam
 ### Topics
 
 Mas como esses _nodes_ se comunicam entre si? A forma mais comum é através de _topics_. Os tópicos funcionam como caixinhas de correio: um _node_ coloca uma mensagem em uma certa caixinha, e depois um outro _node_ pode ir nessa caixinha e ver a mensagem que foi colocada. No ROS, dizemos que um _node_ do tipo _Publisher_ publica mensagens em um _topic_, e um _node_ do tipo _Subscriber_ se inscreve nesse _topic_, recebendo todas as mensagens que são publicadas nele.
-Eles são um dos tipos possíveis de **arestas** no grafo de comunicação que mencionamos acima
+
+Eles são um dos tipos possíveis de **arestas** no grafo de comunicação que mencionamos acima. Mais especificamente, são arestas direcionais, ou seja, que só permitem comunicação em um sentido. Dizemos também que a comunicação é **assíncrona**, pois os Subscribers podem realizar as postagens em qualquer momento, sem precisar interromper sua execução para esperar que algum Subscriber receba a mensagem.
+
 Vamos ver os tópicos atualmente em execução com o comando `rostopic list` em um terminal. Vamos examinar, por exemplo, o tópico `/turtle1/pose`, com o comando `rostopic info /turtle1/pose`:
 
 ```
@@ -129,9 +133,10 @@ Veja que ela é composta de dois itens (linear e angular), sendo que esses são 
 Você pode enconrar mais informações sobre ROS Messages [aqui](http://wiki.ros.org/msg).
 
 ### Services
+
 O modelo publish/subscribe que estávamos usando até agora é muito útil pra várias aplicações, mas possui limitações. Por exemplo, um Publisher nunca sabe se o Subscriber recebeu a mensagem, nem se ele conseguiu realizar a tarefa.
 
-Para resolver isso, existem os _Services_. Ao invés de "postar" uma mensagem num tópico, os serviços correspondem a chamadas diretas que um node faz para o outro, da mesma forma que podemos chamar funções em Python. Os serviços são compostos de um _request_, que é a mensagem que o node "cliente" realiza para o "servidor", e uma _response_, a mensagem retornada pelo servidor ao cliente quando a chamada for concluida. É importante notar que **enquanto o servidor estiver realizando o serviço, o processamento do cliente é interrompido**.
+Para resolver isso, existem os _Services_. Ao invés de "postar" uma mensagem num tópico, os serviços correspondem a chamadas diretas que um node faz para o outro, da mesma forma que podemos chamar funções em Python. Os serviços são compostos de um _request_, que é a mensagem que o node "cliente" realiza para o "servidor", e uma _response_, a mensagem retornada pelo servidor ao cliente quando a chamada for concluida. É importante notar que **enquanto o servidor estiver realizando o serviço, o processamento do cliente é interrompido**. Por isso, dizemos que a comunicação por services é **síncrona**, e constitui um outro tipo de **aresta** para a comunicação entre nós. 
 
 Por exemplo, o turtlesim possui um serviço chamado /spawn, que cria uma nova tartaruga. Vamos criar uma tartaruga chamada Edson no ponto x=1, y=2 com theta=0.
 
@@ -145,7 +150,30 @@ rosservice call /spawn 1 2 0 Edson
 - `rosservice info /service_name`: mostra informações sobre um dado serviço
 
 
-### Parameter Server BARROS
+### Parameter Server
+
+O **Parameter Server** é um dicionário de parâmetros centralizado que é criado durante a execução do ROS e que pode ser usado por qualquer _node_. Ele é útil para definir nomes, opções e configurações ao executar um programa, assim como modificá-los durante a execução (sem precisar, desligar o programa, modificar o código, compilar e rodar de novo). Também é possível guardar e carregar esses parâmetros em arquivos, o que pode facilitar o transporte de configurações.
+
+Executando o comando `rosparam list` podemos ver todos os parâmetros atualmente sendo usados. Por exemplo, o turtlesim armazena a cor de fundo do simulador em 3 parâmetros (RGB). Podemos ver qual o valor armazenado em um desses com:
+
+```
+rosparam get /sim/background_b
+```
+
+Podemos também mudar o valor do azul para 0, por exemplo:
+
+```
+rosparam set /sim/background_b 0
+```
+
+Note que o simulador não atualiza a cor de fundo em tempo real. Para isso, seria necessário chamar algum serviço. Qual deve ser esse serviço?
+
+*Obs.:* O parâmetro só 
+
+**Comandos importantes:**
+- `rosparam list`: lista todos os parâmetros do Parameter Server
+- `rosparam get /param_name`: mostra o valor armazenado em um parâmetro
+- `rosparam set /param_name [args]`: atribui um valor a um parâmetro, eliminando o anterior.
 
 ### Packages
 Todo software ROS é organizado em **packages**. Eles são um jeito modular de organizar pedaços de código com funções diferentes, e geralmente estão presentes no nosso **catkin workspace**.
@@ -190,9 +218,7 @@ Além desse comando, temos vários outros para manipular packages, como
 
 * `rospack` - obter informações do package
 * `rosdep` - instala dependências de um package
-Exemplo: `rosdep install PACKAGE` instala as dependências do package `PACKAGE`
-
-CAIO - ele instala no PC ou no workspace?
+Exemplo: `rosdep install PACKAGE` instala as dependências do package `PACKAGE` na sua máquina.
 
 
 ### Workspaces
@@ -242,17 +268,24 @@ Na pasta `src` que estarão todos os códigos (compiláveis) que desenvolveremos
 
 * `devel` é onde todos os resultados das compilação estão, os binários e executáveis
 
-* `install` os programas podem ser instalados no computador no diretório install, com o comando `make install`, por exemplo CAIO
+* `install` os programas podem ser instalados no computador no diretório install, com o comando `make install`
 
 
 
-# `rosdep install --from-paths src` CAIO
+Para instalar as dependências de todos os packages de um workspace, podemos usar o comando `rosdep install --from-paths src --ignore-src -r -y`, rodando ele da raiz do workspace.
 
-#### Como compilar o workspace
+> "This command magically installs all the packages that the packages in your catkin workspace depend upon but are missing on your computer." - ROS Wiki
 
-`catkin build` x `catkin_make`
+#### Criando e iniciando um workspace
+Para criar um catkin workspace, precisamos ~~, além de ter o [catkin instalado](http://www.ros.org/wiki/catkin#Installing_catkin)~~ criar um diretório, que será nosso workspace, com uma pasta `src` dentro dele.
 
-CAIO falar mais sobre isso
+`mkdir -p ~/meu_ws/src`
+
+
+Depois disso, **dentro da pasta `src`**, daremos o comando
+
+`catkin_init_workspace`, que inicia nosso workspace (repare que ele cria o arquivo CMakeLists.txt dendo da src)
+
 
 #### Como usar o workspace
 Para "entrar" no workspace, usamos os chamados **environment setup files**, que são basicamente scripts bash que configuram variáveis do sistema para que o sistema reconheça o seu catkin workspace.
@@ -261,7 +294,19 @@ Para usar o workspace então, precisamos dar o comando
 
 `source ~/[nome_do_workspace]/devel/setup.bash`
 
-`source /opt/ros/melodic/setup.bash` CAIO
+
+Costumamos deixar a linha abaixo e o source do workspace no final do nosso arquivo ~/.bashrc, para mudar o ambiente de trabalho.
+
+`source /opt/ros/melodic/setup.bash`
+
+#### Compilando o workspace
+Para compilar, devemos ir ao diretório do workspace e dar o comando
+
+`catkin build`
+
+Após esse comando são criadas no workspace, que antes só possuia a pasta `src`, as pastas devel, build e logs.
+
+E é criado também nosso amigo `devel/setup.bash`, que podemos usar para configurar o workspace no terminal bash.
 
 ### Implementação de um Node Publisher em Python
 ```python
