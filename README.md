@@ -23,7 +23,7 @@ Usamos o ROS conforme as necessidades do projeto em que estamos trabalhando. Pod
 * MAVROS
 * CvBridge
 * Gazebo
-* bebop_driver, bebop_autonomy, bebop_msgs, bebop tools, _et cetera_.
+* bebop_driver, bebop_autonomy, bebop_msgs, bebop tools,_et cetera_.
 
 ## Como funciona o ROS?
 
@@ -41,13 +41,7 @@ Para ver os _nodes_ rodando no momento, executamos o seguinte comando em um outr
 rosnode list
 ```
 
-Note que, no momento, temos apenas um _node_ em funcionamento, o `/rosout`. Para executar um programa (que seja um _node_), utilizamos o comando `rosrun`, com a seguinte sintaxe
-
-```
-rosrun package_name program_name
-```
-
-Vamos começar executando o turtlesim, o simulador de tartarugas. Ele está contido no package _turtlesim_, e o simulador em si corresponde ao programa _turtlesim_node_.
+Note que, no momento, temos apenas um _node_ em funcionamento, o `/rosout`. Para executar um programa (que seja um _node_), utilizamos o comando `rosrun`. Vamos começar executando o turtlesim, o simulador de tartarugas. Ele está contido no package _turtlesim_, e o simulador em si corresponde ao programa _turtlesim_node_.
 
 ```
 rosrun turtlesim turtlesim_node
@@ -58,6 +52,7 @@ Veja que o programa roda e abre a linda janelinha do turtlesim. Examinando novam
 **Comandos importantes:**
 - `rosnode list`: lista todos os _nodes_ ativos
 - `rosnode info node_name`: dá informações sobre um _node_ específico.
+- `rosrun package_name program_name`: executa um _node_ em um package.
 
 ### Topics
 
@@ -94,7 +89,11 @@ Essa funcionalidade é implementada pelo seguinte node:
 rosrun turtlesim turtle_teleop_key
 ```
 
-Esse programa traduz
+Esse programa basicamente recebe comandos do seu teclado e envia uma mensagem equivalente no topico `/turtle1/cmd_vel`. Poderiamos fazer algo parecido diretamente pela linha de comando:
+
+```
+rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist '[1.0, 0.0, 0.0]' '[0.0, 0.0, 1.0]'
+```
 
 **Obs.:** Tópicos *não* são programas. Eles só começam a existir quando um _node_ inicia um Publisher ou Subscriber.
 
@@ -104,11 +103,32 @@ Esse programa traduz
 - `rostopic echo /topic_name`: imprime na tela todas as mensagens publicadas em um tópico específico
 - `rostopic pub /topic_name msg_type args`: publica uma mensagem em um tópico
 - `rostopic find msg_type`: encontra tópicos com um certo tipo de mensagem
+- `rosmsg show msg_type`: mostra a descrição de um dado tipo de mensagem
 
 ### Messages
 
+Em um tópico só podem ser passadas mensagens de apenas um tipo, e tentar usar uma mensagem do tipo errado resultaria em um erro. Mensagens são compostas de alguns tipos primitivos, e são descritas em arquivos .msg dentro de um package. Para serem usadas no código, o ROS transforma elas em classes.
+
+_Ex.:_ Vimos que o tipo de mensagem usado no tópico cmd_vel é geometry_msgs/Twist. Vamos usar o comando `rosmsg show geometry_msgs/Twist` para ver o que essa mensagem contem:
+
+```
+geometry_msgs/Vector3 linear
+  float64 x
+  float64 y
+  float64 z
+geometry_msgs/Vector3 angular
+  float64 x
+  float64 y
+  float64 z
+```
+
+Veja que ela é composta de dois itens (linear e angular), sendo que esses são instâncias de uma mensagem do tipo geometry_msgs/Vector3. Essa mensagem, por sua vez, tem 3 parâmetros (dessa vez primitivos): x, y e z, do tipo float64. Ou seja, uma mensagem pode ser uma combinação de outras mensagens e tipos primitivos.
+
+Você pode enconrar mais informações sobre ROS Messages [aqui](http://wiki.ros.org/msg).
+
 ### Services
 
+<<<<<<< HEAD
 ### Packages
 Todo software ROS é organizado em **packages**. Eles são um jeito modular e organizar pedaços de código com funções diferentes, e geralmente estão presentes no nosso **catkin workspace**.
 Cada package ROS é (idealmente) independente dos códigos presentes nos outros códigos, e pode conter **nodes**, **messages**, **config**'s, **libraries** ou qualquer coisa que constitua um módulo útil.
@@ -247,6 +267,23 @@ Ferramenta para gravação e reprodução de mensagens ROS .
 #### Symlinks
 
 `ln -s ~/git/[package] ~/[workspace]/src/`
+=======
+O modelo publish/subscribe que estávamos usando até agora é muito útil pra várias aplicações, mas possui limitações. Por exemplo, um Publisher nunca sabe se o Subscriber recebeu a mensagem, nem se ele conseguiu realizar a tarefa.
+
+Para resolver isso, existem os _Services_. Ao invés de "postar" uma mensagem num tópico, os serviços correspondem a chamadas diretas que um node faz para o outro, da mesma forma que podemos chamar funções em Python. Os serviços são compostos de um _request_, que é a mensagem que o node "cliente" realiza para o "servidor", e uma _response_, a mensagem retornada pelo servidor ao cliente quando a chamada for concluida. É importante notar que **enquanto o servidor estiver realizando o serviço, o processamento do cliente é interrompido**.
+
+Por exemplo, o turtlesim possui um serviço chamado /spawn, que cria uma nova tartaruga. Vamos criar uma tartaruga chamada Edson no ponto x=1, y=2 com theta=0.
+
+```
+rosservice call /spawn 1 2 0 Edson
+```
+
+**Comandos importantes:**
+- `rosservice list`: lista todos os serviços ativos
+- `rosservice call /service_name [args]`: chama um serviço com os argumentos dados
+- `rosservice info /service_name`: mostra informações sobre um dado serviço
+
+>>>>>>> 7b8891b43319f076703909ddd840522f811bf046
 
 
 
