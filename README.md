@@ -29,6 +29,8 @@ Usamos o ROS conforme as necessidades do projeto em que estamos trabalhando. Pod
 
 O funcionamento do ROS é representado por um **Grafo de comunicação**, que organiza a interação entre os programas através de tópicos e serviços.
 
+# GRAFOS? defina (BARROS)
+
 Para iniciar o ROS, usamos o comando `roscore` em um terminal
 
 ### Nodes
@@ -57,7 +59,7 @@ Veja que o programa roda e abre a linda janelinha do turtlesim. Examinando novam
 ### Topics
 
 Mas como esses _nodes_ se comunicam entre si? A forma mais comum é através de _topics_. Os tópicos funcionam como caixinhas de correio: um _node_ coloca uma mensagem em uma certa caixinha, e depois um outro _node_ pode ir nessa caixinha e ver a mensagem que foi colocada. No ROS, dizemos que um _node_ do tipo _Publisher_ publica mensagens em um _topic_, e um _node_ do tipo _Subscriber_ se inscreve nesse _topic_, recebendo todas as mensagens que são publicadas nele.
-
+Eles são um dos tipos possíveis de **arestas** no grafo de comunicação que mencionamos acima
 Vamos ver os tópicos atualmente em execução com o comando `rostopic list` em um terminal. Vamos examinar, por exemplo, o tópico `/turtle1/pose`, com o comando `rostopic info /turtle1/pose`:
 
 ```
@@ -92,7 +94,7 @@ rosrun turtlesim turtle_teleop_key
 Esse programa basicamente recebe comandos do seu teclado e envia uma mensagem equivalente no topico `/turtle1/cmd_vel`. Poderiamos fazer algo parecido diretamente pela linha de comando:
 
 ```
-rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist '[1.0, 0.0, 0.0]' '[0.0, 0.0, 1.0]'
+rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[1.0, 0.0, 0.0]' '[0.0, 0.0, 1.0]'
 ```
 
 **Obs.:** Tópicos *não* são programas. Eles só começam a existir quando um _node_ inicia um Publisher ou Subscriber.
@@ -127,19 +129,36 @@ Veja que ela é composta de dois itens (linear e angular), sendo que esses são 
 Você pode enconrar mais informações sobre ROS Messages [aqui](http://wiki.ros.org/msg).
 
 ### Services
+O modelo publish/subscribe que estávamos usando até agora é muito útil pra várias aplicações, mas possui limitações. Por exemplo, um Publisher nunca sabe se o Subscriber recebeu a mensagem, nem se ele conseguiu realizar a tarefa.
 
-<<<<<<< HEAD
+Para resolver isso, existem os _Services_. Ao invés de "postar" uma mensagem num tópico, os serviços correspondem a chamadas diretas que um node faz para o outro, da mesma forma que podemos chamar funções em Python. Os serviços são compostos de um _request_, que é a mensagem que o node "cliente" realiza para o "servidor", e uma _response_, a mensagem retornada pelo servidor ao cliente quando a chamada for concluida. É importante notar que **enquanto o servidor estiver realizando o serviço, o processamento do cliente é interrompido**.
+
+Por exemplo, o turtlesim possui um serviço chamado /spawn, que cria uma nova tartaruga. Vamos criar uma tartaruga chamada Edson no ponto x=1, y=2 com theta=0.
+
+```
+rosservice call /spawn 1 2 0 Edson
+```
+
+**Comandos importantes:**
+- `rosservice list`: lista todos os serviços ativos
+- `rosservice call /service_name [args]`: chama um serviço com os argumentos dados
+- `rosservice info /service_name`: mostra informações sobre um dado serviço
+
+
+### Parameter Server BARROS
+
 ### Packages
-Todo software ROS é organizado em **packages**. Eles são um jeito modular e organizar pedaços de código com funções diferentes, e geralmente estão presentes no nosso **catkin workspace**.
-Cada package ROS é (idealmente) independente dos códigos presentes nos outros códigos, e pode conter **nodes**, **messages**, **config**'s, **libraries** ou qualquer coisa que constitua um módulo útil.
->> In general, ROS packages follow a "Goldilocks" principle: enough functionality to be useful, but not too much that the package is heavyweight and difficult to use from other software.
+Todo software ROS é organizado em **packages**. Eles são um jeito modular de organizar pedaços de código com funções diferentes, e geralmente estão presentes no nosso **catkin workspace**.
+Cada package ROS é (idealmente) independente dos códigos presentes nos outros packages, e pode conter **nodes**, **messages**, **config**'s, **libraries** ou qualquer coisa que constitua um módulo útil.
+> In general, ROS packages follow a "Goldilocks" principle: enough functionality to be useful, but not too much that the package is heavyweight and difficult to use from other software.
 
 De maneira prática, um package ROS é organizado em um repositório "compilável", que contém:
+
 * Um arquivo `CMakeLists.txt`
 
 Nele, descrevemos as diretrizes de compilação dos códigos desse package.
 
-* Um arquivo `package.sml`, que fornece informações básicas sobre o código como
+* Um arquivo `package.xml`, que fornece informações básicas sobre o código como
     * Versão
     * Nome
     * Informações dos desenvolvedores
@@ -172,6 +191,9 @@ Além desse comando, temos vários outros para manipular packages, como
 * `rospack` - obter informações do package
 * `rosdep` - instala dependências de um package
 Exemplo: `rosdep install PACKAGE` instala as dependências do package `PACKAGE`
+
+CAIO - ele instala no PC ou no workspace?
+
 
 ### Workspaces
 Todos os packages ROS que desenvolveremos estarão organizados em **workspaces**, para organizarmos os códigos que precisamos para determinada aplicação. Esses são os **catkin workspaces**, uma pasta onde modificamos, compilamos e instalamos packages.
@@ -220,11 +242,17 @@ Na pasta `src` que estarão todos os códigos (compiláveis) que desenvolveremos
 
 * `devel` é onde todos os resultados das compilação estão, os binários e executáveis
 
-* `install` os programas podem ser instalados no computador no diretório install, com o comando `make install`, por exemplo DEBUG
+* `install` os programas podem ser instalados no computador no diretório install, com o comando `make install`, por exemplo CAIO
+
+
+
+# `rosdep install --from-paths src` CAIO
 
 #### Como compilar o workspace
 
 `catkin build` x `catkin_make`
+
+CAIO falar mais sobre isso
 
 #### Como usar o workspace
 Para "entrar" no workspace, usamos os chamados **environment setup files**, que são basicamente scripts bash que configuram variáveis do sistema para que o sistema reconheça o seu catkin workspace.
@@ -233,7 +261,30 @@ Para usar o workspace então, precisamos dar o comando
 
 `source ~/[nome_do_workspace]/devel/setup.bash`
 
-`source /opt/ros/melodic/setup.bash`
+`source /opt/ros/melodic/setup.bash` CAIO
+
+### Implementação de um Node Publisher em Python
+```python
+import rospy
+CAIO
+```
+### Implementação de um Node Subscriber em Python
+```python
+import rospy
+CAIO
+```
+
+### Chamando um Service em Python
+```python
+import rospy
+CAIO
+```
+
+### Criando um Service em Python
+```python
+import rospy
+CAIO
+```
 
 ### Roslaunch
 O roslaunch é uma ferramenta que serve para **rodar diversos nodes ROS ao mesmo tempo**, e setar parametros no Parameter Server do ROS - e rodar outros arquivos launch :).
@@ -254,34 +305,22 @@ Para usá-la, criamos arquivos launch (um arquivo XML)
 ```
 
 #### Rodando o roslaunch
+Para rodar o roslaunh, usamos o comando
 
 `roslaunch package_name file.launch`
+
+Mas antes precisamos **compilar o workspace** e dar **source** em seu **setup.bash**
 
 #### ROS Bags
 Ferramenta para gravação e reprodução de mensagens ROS .
 
-* `rosbag record [topico1] [topico2] [topico3]`
+* `rosbag record [topico1] [topico2] [topico3]` grava os tópicos 1, 2 e 3
 * `rosbag record -a` grava todos os tópicos
 * `rosbag play [nome_da_rosbag].bag`
 
 #### Symlinks
 
-
 `ln -s ~/git/[package] ~/[workspace]/src/`
-O modelo publish/subscribe que estávamos usando até agora é muito útil pra várias aplicações, mas possui limitações. Por exemplo, um Publisher nunca sabe se o Subscriber recebeu a mensagem, nem se ele conseguiu realizar a tarefa.
-
-Para resolver isso, existem os _Services_. Ao invés de "postar" uma mensagem num tópico, os serviços correspondem a chamadas diretas que um node faz para o outro, da mesma forma que podemos chamar funções em Python. Os serviços são compostos de um _request_, que é a mensagem que o node "cliente" realiza para o "servidor", e uma _response_, a mensagem retornada pelo servidor ao cliente quando a chamada for concluida. É importante notar que **enquanto o servidor estiver realizando o serviço, o processamento do cliente é interrompido**.
-
-Por exemplo, o turtlesim possui um serviço chamado /spawn, que cria uma nova tartaruga. Vamos criar uma tartaruga chamada Edson no ponto x=1, y=2 com theta=0.
-
-```
-rosservice call /spawn 1 2 0 Edson
-```
-
-**Comandos importantes:**
-- `rosservice list`: lista todos os serviços ativos
-- `rosservice call /service_name [args]`: chama um serviço com os argumentos dados
-- `rosservice info /service_name`: mostra informações sobre um dado serviço
 
 
 ## Referências
