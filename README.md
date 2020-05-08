@@ -109,6 +109,146 @@ Esse programa traduz
 
 ### Services
 
+### Packages
+Todo software ROS é organizado em **packages**. Eles são um jeito modular e organizar pedaços de código com funções diferentes, e geralmente estão presentes no nosso **catkin workspace**.
+Cada package ROS é (idealmente) independente dos códigos presentes nos outros códigos, e pode conter **nodes**, **messages**, **config**'s, **libraries** ou qualquer coisa que constitua um módulo útil.
+>> In general, ROS packages follow a "Goldilocks" principle: enough functionality to be useful, but not too much that the package is heavyweight and difficult to use from other software.
+
+De maneira prática, um package ROS é organizado em um repositório "compilável", que contém:
+* Um arquivo `CMakeLists.txt`
+
+Nele, descrevemos as diretrizes de compilação dos códigos desse package.
+
+* Um arquivo `package.sml`, que fornece informações básicas sobre o código como
+    * Versão
+    * Nome
+    * Informações dos desenvolvedores
+    * Licensa
+    * Balela, perfumaria
+
+* Uma pasta `src`, onde encontramos todos os codigos fontes que serão compilados
+
+* Uma pasta `scripts`, para guardar scripts executáveis (python, bash, etc)
+
+* Uma pasta `include/package_name`
+
+Nela, colocamos todos os **headers C++** - os famosos .h. Para serem reconhecidos por este e por outros pacakges ROS
+
+* Além destas, podemos ter pastas para definir ROS **messages** e **services**, denominadas
+    * `msg`
+    * `srv`
+
+* Uma pasta `launch` para guardar os arquivos launchfiles
+
+#### Criando o package
+Putz, mas como eu vou lembrar de criar todas essas pastas?
+Resposta: ~~não vou~~
+
+Para a criação de um package, usamos o comando 
+`catkin_create_pkg`
+
+Além desse comando, temos vários outros para manipular packages, como
+
+* `rospack` - obter informações do package
+* `rosdep` - instala dependências de um package
+Exemplo: `rosdep install PACKAGE` instala as dependências do package `PACKAGE`
+
+### Workspaces
+Todos os packages ROS que desenvolveremos estarão organizados em **workspaces**, para organizarmos os códigos que precisamos para determinada aplicação. Esses são os **catkin workspaces**, uma pasta onde modificamos, compilamos e instalamos packages.
+A carinha de um workspace...
+```
+workspace_folder/         -- WORKSPACE
+  src/                    -- SOURCE SPACE
+    CMakeLists.txt        -- The 'toplevel' CMake file
+    package_1/
+      CMakeLists.txt
+      package.xml
+      ...
+    package_n/
+      CMakeLists.txt
+      package.xml
+      ...
+  build/                  -- BUILD SPACE
+  devel/                  -- DEVELOPMENT SPACE (set by CATKIN_DEVEL_PREFIX)
+    bin/
+    etc/
+    include/
+    lib/
+    share/
+    .catkin
+    env.bash
+    setup.bash
+    setup.sh
+    ...
+  install/                -- INSTALL SPACE (set by CMAKE_INSTALL_PREFIX)
+    bin/
+    etc/
+    include/
+    lib/
+    share/
+    .catkin             
+    env.bash
+    setup.bash
+    setup.sh
+```
+
+* `src`, nosso velho amigo
+
+Na pasta `src` que estarão todos os códigos (compiláveis) que desenvolveremos - src <= source code <= código fonte.
+
+* `build` irá guardar todos os informações e arquivos intermediarios de compilação do cmake.
+
+* `devel` é onde todos os resultados das compilação estão, os binários e executáveis
+
+* `install` os programas podem ser instalados no computador no diretório install, com o comando `make install`, por exemplo DEBUG
+
+#### Como compilar o workspace
+
+`catkin build` x `catkin_make`
+
+#### Como usar o workspace
+Para "entrar" no workspace, usamos os chamados **environment setup files**, que são basicamente scripts bash que configuram variáveis do sistema para que o sistema reconheça o seu catkin workspace.
+Esses arquivos estão em `devel/`, e o que costumamos usar (para o terminal bash) eh o `devel/bash`.
+Para usar o workspace então, precisamos dar o comando
+
+`source ~/[nome_do_workspace]/devel/setup.bash`
+
+`source /opt/ros/melodic/setup.bash`
+
+### Roslaunch
+O roslaunch é uma ferramenta que serve para **rodar diversos nodes ROS ao mesmo tempo**, e setar parametros no Parameter Server do ROS - e rodar outros arquivos launch :).
+Para usá-la, criamos arquivos launch (um arquivo XML)
+
+```XML
+<?xml version="1.0"?>
+<launch>
+
+    <node pkg="your_package" name="josé" type="your_node"/>
+
+    <arg name="x" default="0"/> <!--Seta o parametro x como 0-->
+   
+    <include file="$(find outropackage)/launch/file2.launch"> <!--lansa o outro arquivo-->
+        <arg name="y" value="1"/> <!-- y = 1 -->
+    </include>
+</launch>
+```
+
+#### Rodando o roslaunch
+
+`roslaunch package_name file.launch`
+
+#### ROS Bags
+Ferramenta para gravação e reprodução de mensagens ROS .
+
+* `rosbag record [topico1] [topico2] [topico3]`
+* `rosbag record -a` grava todos os tópicos
+* `rosbag play [nome_da_rosbag].bag`
+
+#### Symlinks
+
+`ln -s ~/git/[package] ~/[workspace]/src/`
+
+
 
 ## Referências
 1. [ROS Wiki](http://wiki.ros.org/)
