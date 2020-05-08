@@ -266,8 +266,8 @@ Ferramenta para gravação e reprodução de mensagens ROS .
 
 #### Symlinks
 
+
 `ln -s ~/git/[package] ~/[workspace]/src/`
-=======
 O modelo publish/subscribe que estávamos usando até agora é muito útil pra várias aplicações, mas possui limitações. Por exemplo, um Publisher nunca sabe se o Subscriber recebeu a mensagem, nem se ele conseguiu realizar a tarefa.
 
 Para resolver isso, existem os _Services_. Ao invés de "postar" uma mensagem num tópico, os serviços correspondem a chamadas diretas que um node faz para o outro, da mesma forma que podemos chamar funções em Python. Os serviços são compostos de um _request_, que é a mensagem que o node "cliente" realiza para o "servidor", e uma _response_, a mensagem retornada pelo servidor ao cliente quando a chamada for concluida. É importante notar que **enquanto o servidor estiver realizando o serviço, o processamento do cliente é interrompido**.
@@ -282,9 +282,6 @@ rosservice call /spawn 1 2 0 Edson
 - `rosservice list`: lista todos os serviços ativos
 - `rosservice call /service_name [args]`: chama um serviço com os argumentos dados
 - `rosservice info /service_name`: mostra informações sobre um dado serviço
-
->>>>>>> 7b8891b43319f076703909ddd840522f811bf046
-
 
 
 ## Referências
