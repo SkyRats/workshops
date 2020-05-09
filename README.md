@@ -168,7 +168,7 @@ rosparam set /sim/background_b 0
 
 Note que o simulador não atualiza a cor de fundo em tempo real. Para isso, seria necessário chamar algum serviço. Qual deve ser esse serviço?
 
-*Obs.:* O parâmetro só 
+*Obs.:* O parâmetro só passa a "existir" quando um valor é atribuido a ele pela primeira vez.
 
 **Comandos importantes:**
 - `rosparam list`: lista todos os parâmetros do Parameter Server
