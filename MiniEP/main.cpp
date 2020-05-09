@@ -1,14 +1,10 @@
 #include <iostream>
 
 #include "Modalidade.h"
-#include "TabelaComOrdem.h"
-#include "TabelaComPontos.h"
-#include <vector>
 #include "Competicao.h"
 #include "CompeticaoMultimodalidades.h"
 #include "CompeticaoSimples.h"
-#include "PersistenciaDeCompeticao.h"
-#include <stdexcept>
+#include "Equipe.h"
 
 using namespace std;
 
