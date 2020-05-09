@@ -308,6 +308,8 @@ Após esse comando são criadas no workspace, que antes só possuia a pasta `src
 
 E é criado também nosso amigo `devel/setup.bash`, que podemos usar para configurar o workspace no terminal bash.
 
+*Obs.:* caso o seu terminal reclame que o comando `catkin build` não foi encontrado, é necessária a instalacao do python-catkin-tools através do comando `sudo apt-get install python-catkin-tools`.
+
 ### Implementação de um Node Publisher em Python
 ```python
 import rospy
