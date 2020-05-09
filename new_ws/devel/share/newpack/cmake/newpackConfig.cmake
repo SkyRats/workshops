@@ -1,0 +1,1 @@
+/home/caio/new_ws/devel/.private/newpack/share/newpack/cmake/newpackConfig.cmake

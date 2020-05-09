@@ -1,0 +1,5 @@
+newpack
+/home/caio/new_ws/devel/.private/newpack/cmake.lock /home/caio/new_ws/devel/./cmake.lock
+/home/caio/new_ws/devel/.private/newpack/share/newpack/cmake/newpackConfig.cmake /home/caio/new_ws/devel/share/newpack/cmake/newpackConfig.cmake
+/home/caio/new_ws/devel/.private/newpack/share/newpack/cmake/newpackConfig-version.cmake /home/caio/new_ws/devel/share/newpack/cmake/newpackConfig-version.cmake
+/home/caio/new_ws/devel/.private/newpack/lib/pkgconfig/newpack.pc /home/caio/new_ws/devel/lib/pkgconfig/newpack.pc

@@ -1,0 +1,1 @@
+/home/caio/new_ws/devel/.private/newpack/lib/pkgconfig/newpack.pc

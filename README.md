@@ -312,26 +312,153 @@ E é criado também nosso amigo `devel/setup.bash`, que podemos usar para config
 
 ### Implementação de um Node Publisher em Python
 ```python
+#!/usr/bin/env python
 import rospy
-CAIO
+
+rospy.init_node("nome_do_node")
+rate = rospy.Rate(60)
+pub = rospy.Publisher("nome_do_topico", TipoDeMsg, queue_size=1)
+
+def main():
+  pub.publish(TipoDeMsg(param1, param2, ..., paramN))
+  rate.sleep()
 ```
+Repare no jutsu do jutsu mil grau que é o `#!/usr/bin/env python`, é teoricamente um comentário no programa, mas ele tem uma função importante.
+Esa linha é chamada de **shebang**, e se temos um script executável, que é chamado para execução sem que informemos a linguagem dele (como será o caso do roslaunch/rosrun), o shebang dá o endereço do interpretador que roda o código em questão
+>if the script is executable, and called without the preceding language. The script then calls the language's interpreter to run the code inside the script, and the shebang is the "guide" to find it.
+
 ### Implementação de um Node Subscriber em Python
 ```python
+#!/usr/bin/env python
 import rospy
-CAIO
+
+def callback_func(data):
+  print(data)
+
+rospy.init_node("nome_do_node")
+rate = rospy.Rate(60)
+sub = rospy.Subscriber("nome_do_topico", TipoDeMsg, callback_func)
+def main():
+  rospy.spin()
+
 ```
+
 
 ### Chamando um Service em Python
 ```python
+#!/usr/bin/env python
 import rospy
-CAIO
+
+
+service = rospy.ServiceProxy("service", CommandBool)
+
+def main():
+  service(arg1, arg2, ..., argN)
 ```
 
 ### Criando um Service em Python
 ```python
+#!/usr/bin/env python
+from beginner_tutorials.srv import AddTwoInts,AddTwoIntsResponse
 import rospy
-CAIO
+
+def handle_add_two_ints(req):
+    print "Returning [%s + %s = %s]"%(req.a, req.b, (req.a + req.b))
+    return AddTwoIntsResponse(req.a + req.b)
+
+def add_two_ints_server():
+    rospy.init_node('add_two_ints_server')
+    s = rospy.Service('add_two_ints', AddTwoInts, handle_add_two_ints)
+    print "Ready to add two ints."
+    rospy.spin()
+
+if __name__ == "__main__":
+    add_two_ints_server()
 ```
+Exemplo do ROS wiki
+
+### Exemplos em C++
+
+#### Compilação! EEBA!
+Ao escrever um node ROS em C++, precisaremos compilá-lo eventualmente, isso envolve adicionar o arquvio .cpp (e, eventualmente, os .h) no arquivo `CMakeLists.txt`, para fazer isso o CMakeLists facilita disponibilizando um template para cada tipo de operação. Precisamos:
+
+* Adicionar o roscpp no `find_package`
+* Adicionar o executável com um
+```
+add_executable([nome do executável] src/[nome_do_compilável].cpp)
+```
+Onde o nome do executável é de livre escolha
+
+
+* Linkar as bibliotecas usadas com o target_link_libraries
+
+```
+target_link_libraries([nome_do_executável] ${catkin_LIBRARIES}, <ilb2>, <lib3>)
+```
+
+Exemplo, se quisermos adicionar o OpenCV, teremos algo do tipo
+`target_link_libraries([nome do executável] ${OpenCV_LIBS})`
+
+#### Publisher em C++
+```C++
+#include "ros/ros.h"
+#include "std_msgs/String.h"
+
+
+int main(int argc, char **argv) // argumentos passados pelo terminal
+{
+  ros::init(argc, argv, "publisher");
+  ros::NodeHandle n; // objeto que cria os publishers, subscribers, services, etc
+
+  ros::Publisher pub = n.advertise<std_msgs::String>("topic", 0); //topic, queue
+
+  ros::Rate rate(10);
+
+  while (ros::ok())
+  {
+    std_msgs::String msg;
+    msg.data = "hello, ROS";
+
+    ROS_INFO("%s", msg.data.c_str());
+
+    pub.publish(msg);
+ 
+    ros::spinOnce();
+ 
+    rate.sleep();
+   }
+   return 0;
+ }
+```
+Exemplo do ROS wiki
+
+#### Subscriber em C++
+
+```C++
+
+include "ros/ros.h"
+#include "std_msgs/String.h"
+
+void callback(const std_msgs::String::ConstPtr& msg)
+{
+  ROS_INFO("%s", msg->data.c_str());
+}
+
+int main(int argc, char **argv)
+{
+  ros::init(argc, argv, "subscriber");
+
+  ros::NodeHandle n;
+
+  ros::Subscriber sub = n.subscribe("topic", 1000, callback);
+
+  ros::spin(); // trava o programa para rodar somente o callback
+
+  return 0;
+}
+
+```
+
 
 ### Roslaunch
 O roslaunch é uma ferramenta que serve para **rodar diversos nodes ROS ao mesmo tempo**, e setar parametros no Parameter Server do ROS - e rodar outros arquivos launch :).
@@ -364,6 +491,20 @@ Ferramenta para gravação e reprodução de mensagens ROS .
 * `rosbag record [topico1] [topico2] [topico3]` grava os tópicos 1, 2 e 3
 * `rosbag record -a` grava todos os tópicos
 * `rosbag play [nome_da_rosbag].bag`
+
+Exemplo: rosbag Tello
+
+#### rviz
+O rviz é uma ferramenta de visualização 3D pro ROS, onde podemos mostrar diversos tipos de mensagens ROS.
+
+
+Podemos rodar o rviz com o comando
+
+`rosrun rviz rviz`
+
+Ou carregar uma interface já configurada com
+
+`rosurun rviz rviz -d rviz_config.rviz`
 
 #### Symlinks
 
