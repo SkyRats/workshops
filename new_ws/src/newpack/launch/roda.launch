@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node pkg="turtlesim" name="jose" type="turtlesim_node"/>
+    <node pkg="newpack" name="edson" type="edson.py" output="screen"/>
+
+    <!--arg name="x" default="0"/--> <!--Seta o parametro x como 0-->
+</launch>

@@ -1,0 +1,8 @@
+prefix=/home/caio/new_ws/devel/.private/newpack
+
+Name: newpack
+Description: Description of newpack
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

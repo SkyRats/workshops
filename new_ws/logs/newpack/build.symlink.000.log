@@ -1,0 +1,3 @@
+Symlinking /home/caio/new_ws/devel/share/newpack/cmake/newpackConfig.cmake
+Symlinking /home/caio/new_ws/devel/share/newpack/cmake/newpackConfig-version.cmake
+Symlinking /home/caio/new_ws/devel/lib/pkgconfig/newpack.pc
