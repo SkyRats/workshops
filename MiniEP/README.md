@@ -154,13 +154,13 @@ Um exemplo do terminal com as infromações pedidas e a resposta dos métodos po
 #### Terminal para uma competição simples:
 
 <img 
-    src="/images/CompSimplesOut.png"
+    src="./images/CompSimplesOut.png"
     alt="CompeticaoSimles"
 />
 
 #### Terminal para uma competição multimodalidades:
 
 <img 
-    src="/images/CompMultOut.png"
+    src="./images/CompMultOut.png"
     alt="CompeticaoMultimodalidades"
 />
