@@ -1,5 +1,7 @@
 # Exercício Prático: Coletando Dados de um Drone com ROS  + PYTHON + GAZEBO 
 
+Por Fernando Zolubas Preto e Henrique Barros.
+
 No workshop acima você viu um pouco da teoria por trás do ROS e uma série de templates para ajudar no uso da ferramenta. A seguir será mostrado um passo-a-passo de um exemplo de aplicação de parte desses conceitos num drone simulado no Gazebo usando o ROS Melodic no Ubuntu 18.04 LTS.
 
 O intuito aqui é dar o ponta pé inicial pra você seguir no seu aprendizado já decolando no mundo dos drones! **Let's fly?**
