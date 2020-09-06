@@ -130,7 +130,7 @@ geometry_msgs/Vector3 angular
 
 Veja que ela é composta de dois itens (linear e angular), sendo que esses são instâncias de uma mensagem do tipo geometry_msgs/Vector3. Essa mensagem, por sua vez, tem 3 parâmetros (dessa vez primitivos): x, y e z, do tipo float64. Ou seja, uma mensagem pode ser uma combinação de outras mensagens e tipos primitivos.
 
-Você pode enconrar mais informações sobre ROS Messages [aqui](http://wiki.ros.org/msg).
+Você pode encontrar mais informações sobre ROS Messages [aqui](http://wiki.ros.org/msg).
 
 ### Services
 
