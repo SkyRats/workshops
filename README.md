@@ -5,6 +5,7 @@ Digamos que nós temos um drone. Todos os seus componentes estão instalados, o 
 ## **Etapa 0:** Instalações
 
 Antes de começar, precisamos que vocês já tenham algumas coisas instaladas no computador:
+
 - Firmware PX4
 - QGroundControl
 - ROS
@@ -25,7 +26,7 @@ Vamos executar o PX4 no modo **simulação do tipo SITL (Software In The Loop)**
 
 Por cima do PX4, estaremos utilizando o **Gazebo**, um simulador poderoso construido para aplicações de robótica. Se você quiser saber mais sobre ele, clique [aqui](http://gazebosim.org/).
 
-Para iniciar a simulação, compilamos o firmware no modo SITL como gazebo:
+Para iniciar a simulação, compilamos o firmware no modo SITL com o gazebo:
 ```
 cd ~/src/Firmware
 make px4_sitl gazebo
@@ -34,15 +35,15 @@ make px4_sitl gazebo
 
 O terminal vai vomitar um monte de texto sobre a compilação, e em algum momento ele vai ficar parecido com isso:
 
-![](images/terminal_px4.png)
+![terminal_px4](images/terminal_px4.png)
 
 Esse é essencialmente o terminal do PX4. É nele que são publicadas as mensagens, informações, avisos, e outros. Vemos, por exemplo, informações publicadas por [simulator], [mavlink] e [logger]. Enquanto a simulação estiver ligada, esse terminal vai estar nos comunicando sobre o drone.
 
 Além disso, o Gazebo também iniciou, mostrando uma tela como essa:
 
-![](images/gazebo.png)
+![gazebo](images/gazebo.png)
 
-Infelizmente, o drone fica quase da mesma cor do chão, e é muito difícil vê-lo :(.
+Infelizmente, o drone fica quase da mesma cor do chão, e é muito difícil vê-lo :(
 
 Isso foi tudo usando as configurações padrão, mas podemos explorar mais um pouco o que o px4_sitl e o gazebo podem fazer.
 
@@ -99,7 +100,7 @@ Agora que conseguimos voar com o drone e realizar missões simples, podemos faze
 O drone, e a estrutura do PX4, é representado no ROS como
 
 ```
-roslaunch mavros px4.launch fcu_url:="udp://14540@127.0.0.1:14557"
+roslaunch mavros px4.launch fcu_url:="udp://localhost:14540@localhost:14557"
 ```
 
 
