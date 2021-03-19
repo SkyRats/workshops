@@ -18,7 +18,7 @@
 
 ### Caminhos
 
-​	Para se referir a diretórios dentro de diretórios podemos adicionar uma barra `/` e escrever o nome próximo diretório em seguida. 
+​	Para se referir a diretórios dentro de diretórios podemos adicionar uma barra `/` e escrever o nome do próximo diretório em seguida. 
 
 **Exemplo:**
 
@@ -32,13 +32,13 @@
 
 ### O que é?
 
-​	O Terminal é uma interface não gráfica que aceita comandos digitados e os usa para realizar determinadas tarefas. Parece complicado de inicio mas estou aqui pra te ajudar a entender como ele funcioa e te mostrar que é bem simples.
+​	O Terminal é uma interface não gráfica que aceita comandos digitados e os usa para realizar determinadas tarefas. Parece complicado de inicio, mas estou aqui pra te ajudar a entender como ele funciona e te mostrar que é bem simples.
 
 
 
 ### Como abrir o Terminal?
 
-​	Você pode buscar por ele na barra de busca, ou usar o atalho `CTRL + ALT + T`. Este atalho irá abrir uma nova janela com o terminal. Se você já tiver uma janela aberta tente use o `CTRL + SHIFT + T` para abrir uma nova subjanela.
+​	Você pode buscar por ele na barra de busca, ou usar o atalho `CTRL + ALT + T`. Este atalho irá abrir uma nova janela com o terminal. Se você já tiver uma janela aberta tente usar o `CTRL + SHIFT + T` para abrir uma nova subjanela.
 
 
 
@@ -102,9 +102,8 @@ cd ../..
 
 ## 4. Criando e Removendo Arquivos e Diretórios
 
-​	
 
-### Criando Diretórios com
+### Criando Diretórios
 
 Para criar diretórios é usado o comando `mkdir` (*make directory*).
 
@@ -114,7 +113,7 @@ Para criar diretórios é usado o comando `mkdir` (*make directory*).
 mkdir MeuDiretorio
 ```
 
-​	Assim, é criado um novo diretório chamado MeuDiretorio no diretório em que você está localizado.
+​	Assim, é criado um novo diretório chamado MeuDiretorio dentro do diretório em que você está localizado.
 
 
 
@@ -131,11 +130,18 @@ Para obter inforações dos diversos argumentos de um comando, existe o argument
 
 ### Removendo Arquivos e Diretórios
 
-Para remover diretórios usamos o comando `rm` (*remove*) junto com o argumento `-r` (*recursive*).
+Para remover um arquivo usamos o comando `rm` (*remove*) e logo em seguida o nome do arquivo que queremos apagar.
+
+**Exemplo:**
+```bash
+rm meuArquivo.pdf
+```
+
+Para remover diretórios usamos o comando `rm` junto com o argumento `-r` (*recursive*) e em seguida o nome do diretório a ser removido.
 
 **Exemplo:**
 
-```
+```bash
 rm -r MeuDiretorio
 ```
 
@@ -145,11 +151,10 @@ rm -r MeuDiretorio
 
 ## 5. Movendo, Copiando e Renomeando Arquivos e Diretórios
 
-​	
 
 ### Copiando Arquivos e Diretórios
 
-Para copiar um arquivo é usado o comando `cp` (*copy*).
+Para copiar um arquivo é usado o comando `cp` (*copy*). Esse comando recebe como primeiro argumento o nome do arquivo que será copiado e, como segundo argumento, o nome que queremos dar à sua cópia. 
 
 **Exemplo:**
 
@@ -157,7 +162,7 @@ Para copiar um arquivo é usado o comando `cp` (*copy*).
 cp arquivo1 arquivo2
 ```
 
-​	No exemplo acima estamos copiando o conteúdo de `arquivo1` e renomeando como `arquivo2`. Ambos os arquivos estarão no diretório em que você está localizado. Para copiar um arquivo para outro diretório devemos dar o caminho além do nome.
+​	No exemplo acima estamos copiando o conteúdo de `arquivo1` e renomeando como `arquivo2`. Ambos os arquivos estarão no diretório em que você está localizado. Para copiar um arquivo para outro diretório devemos dar o caminho, além do nome.
 
 **Exemplo:**
 
@@ -167,7 +172,7 @@ cp arquivo1 ~/Documents/arquivo2
 
 ​	Acima o `arquivo1` foi copiado para o diretório `Documents` e renomeado como `arquivo2`.  Da mesma forma podemos copiar um arquivo de outro diretório para o diretório atual ou até mesmo copiar um arquivo de um diretório qualquer para outro diretório qualquer, basta apenas dar o caminho antes do nome do arquivo. Toda a teoria de **Caminhos** se aplica aqui.
 
-​	O comando `cp` apenasconsegue copiar arquivos. Para copiar um diretório é necessário usar o argumento `-r` (*recursive*)
+​	O comando `cp` apenas consegue copiar arquivos. Para copiar um diretório é necessário usar o argumento `-r` (*recursive*). 
 
 **Exemplo:**
 
@@ -175,36 +180,34 @@ cp arquivo1 ~/Documents/arquivo2
 cp -r dir1 dir2
 ```
 
-
-
 ### Movendo e Renomeando Arquivos e Diretórios
 
-​	De maneira análoga ao `cp` aqui iremos usar o `mv` (*move*). Ambos possuem a mesma sintaxe e são usados da mesma forma.
+​	De maneira análoga ao `cp` aqui iremos usar o `mv` (*move*). Esse comando recebe no primeiro argumento o nome do arquivo que será movido e, como segundo argumento, o caminho de destino desse arquivo. 
 
 **Exemplo:**
 
 ```
-mv colombini.py ~/Documents/Paris
+mv caio.py ~/Documents/FariaLima
 ```
 
-​	Aqui estamos movendo o arquivo `colombini.py` para o diretório `Paris`.
+​	Aqui estamos movendo o arquivo `caio.py` para o diretório `FariaLima`.
 
-​	O terminal não possui um comando para renomear. Para realizar essa função usamos o próprio comando `mv` pois sempre que você move um arquivo/diretório você tem a opção de **renomear** ele (igual no comando`cp`). Imagine que estamos movendo um arquivo de um diretório para o mesmo diretório mas no processo estamos mudando o nome dele.
+​	O terminal não possui um comando específico para renomear. Para realizar essa função usamos o próprio comando `mv` pois sempre que você move um arquivo/diretório você tem a opção de **renomear** ele (igual no comando`cp`). Imagine que estamos movendo um arquivo de um diretório para o mesmo diretório mas no processo estamos mudando o nome dele.
 
 **Exemplo:**
 
 ```
-mv colombini.py frances.py
+mv caio.py farialimer.py
 ```
 
-​	No exemplo acima estamos renomeando o arquivo `colombini.py` para `frances.py`. O que estamos fazendo de fato é mover o arquivo para o mesmo diretório em que estamos mas no processo mudando o nome dele.
+​	No exemplo acima estamos renomeando o arquivo `caio.py` para `farialimer.py`. O que estamos fazendo de fato é mover o arquivo para o mesmo diretório em que estamos, mas no processo mudamos o nome dele.
 
-​	Se quiermos mover pra outro diretório mas mudar o nome no processo é só dar o caminho do diretório de destino.
+​	Se quisermos mover para outro diretório, mas mudar o nome no processo é só dar o caminho do diretório de destino.
 
 **Exemplo:**
 
 ```
-mv colombini.py ~/Documents/Paris/frances.py
+mv caio.py ~/Documents/FariaLima/farialimer.py
 ```
 
 **Dica:** para os comandos `cp`, `mv`, `rm` recomendo usar o argumento `-v` (*verbose*). Ele mostra no seu terminal o que foi feito (qual arquivo foi copiado, movido e para onde ele foi), assim você consegue ter maior certeza e segurança no que você está fazendo.
@@ -213,9 +216,9 @@ mv colombini.py ~/Documents/Paris/frances.py
 
 ## 6. File Globbing - Caracteres Coringa
 
-​	Os *Caracteres Coringa* auxiliam a filtrar arquivos e diretórios que possuem semlhanças nos nomes. Assim, você consegue mover, renomear, copiar uma série de arquivos de uma vez só se todos estes possuírem nomes ou formato semelhantes. Darei aqui exemplos usando o comando `ls` mas saiba que o mesmo pode ser aplicado ao `cp` , `mv` e o que você precisar.
+​	Os *Caracteres Coringa* auxiliam a filtrar arquivos e diretórios que possuem semlhanças nos nomes. Assim, você consegue mover, renomear, listar ou copiar uma série de arquivos de uma vez só se todos estes possuírem nomes ou formato semelhantes. Darei aqui exemplos usando o comando `ls` mas saiba que o mesmo pode ser aplicado ao `cp` , `mv` também.
 
-​	Imagine que temos um diretório com os seguintes arqui
+​	Imagine que temos um diretório com os seguintes arquivos:
 
 ```
 exemplo12
@@ -230,11 +233,19 @@ Arquivo100
 Arquivo5
 ```
 
-​	Vamos explicar o que cada caracter representa e como eles agiriam sobre esses arquivos:
+​	O principal caracter coringa que usamos é o `*`. Tente ler esse comando como "qualquer coisa". 
+	
+Se usamos ele no começo, tudo que está depois dele é obrigatoriamente considerado, sem importar o que vem antes. Nesse caso, ele faria referência a aruivos ou diretórios com o mesmo final. 
 
+**Exemplo:**
+```
+Input: ls *12
+Output: exemplo12
+		arquivo12
+```
+Aqui estão listados arquivos que possuem **qualquer coisa** no começo, mas terminam com "*12*".
 
-
-* `*` - Tente ler esse comando como "qualquer coisa". Tudo que for escrito antes dele será obrigatório que no nome do arquivo/diretório sejam os primeiros digitos e tudo que for escrito depois fará referência aos arquivos cujo nome terminam com o conteúdo digitado.
+Se usamos o caracter no final, ele fará referência a arquivos ou diretórios com o mesmo começo. 
 
 **Exemplos:** 
 
@@ -247,95 +258,11 @@ Output: Exemplo
 
 ​	Aqui estão sendo listados todos os arquivos que começam com "*Exemplo*" e possuem **qualquer coisa** depois.
 
-```
-Input: ls *2
-Output: exemplo12
-		arquivo12
-```
-
-​	Aqui estão sendo listados todos os arquivos que começam com **qualquer coisa** e terminam com "*2*".
-
-```
-Input: ls Exemplo*1
-Output: Exemplo1
-		Exemplo231 
-```
-
-​	Aqui estão sendo listados todos os arquivos que começam com "*Exemplo*", terminam com "*1*", e possuem  **qualquer coisa** no meio.
 
 ​	Lembrando que existe diferença entre caracteres maiúsculos e minúsculos ainda que eles representem a mesma letra do alfabeto.
 
 
-
-* `?`  - funciona de maneira ao semelhante ao `*` mas ele limita o número de caracteres que serão completados.
-
-**Exemplo:**
-
-```
-Input: ls Exemplo?
-Output: Exemplo1
-		Exemplo2
-		Exemplo3
-```
-
-	Note que o comando exige que tenha um caracter após a palavra `Exemplo` e **apenas um**. Podemos também aumentar o número de `?` para auxiliar a filtrar:
-
-```
-Input: ls arquivo???
-Output:  arquivo123
-```
-
-
-
-* `[]`  - Dentro dos colchetes você deve colocar uma lista de caracteres que você deseja que apareçam. Tenha em mente que por mais que você digite diversos caracteres eles serão interpretados de maneira independente.
-
-**Exemplo:** 
-
-```
-Input: Exemplo[123]
-Output: Exemplo1
-		Exemplo2
-		Exemplo3
-```
-
-```
-Input: Exemplo[1-3]
-Output: Exemplo1
-		Exemplo2
-		Exemplo3
-```
-
-​	Ambas as notações funcionam da mesma forma. Perceba também que arquivos como `Exemplo231` não são inseridos pois diferente do `*` os colchetes `[]` buscam estritamente os arquivos/diretórios que você listou dentro deles. Mas você ainda pode combinar os *Caracteres Coringa*:
-
-**Exemplo:**
-
-```
-Input: Exemplo[1-3]*
-Output: Exemplo1
-		Exemplo2
-		Exemplo231
-		Exemplo3
-```
-
-
-
-* `{}` - As chaves funcionam de maneira bem semelhante aos colchetes, mas aqui o caracteres não são independentes, ou seja, tudo que for digitado é considerado uma **palavra** (*string*). caso queira filtrar mais de uma palavra, separe-as por uma vírgula.
-
-**Exemplo:**
-
-```
-Input: ls {exemplo, Arquivo}*
-Output: exemplo12
-		arquivo12
-		arquivo123
-```
-
-
-
-
-
 ## 7. Agrupando e Compactando Arquivos e Diretórios
-
 
 
 ### Conceitos
@@ -344,10 +271,6 @@ Output: exemplo12
 
 * **Agrupar**  - Quando agrupamos uma série de arquivos nós geramos um novo arquivo que contém todos os arquivos que agrupamos. Assim o **tamanho** do arquivo gerado será a **soma** dos tamanhos de todos os arquivos agrupados.
 * **Compactar** - Quando compactamos uma série de arquivos estamos, assim como quando agrupamos, gerando um novo arquivo que contém todos os arquivos compactados mas com a diferença de que eles serão comprimidos, de maneira a deixar o tamanho do arquivo gerado menor que quando agrupado. É importante ressaltar que existem diversos tipos de algoritmos diferentes para compactação. Aqui iremos trabalhar o GZip.
-
-
-
-
 
 ### Agrupando
 
@@ -392,7 +315,7 @@ tar xf exemplo1.tar foto1.png
 tar xf exemplo1.tar -C ~/Documents/ExtractedFiles
 ```
 
-​	Como visto no exemplo, para dar o caminho é necessário adicioar o `-C`.
+​	Como visto no exemplo, para dar o caminho é necessário adicinoar o `-C`.
 
 
 
@@ -461,7 +384,9 @@ locate .py
 ​	Já no exemplo acima estamos procurando por todo o qualquer arquivo `.py`
 
 ​	Mas afinal, qual a diferença entre o `find` e o `locate`? O `find` faz uma varredura nos seus diretórios até achar o que você pediu. Assim, as coisas são atualizadas em tempo real. Se você criar um diretório novo o `find` irá buscar ele.
-​	 O locate é um pouco diferente. Ele faz uso de um **banco de dados interno** do seu computador. Esse banco de dados é atualizado toda vez que seu computador é inicializado. Assim, se você criar um diretório ele ainda não vai estar registrado nesse banco de dados e você não irá encontrá-lo com o `locate`. Caso você queira, você pode atualizar na mão esse banco de dados. Apenas use o comando `updatedb`. Caso você apenas digite o comando irá perceber que deu erro. Isso é porque você não tem permissão para acessar esse comando. Vamos entender como isso funciona.
+​	 O locate é um pouco diferente. Ele faz uso de um **banco de dados interno** do seu computador. Esse banco de dados é atualizado toda vez que seu computador é inicializado. Assim, se você criar um diretório ele ainda não vai estar registrado nesse banco de dados e você não irá encontrá-lo com o `locate`. 
+
+Caso você queira, você pode atualizar na mão esse banco de dados. Apenas use o comando `updatedb`. Caso você apenas digite o comando irá perceber que deu erro. Isso é porque você não tem permissão para acessar esse comando. Vamos entender como isso funciona.
 
 
 
@@ -485,118 +410,6 @@ sudo updatedb
 
 ​	Todos os comandos que executamos no terminal são definidos em algum lugar, o comando **source** le e usa comandos de um arquivo para serem interpretados pelo terminal atual.
 Podemos usar o source para definir nosso ambiente de trabalho, setando variáveis e configurações
-
-
-## 9. Git, seu lindo
-
-Já atualizaram o Android de vocês para a versão 11.4.1? Já se perguntaram  como os desenvolvedores mantém registro de todas as mudanças entre as  diferentes verões do sistema? E se alguma coisa der errado? Como  voltamos atrás?. A resposta pra essas e muitas outras perguntas é, **usando o Git**,  o Git é um "sistema de controle de versões distribuído ... usado para  registrar o histórico de edições de qualquer tipo de arquivo"- O git serve para registrar histórico de edições de *qualquer tipo de arquivo*, **incluindo esse workshop** :smile:
-
-### O Github, Facebook dos devs
-
-Uma das plataformas de hospedagem (a mais famosa) para controle de versão usando Git é o **Github**.
-
-Já façam a conta de vcs ~~e me sigam~~ https://github.com/caio-freitas
-
-Lá podemos encontrar hospedados todos os os códigos que desenvolvemos aaqui na equipe e muitos outros, que as vezes podem ser úteis. E, para trabalhar em cima dos códigos do git, costumamos começar com o comando 
-
-### `git init`
-* Para inicializar o git em um diretório do seu computador, podemos usar o comando `git init` 
-	* Vale lembrar que esse comando não cria um repositório em um servidor, somente habilita os comandos git para a pasta no seu PC. 
-
-### `git clone`
-* O comando `git clone [url_do_repositorio]` pega todos os arquivos de um determinado repositório e faz o download para o seu PC - no diretório em que vc executar o comando -. Além disso, ele faz desse novo diretório criado um ambiente no qual é possível desenvolver o código colaborativamente.
-
-### `git remote`
-* Cada diretório inicializado como git tem um (ou mais) repositório remoto associado, podemos gerenciar esses _remotes_ com o comando `git remote`.
-
-* Exemplo:
-	* Inicializando um repositório qualquer com o `git init`, não teremos nenhum _remote origin_ configurado, para configurar, podemos usar o comando `git remote add origin [url_do_repositório]`.
-	* O git remote é usado também para determinar em qual _branch_ do projeto estamos trabalhando.
-### `git add`
-* Para fazer o primeiro _commit_, devemos primeiro adicionar os arquivos modificados à chamada **staging area** - que contem os códigos que serão adicionados a um _commit_ -, com o comando `git add [nome do arquivo]` (para adicionar tudo, use `git add .`)
-* Depois disso, podemos ver as mudanças na sua _staging area_ com relação ao repositório online, com o comando `git status` ou as alterações em cada arquivo com 
-`git diff [nome_do_arquivo]` (em relação ao último *commit*)
-`git diff -- [nome_do_arquivo] HEAD` (em relação ao último *push*)
-
-### `git commit`
-* Agora, está na hora do **commit**, isso irá criar um novo "pontinho" na história do repositório (localmente (sim, ainda no seu PC)). Para isso, usamos o comando `git commit -m "Descrição autoexplicativa do commit"` (-m de message)
-
-### `git push`
-* Finalmente, para mandar seu _commit_ para o repositório online, usamos o comando **push**, escollhendo a __branch__ desejada
-`git push origin [nome_da_branch]`.
-O github vai pedir seu login e senha, e logo após vai atualizar o repositório em seu servidor :)
-
-
-## Criando um repositório por linha de comando
-![alt text](./media/jutsu.gif "programming languages GIF")
-* Criar pasta `mkdir [nome_da_pasta]`, entrar `cd [nome_da_pasta]
-* `git init` vai inicializar o git **localmente** no seu computador
-Ainda dentro do repositório,
-* `curl -u '[seu_usuario]' https://api.github.com/user/repos -d '{"name":"[nome_do_repositorio]"}'`
-* `git remote add origin https://github.com/[username]/[nome_do_repositorio].git` (esse endereço pode ser encontrado no site do github)
-O comando acima vai associar o repositório local do seu PC com o endereço especificado do GitHub.
-* `git push -u origin master` (u de set-upstream)
-
-
-## Uma palavra sobre _branches_
-* Para clonar uma *branch* específica de um repositório, use `git clone  https://github.com/blablablabl -b [nome_da_branch]`
-* Estou trabalhando em uma _branch_, como mudo para outra?
-`git checkout [nome_da_branch]`
-
-* Quero fazer o _merge_ de duas branches, basta usar o comando `git merge [segunda_branch]`, enquanto estiver trabalhando na **primeira branch**
-
-* Exemplo:
-	* Criamos uma nova branch `git checkout -b newbranch`
-
-	`Switched to a new branch 'newbranch'`
-
-	* Depois de trabalhar na **newbranch** e fazer os commits, digamos que queremos fazer um **merge** da **newbranch** na branch **master**, então precisamos ir para a branch master, com `git checkout master`
-	
-	`Switched to branch 'master'`
-
-	* E então, fazemos o **merge** de lá, com o comando `git merge newbranch`
-
-	A partir desse ponto, a branch **newbranch** não será mais ultilizada, e existirá somente como um histórico de versões.
-
-
-
-### O **.gitignore**
-  O .gitignore é um arquivo dentro do repositório que especifica ao github arquivos que não devem ser rastreados, ou "sincronizados com a nuvem" - um bom exemplo de onde usaremos isso é nos repositórios build e devel gerados pelo *catkin_ws* durante a compilação, eles possuem endereços locais do seu computador e não funcionarão no computador alheio.
-Geralmente, ignoramos arquivos de log, arquivos temporários de sistema, saídas compiladas, executáveis, etc
-
-Para fazer isso de forma automática, em todos os commits, precisamos adicionar um arquivo de texto chamado .gitignore (oculto) na raiz do repositório
-* `touch .gitignore` resolve
-
-Depois, precisamos informar ao git que esse arquivo é nosso gitignore
-* `git config core.excludesFile .gitignore`
-	* Podemos também criar um arquivo .gitignore só para **todos** os repositórios que vc tiver na sua máquina, com `git config --global core.excludesFile ~/.gitignore`
-Nesse arquivo .gitignore, podemos adicionar
-* Nomes de arquivos literais (`caio.py`)
-	* Podemos fazer isso direto com um `echo caio.py >> .gitignore`
-* Diretórios (`diretorio/`)
-* Usar caracteres coringa (exemplo *.log)
-
-* O arquivo .gitignore não precisa ser commitado, mas é recomendado
-
-### Além desses comandos...
-* git stash
-* git mv
-* git reset
-* git rm
-* git bisect
-* git grep
-* git log
-* git show
-* git status
-* git diff
-* git merge
-* git rebase
-* git fetch
-
-### Uma boa prática, symlinks
-
-
-`ln -s [endereço global do repositório] [endereço global do workspace]`
 
 #### Best argument ever
 
