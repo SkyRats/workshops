@@ -235,7 +235,7 @@ Arquivo5
 
 ​	O principal caracter coringa que usamos é o `*`. Tente ler esse comando como "qualquer coisa". 
 	
-Se usamos ele no começo, tudo que está depois dele é obrigatoriamente considerado, sem importar o que vem antes. Nesse caso, ele faria referência a aruivos ou diretórios com o mesmo final. 
+Se usamos ele no começo, tudo que está depois dele é obrigatoriamente considerado, sem importar o que vem antes. Nesse caso, ele faria referência a arquivos ou diretórios com o mesmo final. 
 
 **Exemplo:**
 ```
@@ -262,98 +262,9 @@ Output: Exemplo
 ​	Lembrando que existe diferença entre caracteres maiúsculos e minúsculos ainda que eles representem a mesma letra do alfabeto.
 
 
-## 7. Agrupando e Compactando Arquivos e Diretórios
 
 
-### Conceitos
-
-​	Antes de sair aprendendo comandos vamos entender conceitualmente a diferença entre **agrupar** e **compactar**.
-
-* **Agrupar**  - Quando agrupamos uma série de arquivos nós geramos um novo arquivo que contém todos os arquivos que agrupamos. Assim o **tamanho** do arquivo gerado será a **soma** dos tamanhos de todos os arquivos agrupados.
-* **Compactar** - Quando compactamos uma série de arquivos estamos, assim como quando agrupamos, gerando um novo arquivo que contém todos os arquivos compactados mas com a diferença de que eles serão comprimidos, de maneira a deixar o tamanho do arquivo gerado menor que quando agrupado. É importante ressaltar que existem diversos tipos de algoritmos diferentes para compactação. Aqui iremos trabalhar o GZip.
-
-### Agrupando
-
-Quando se quer fazer uso de algum documento dentro de algum arquivo agrupado ou compactado deve-se extrair esse arquivo. 
-
-Para agrupar é usado o comando `tar` (Tape Archive), mas é necessário passar algumas informações ao terminal para usar esse comando. Vamos dar uma olhada em como funciona a sintaxe e vou explicando com mais calma o que cada coisa significa:
-
-```
-tar [o_que_deseja_fazer][f] [nome_do_arquivo_a_ser_criado][.tar] [arquivos_a_serem_agrupados] 
-```
-
-​	CALMA, OK? Eu sei que parece muita coisa, mas é bem mais tranquilo do que parece. Antes de mais nada saiba que aqui os colchetes `[]` estão apenas indicando o espaço onde vão os comandos. Eles não fazem parte do comando em si. Dito isso vamos por partes:
-
-* o_que_deseja_fazer: Aqui você vai ter algumas opções, mas só vamos trabalhar duas delas:
-  * c (*create*) - usado para criar um arquivo agrupado;
-  * x (*extract*) - usado para extrair um arquivo agrupado ja criado;
-
-* f (*file*): só escreve `f` que é sucesso. É obrigatório;
-* nome_do_arquivo_a_ser_criado: sugestivo, não?;
-* .tar: todo arquivo agrupado pelo comando `tar` é de extensão `.tar`, então tem que ter no final do nome do arquivo criado;
-* arquivos_a_serem_agrupados: sugestivo parte2 o retorno;
-
-**Exemplo:**
-
-```
-tar cf exemplo1.tar *png
-```
-
-​	No exemplo acima estamos **criando** um arquivo agrupado `.tar` chamado `exemplo1` que contém todos os arquivos de extensão `.png` do diretório em que estamos. Aqui os conceitos de *Caracteres Coringa* podem ser úteis pra filtrar os arquivos que você quer agrupar.
-
-```
-tar xf exemplo1.tar
-```
-
-​		Acima estamos **extraindo** todo os arquivos do `exemplo1.tar` pro diretório atual. Podíamos dar um caminho no final, ou até mesmo extrair arquivos específicos:
-
-```
-tar xf exemplo1.tar foto1.png
-```
-
-```
-tar xf exemplo1.tar -C ~/Documents/ExtractedFiles
-```
-
-​	Como visto no exemplo, para dar o caminho é necessário adicinoar o `-C`.
-
-
-
-### Compactando
-
-​	Para compactar é bem mais fácil. Usamos apenas o comando `gzip` com o argumento `-k` (*keep*)  e escrevemos o nome do arquivo/diretório que queremos compactar. Não estranhe, mas seu arquivo compactado terá duas extensões sendo uma a original do arquivo e uma `.gz`.
-
-**Exemplo:**
-
-```
-gzip -k foto1.png
-```
-
-​	Usamos o `-k`  para criar um backup do nosso arquivo original. Caso não usemos ele o gzip irá sobreescrever o arquivo original. É muito mais seguro mantermos uma cópia do original, copiarmos ele e compactarmos a cópia.
-
-​	Para descompactar o processo é o mesmo mas é usado o comando `gunzip`
-
-**Exemplo:**
-
-```
-gunzip *gz
-```
-
-​	No exemplo acima estamos descompactando todos os arquivos compactados do diretório, mas você pode descompactar um arquivo específico ou uma série de arquivos que você filtrar.
-
-​	Você pode ainda agrupar e compactar arquivos num comando só. Para isso usamos o `tar` de maneira semelhante ao agrupamento mas acrescentamos um `z`(*zip*) e alteramos a extensão para `.tgz`.
-
-**Exemplo:**
-
-```
-tar czf exemplo.tgz *png
-```
-
-
-
-
-
-## 8. Procurando Arquivos
+## 7. Procurando Arquivos
 
 
 
@@ -377,7 +288,7 @@ locate colombini.py
 
 ​	Aqui estamos procurando em todos os lugares do computador pelo arquivo `colombini.py`
 
-```]
+```
 locate .py
 ```
 
@@ -406,11 +317,6 @@ sudo updatedb
 
 
 
-### Source *
-
-​	Todos os comandos que executamos no terminal são definidos em algum lugar, o comando **source** lê e usa comandos de um arquivo para serem interpretados pelo terminal atual.
-Podemos usar o source para definir nosso ambiente de trabalho, setando variáveis e configurações.
-
-#### Best argument ever
+### Best argument ever
 
 `--help` ou `-h`, quando usado com qualquer comando te lista as possibilidades do comando e te ajuda a usá-lo
