@@ -406,10 +406,10 @@ sudo updatedb
 
 
 
-### Source
+### Source *
 
-​	Todos os comandos que executamos no terminal são definidos em algum lugar, o comando **source** le e usa comandos de um arquivo para serem interpretados pelo terminal atual.
-Podemos usar o source para definir nosso ambiente de trabalho, setando variáveis e configurações
+​	Todos os comandos que executamos no terminal são definidos em algum lugar, o comando **source** lê e usa comandos de um arquivo para serem interpretados pelo terminal atual.
+Podemos usar o source para definir nosso ambiente de trabalho, setando variáveis e configurações.
 
 #### Best argument ever
 
