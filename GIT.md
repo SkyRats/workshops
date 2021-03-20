@@ -24,30 +24,90 @@ Assim, você consegue retornar a uma versão antiga do seu projeto muito mais fa
 3. Tem *branches* muito desenvolvidas  
 Vamos falar de *branches* mais pra frente.
 
----
+## Mas como isso funciona?
 
-- Files are indexed by their checksums
-    - Makes it impossible to modify files in the history
-- Operations are almost all local
-    - Doesn't require a constant connection to the remote
-- Git stores snapshots of files
-    - Stores a version and pointers (references) to all files at the time of the commit
-    - Other VCSs store modifications to files
+Agora que já sabemos porque o Git existe e porque usamos ele, vamos falar sobre o seu funcionamento. Antes de partirmos para os comandos, precisamos falar sobre um pouco de teoria. 
 
-## What is Git?
+O Git funciona a partir de **repositórios**. Você pode pensar em cada repositório como um diretório em que você pode chamar os comandos do sistema de controle de versão. Vale dizer que você pode ter sub diretórios, como em qualquer pasta.
 
-- Distributed Version Control System
-    - Each user has the entire history of the repository in their local machines
-    - Allows for offline work and makes "security copies" in case of any event with the main server
+Dentro de um repositório do Git, qualquer arquivo seu está em um de 5 estados:
 
-### How does Git work?
+![Os 5 estados de um arquivo no Git](./media/git.jpg)
 
-- The Three States of Git
-    - Working directory (from now WD) → the files in your computer
-    - Staging area (aka Index, from now SA) → the modifications to files that will be saved in your next commit
-    - (Remote) Repository → the collection of all your past commits
+1. Não versionado (*untracked*)  
+Esses são os arquivos que não foram adicionados ao repositório ainda. É como se eles não existissem para o Git, então quase nenhum comando vai afetá-los; 
+2. Versionado  
+Depois que você adiciona um arquivo ao seu repositório pela primeira vez, ele entra no seu *working directory*, e o Git começa a "ver" esse arquivo e a gravar as modificações que ele sofre;
+3. Adicionado (*staged*)  
+Aqui os arquivos estão na *staging area*. As modifcações colocadas aqui vão ser adicionadas ao histório do repositório no próximo *commit*;
+4. Em um *commit* local  
+Com um *commit*, você coloca as suas modificações adicionadas no histórico do repositório. É como se os seus arquivos na *staging area* estivessem escritos a lápis - você ainda pode reverter essas mudanças facilmente. Quando você realiza um *commit*, você escerve à caneta - fica um registro mais permanente do que você fez; 
+5. Em um *commit* remoto  
+Se um commit local é escrever à caneta, um *commit* remoto é como talhar em uma pedra. Qualquer um com acesso ao repositório pode ver exatamente o que você fez, e isso fica registrado praticamente "para sempre";
 
-### What makes Git unique?
+(O "para sempre" está entre aspas porque de fato é possível, mas é extremamente não recomendado por poder causar vários problemas.)
+
+### Na prática
+
+Vamos mostrar com um exemplo como um arquivo passa pelas 4 primeiras etapas desse processo.
+(As linhas com `$` na frente são comandos que você deve digitar e as sem, a saída desses comandos.)
+
+1. Crie um repositório local do Git com `git init`
+```bash
+$ mkdir repo
+$ cd repo
+$ git init
+Initialized empty Git repository in /path/to/repository/.git/
+```
+O repositório iniciado tem uma pasta `.git`
+```bash
+$ ls -a1
+.
+..
+.git
+```
+2.  Adicione umarquivo na pasta do repositório
+```bash
+$ echo "Hello, world!" > hello.txt
+$ ls
+hello.txt
+```
+3. Verifique o estado do repositório usando o comando `git status`
+```bash
+$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	hello.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+```
+4. Adicione o arquivo usando `git add`
+```bash
+$ git add hello.txt
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+	new file:   hello.txt
+```
+5. Coloque em um commit usando `git commit`  
+Todos os commits precisam de uma mensagem; neste caso, a flag `-m` a fornece  
+```bash
+$ git commit -m "Initial commit"
+[master (root-commit) 1f3c605] Initial commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 hello.txt
+``` 
 
 - Files are indexed by their checksums
     - Makes it impossible to modify files in the history
