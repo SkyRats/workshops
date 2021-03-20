@@ -12,6 +12,18 @@ Daí vem a necessidade de sistemas de controle de versão (SCV) para vários usu
 
 Ok, mas esse é o workshop de Git, que é só um SCV. Por que afinal a gente usa o Git? O que ele tem de especial?
 
+## Por que o Git?
+
+Primeiro, temos que mencionar que muitos desenvolvedores usam Git simplesmente porque é o SCV mais popular atualmente, então quase todo programador vai saber usar. Isso é importante porque queremos que o maior número de pessoas consiga usar o nosso código (foi pra isso que surgiu o controle de versão afinal).
+
+Contudo, o Git é de fato superior e inovador em alguns aspectos:
+1. É um SCV distribuido  
+Isso significa que cada programador tem uma cópia de todo o código no seu computador. Assim, você consegue trabalhar mesmo sem acesso à internet, e sincronizar suas mudanças depois;
+2. Guarda *snapshots* dos arquivos, não só modificações   
+Assim, você consegue retornar a uma versão antiga do seu projeto muito mais facilmente;
+3. Tem *branches* muito desenvolvidas  
+Vamos falar de *branches* mais pra frente.
+
 ---
 
 - Files are indexed by their checksums
