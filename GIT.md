@@ -109,20 +109,11 @@ $ git commit -m "Initial commit"
  create mode 100644 hello.txt
 ``` 
 
-- Files are indexed by their checksums
-    - Makes it impossible to modify files in the history
-- Operations are almost all local
-    - Doesn't require a constant connection to the remote
-- Git stores snapshots of files
-    - Stores a version and pointers (references) to all files at the time of the commit
-    - Other VCSs store modifications to files
+## Por que meu repositório tem galhos?
 
-## The Git Cycle
+Repositórios do Git tem *branches*. Essas estruturas são uma forma de organizar o desenvolvimento de uma aplicação com várias partes. Assim, você pode trabalhar em diversas funcionalidades ao mesmo tempo sem que uma prejudique a outra. Por exemplo, um algoritmo de desvio de obstáculos para drones tem pelo menos duas partes que precisam trabalhar juntas: a detecção do obstáculo e o controle do drone em si. O desenvolvimento do algoritmo poderia ser separado então nas *branches* de `obstacle_detection` e `control`.
 
-- Untracked
-- Unmodified
-- Modified
-- Staged
+O que torna *branches* mais interessantes que diretórios separados é a capacidade de fundi-las, chamade de *merge*. Assim, no nosso exemplo, quando as partes do algoritmo estivessem prontas, ambas poderiam ser fundidas na branch principal, gerando o programa completo. 
 
 ## `.gitignore`
 
