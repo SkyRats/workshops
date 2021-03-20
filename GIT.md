@@ -115,19 +115,37 @@ Repositórios do Git tem *branches*. Essas estruturas são uma forma de organiza
 
 O que torna *branches* mais interessantes que diretórios separados é a capacidade de fundi-las, chamade de *merge*. Assim, no nosso exemplo, quando as partes do algoritmo estivessem prontas, ambas poderiam ser fundidas na branch principal, gerando o programa completo. 
 
-## `.gitignore`
+## O que é esse *Remote Repository*?
 
-- Stops git from tracking certain files (ex. binaries, data bases, logs)
-- Interesting options
-    - * → select all file names
-    - ! → reverse one of the rules set previously
-    - /filename → only in the current directory
-    - dirname/ → ignore all files, folders and subfolders of dirname
-    - dirname/**/filename → ignore all files inside subdiretories
-- Example
+Existe uma distinção entre repositórios locais e repositórios com *remote*. Um repositório local fica só no seu computador; você não consegue compartilhar código, mas pode controlar versões, criar branches e voltar para versões passadas dos seus arquivos. Um repositório com *remote* pode fazer isso, mas também pode sincronizar suas mudanças com um servidor para que outras pessoas acessem. Geralemnte usamos o [GitHub](https://github.com/).
 
+Existem duas formas de trabalhar com repositórios remotos: adicionando um *remote* a um repositório existente, ou copiando um repositório do servidor diretamente, chamado de clonar o repositório. É mais simples e comum clonarmos repositórios, então vamos usar isso como exemplo.
+
+### Autenticação na linha de comando
+
+Toda vez que você interage com o GitHub, ele vai pedir seu nome de usuário e senha. Para que isso não seja necessário, é recomendado [adicionar uma chave SSH à sua conta](https://docs.github.com/pt/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account). Além de ser mais prático, é mais seguro, e no futuro próximo vai ser a única forma de usar o GitHub pelo terminal.
+
+### Na prática
+
+1. Clone um repositório do GitHub com `git clone`  
+Perceba que a URL para clonar é diferente dependendo do método de autenticação: HTTPS (com senha) ou SSH.
 ```bash
-# Comments strat with #
+$ git clone git@github.com:SkyRats/workshops.git
+# Ou https://github.com/SkyRats/workshops.git com HTTPS
+```
+2. Mude de *branch* com `git checkout`
+```bash
+$ git checkout linux_basics
+```
+3. Colete modificações do servidor com `git fetch` e `git merge`, ou `git pull`
+```bash
+$ git fetch
+$ git merge # mesmo que git merge origin/master
+```
+4. Faça *upload* de seus commits com `git push`
+```bash
+$ git push origin master
+```
 
 # Ignore all .a files...
 *.a
