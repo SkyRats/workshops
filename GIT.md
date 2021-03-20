@@ -1,6 +1,26 @@
-# Git
+# Git: um Sistema de Controle de Versão Distribuido
 
-# Git Pro Book
+## Por que controle de versão existe?
+
+A programação antes da internet era muito diferente do que é hoje, porque era mais difícil acessar informação e compartilhar código, o que desacelerava a inovação. Mas um mundo conectado exigia novas formas de colaboração, e com elas novas ferramentas para colaborar.
+
+Imagine que você é um programador da décade de 70 tentando, por exemplo, fazer um drone voar sozinho. Você teria que programar tudo absolutamente do zero - desde como os motores são controlados até rotinas de pouso e movimentação por exemplo, e tudo isso antes de pensar em fazer o seu drone se controlar autonomamente! Isso acontece porque você não tem acesso ao trabalho de outros programadores, já que a única forma de compartilhar código era copiando em um disquete e mandar para outras pessoas. E esse problema não existia só em robótica - desenvolver uma nova aplicação muitas vezes envolvia escrever também o sistema operacional para o computador.
+
+O desenvolvimento da internet permitiu que arquivos fossem compartilhador mais facilmente, permitindo que várias pessaos trabalhassem remotamente em um mesmo projeto, até de diferntes países. Assim, não era preciso inventar a roda de novo toda vez, mas existia um outro problema: como lidar com equipes de programadores em lugares diferentes, modificando todos ao mesmo tempo os mesmos arquivos?
+
+Daí vem a necessidade de sistemas de controle de versão (SCV) para vários usuários. Esses sistemas permitem que várias pessoas façam modificações, e depois encontra um jeito de juntar todas elas automaticamente. Eles também permitem muito mais, como voltar em versões passadas dos seus arquivos, de uma forma simples e integrada.
+
+Ok, mas esse é o workshop de Git, que é só um SCV. Por que afinal a gente usa o Git? O que ele tem de especial?
+
+---
+
+- Files are indexed by their checksums
+    - Makes it impossible to modify files in the history
+- Operations are almost all local
+    - Doesn't require a constant connection to the remote
+- Git stores snapshots of files
+    - Stores a version and pointers (references) to all files at the time of the commit
+    - Other VCSs store modifications to files
 
 ## What is Git?
 
