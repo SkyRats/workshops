@@ -147,112 +147,108 @@ $ git merge # mesmo que git merge origin/master
 $ git push origin master
 ```
 
-# Ignore all .a files...
+
+## É só isso?
+
+Um uso extremamente básico do Git só necessita dos comandos que vimos até agora. Contudo, existem outras funcionalidades do Git que são muito úteis e que não mencionamos.
+
+### `.gitignore`: deixando arquivos de fora do repositório
+
+Muitas vezes, quando programamos, geramos arquivos binários usados para a execução dos nossos programas (como `.out` e `.o` em C ou `.pyc` em Python). O Git oferece uma ferramente para impedir que binários sejam adicionados adicentelmente: o arquivo `.gitignore`. Ele deve ser colocado dentro do seu repositório, e contém um conjunto de expressões que dizem quais arquivos e diretórios não devem ser incluídos no seu repositório automaticamente. Um exemplo de regras de `.gitignore` é:
+
+```
+# Comentários começam com #
+
+# Ignora todos os arquivos com extensão .a ...
 *.a
-# ... but track lib.a
+# ... mas não lib.a
 !lib.a
-# Ignore TODO files in CW
+
+# Ignora todos os arquivos chamados TODO no diretório atual
 /TODO
-# Ignore build and sub folders/files
+
+# Ignora o diretório build/ e todos os seus sub diretórios
 build/
-# Ignore all .txt in docs, but not in its subfolders
+# Ignore todos .txt no diretório docs/, mas não em seus subdiretórios
 doc/*.txt
-# Ignore all .pdf in all sufolders of doc
+# Ignora todos os .pdf em todos os subdiretórios de doc/
 doc/**/*.pdf
 ```
 
-### Setting up a global `.gitignore`
+### `git help`: man pages do Git
 
-- Create a file in your `$HOME` (by convention called `.gitignore_global`)
-- Use that file with the usual `.gitignore`syntax
-- Set up Git to use the global file
-
+Todos os comandos que mostramos aqui tem várias flags; todas estão documentadas em man pages, acessíveis pelo comando `git help [nome do comando]`:
 ```bash
-git config --global core.excludefile ~/.gitignore_global
+git help log
+``` 
+
+### `git log`: visualizando o histório do seu repositório
+
+Você pode ver todos os commits de uma branch do seu repositório usando `git log [nome da branch]`:
+```bash
+git log master
+git log # Se não especificado, pega o log a partir do HEAD da branch atual
 ```
 
-## Branching
+Existem muitas opções para o comando `git log`, que você pode ver usando o comando acima.
 
-- Branches are collections of commit objects
-    - Each object has metadata associated with the commit, a tree (mapping file modifications), blobs (describing file modifications), and pointers to the previous and next commits
-- The current branch is pointed at by HEAD
+### `git checkout`: volte no tempo
 
-### Merging
+Já vimos que `git checkout` pode te levar para uma outra branch. Na verdade, o que o comando recebe não é uma branch, mas sim um commit qualquer; o nome das branches no final é só um atalho para o último commit (chamado `HEAD`) delas.
 
-- If the history of the branches doesn't diverge (i.e. one branch has commits all older than the commits of the other branch), they can be fast-forwarded
-- When histories diverge but there is no conflict, Git creates a merge commit that has two parents, one from each merged branch
-- When the same parts of a file are edited in both branches, a conflict occurs
-    - Example
+Isso significa que você pode passar qualquer commit para o `git checkout`. Com isso, você consegue encontrar um commit passado com `git log` e voltar o seu repositório para o estado anterior:
+```bash
+$ git log
+commit d349a0a6a616f66e61b1a8jsjt345a0d5e22ec0e
+Author: your-name <your.email@host.comr>
+Date:   Sat Feb 30 25:00:00 2021 -0300
 
-        ```bash
-        <<<<<<< HEAD
-        this is some content to mess with
-        content to append
-        =======
-        totally different content to merge later
-        >>>>>>> new_branch
-        ```
+    Initial commit
+# Copie o hash do commit para o qual você deseja voltar 
+# e passe para `git checkout`
+$ git checkout d349a0a6a616f66e61b1a8jsjt345a0d5e22ec0e
+```
 
-    - Conflicts need to be resolved manually by deleting the segment between `>>>>>>>` and `<<<<<<<`
-    - You can either select one of the edits or create something entirely different as you wish
-    - After resolving a conflict, add files and commit
+Como só brances tem `HEAD`, ao "ir para o passado" você entra em um estado sem cabeça (*headless state*). Nele você pode mudar arquivos, fazer testes e dar commits para uma outra branch.
 
-## Revision Selection
+### `git stash`: guarde suas mudanças para depois
 
-- How can you select previous commits for visualisation?
-- Branch names expand to references to their HEADs
-- `~` to reference first parents
-    - `~2` references grandparent
-- `^` to reference other parents
-    - `^2` references second parent (of a merge commit)
+Um dos comandos mais úteis quando se trabalha com várias *branches* é o `git stash`. O *stash* guarda o as mudanças que você realizou nos arquivos do seu repositório e as deleta do seu *working directory*. Assim, você pode mudar de *branch* e reaplicar suas mudanças. Ele tem alguns subcomandos:
+* `push [-m <mensagem>] [-a] [nome do arquivo]`: Adiciona arquivos ao *stash*. Sem a opção `-a`, só adiciona as mudanças em arquivos já no repositório; com ela, adiciona modificações e novos aruqivos;
+* `pop <stash>`: Aplica as mundasças as remove do *stash*;
+* `apply <stash>` Aplica as mudanças e NÃO as remove;
+* `drop <stash>`: Remove as mudanças do *stash*;
+* `branch <stash> <nome da branch>`: Aplica as mudanças do *stash* em uma nova *branch*;
+* `list`: Lista os *stashes* existentes no repositório, mostrando suas mensagens também.
 
-### `..` syntax
+### `git diff`: compare arquivos em dois commits
 
-- Shows differences between references
-- `<reference>..<reference to show differences>`
-- Can be replaced with `<reference to show difference> —not <reference>`
+Você pode comparar arquivos em dois commits diferentes usando `git diff <commit 1> <commit 2>`. Usando `git diff <commit>`, se compara o *commit* à `HEAD` da branch atual. Vale lembrar que nomes de *branches* são atalhos para o último commit da *branch*. 
+```bash
+# Comparando a branch local com uma branch remota
+$ git diff origin/main 
+# Comparando a `HEAD` de duas branches
+$ git diff main feature
+# Comparando commits pelos seus hashes
+$ git diff 1d72b2c e2a3608
+```
 
-### `...` syntax
+### `git reset`: um comando potencialmente perigoso
 
-- Shows commits since last common point between references
-- `<reference>...<second reference>`
-- `—left-right` shows to which reference commit belongs
+Existem só dois comandos que mencionamos que podem deletar informação de um repositório do Git: `git checkout` e `git reset`. Porém, só uma das opções dele é perigosa.
 
-## Git Workflows
+Usamos o comando com `git reset <opção> <commit>`. Existem 3 opções principais, dadas por *flags*:
+* `--soft`: Retorna os arquivos não modificados ao estado do *commit*. Não altera os arquivos adicionados nem a *working tree*;
+* `--mixed`: Retorna os arquivos não modificados ao estado do *commit*. Remove os arquivos adicioinados, mas não apaga suas modificações;
+* `--hard`: **A opção perigosa**. Apaga **permanentemente** suas modificações locais que não estejam em um commit ainda. **Não use a menos que saiba MUITO BEM o que está fazendo**.
 
-- Git also allows for collaboration between teams of developers
-- There are some standard ways for collaboration
-- There is no one-size-fits-all solution
+Vale ressaltar o comando `git reset HEAD`, ou seu equivalente mais curto `git reset --`. Ele aplica um reset `--mixed`, removendo os arquivos que você tinha adicionado para o próximo commit. Ou seja, se você adicionou um arquivo por engano, `git reset --` o remove para você da *staging area*.
 
-### Centralised
 
-- All developers push their commits to a single branch
-- Conflicts are resolved by rebasing newer changes on top of older ondes
-- Can slow down the team due to many conflict resolutions
+## E se eu quiser saber mais?
 
-### Feature Branch
+Você pode acessar [aqui](https://www.notion.so/Git-888653ce74dd48d59c8db1ab698cb208) um tutorial (em inglês) que aborda conceitos como workflows do Git e como configurar um `.gitignore` global. Nesse mesmo link você vai encontrar uma lista de comandos com exemplos de algumas *flags* interessantes.
 
-- Each branch for the repository serves a distinct and very specific goal (e.g. working on a bug fix or on a new feature)
-- The developer makes sure their master is up to date with the remote master and updates and fixes conflicts locally if necessary
-- When the changes are ready, a pull request is opened to review the changes
-- The changes are then incorporated into the master branch
+Existem diversos tutoriais na internet em que você pode aprender mais sobre Git; alguns examplos notáveis são os do próprio [GitHub](https://guides.github.com/) (em inglês) e da [Atlassian](https://www.atlassian.com/br/git) (que tem um serviço que concorre com o GitHub chamado BitBucket). Pessoalmente, recomendo ler em inglês caso você consiga, porque algumas traduções não são muito boas e podem confundir você, ainda mais se não conhecer muito do Git.
 
-### Gitflow
-
-- More rigid structure for Feature Branch
-- There are some "canonical" branches
-    - `master` → where final, ready-to-use code is
-    - `develop` or `devel` → where changes are merged between releases
-- During development, each new feature gets its own `feature` branch as well, which is merged into `develop` when ready
-- When a release comes up, a new branch, `release`, is created
-    - No new features are added to `release`, only bug fixes and documentation generation
-    - The release feature is merged into `master`, and then back into `develop` with new documentation and bug fixes
-- Whenever necessary, a new `hotfix` branch can be created to fix critical bug found in the `master` branch
-    - After merging `hotfix` into `master`, a new release is generated
-    - `hotfix` is also merged into develop
-
----
-
-  
-
-[Commands](https://www.notion.so/2e7fa76e5a7a4fcf964fb97d82e81650)
+Por fim, se quiesr muito aprender como o Git funciona, incluindo o que o Git faz de baixo dos panos pra guardar todas as informações dos seus *commits*, você pode ler o livro [Git Pro](https://git-scm.com/book/en/v2). (A tradução para português não chegou a metade do livro).
