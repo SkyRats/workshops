@@ -2,7 +2,7 @@
 
 ## Por que controle de versão existe?
 
-A programação antes da internet era muito diferente do que é hoje, porque era mais difícil acessar informação e compartilhar código, o que desacelerava a inovação. Mas um mundo conectado exigia novas formas de colaboração, e com elas novas ferramentas para colaborar.
+A programação antes da internet era muito diferente do que é hoje, porque era mais difícil acessar informação e compartilhar código, o que desacelerava a inovação. O surgimento de um mundo conectado exigiu novas formas de colaboração, e com elas novas ferramentas para colaborar.
 
 Imagine que você é um programador da décade de 70 tentando, por exemplo, fazer um drone voar sozinho. Você teria que programar tudo absolutamente do zero - desde como os motores são controlados até rotinas de pouso e movimentação por exemplo, e tudo isso antes de pensar em fazer o seu drone se controlar autonomamente! Isso acontece porque você não tem acesso ao trabalho de outros programadores, já que a única forma de compartilhar código era copiando em um disquete e mandar para outras pessoas. E esse problema não existia só em robótica - desenvolver uma nova aplicação muitas vezes envolvia escrever também o sistema operacional para o computador.
 
@@ -11,6 +11,7 @@ O desenvolvimento da internet permitiu que arquivos fossem compartilhador mais f
 Daí vem a necessidade de sistemas de controle de versão (SCV) para vários usuários. Esses sistemas permitem que várias pessoas façam modificações, e depois encontra um jeito de juntar todas elas automaticamente. Eles também permitem muito mais, como voltar em versões passadas dos seus arquivos, de uma forma simples e integrada.
 
 Ok, mas esse é o workshop de Git, que é só um SCV. Por que afinal a gente usa o Git? O que ele tem de especial?
+
 
 ## Por que o Git?
 
@@ -23,6 +24,7 @@ Isso significa que cada programador tem uma cópia de todo o código no seu comp
 Assim, você consegue retornar a uma versão antiga do seu projeto muito mais facilmente;
 3. Tem *branches* muito desenvolvidas  
 Vamos falar de *branches* mais pra frente.
+
 
 ## Mas como isso funciona?
 
@@ -37,15 +39,15 @@ Dentro de um repositório do Git, qualquer arquivo seu está em um de 5 estados:
 1. Não versionado (*untracked*)  
 Esses são os arquivos que não foram adicionados ao repositório ainda. É como se eles não existissem para o Git, então quase nenhum comando vai afetá-los; 
 2. Versionado  
-Depois que você adiciona um arquivo ao seu repositório pela primeira vez, ele entra no seu *working directory*, e o Git começa a "ver" esse arquivo e a gravar as modificações que ele sofre;
+Depois que você adiciona um arquivo ao seu repositório pela primeira vez, ele entra no seu *working directory*, e o Git começa a "ver" esse arquivo. Depois que você der o primeiro *commit* contendo esse arquivo, o Git vai conseguir guardar as modificações que ele sofre;
 3. Adicionado (*staged*)  
 Aqui os arquivos estão na *staging area*. As modifcações colocadas aqui vão ser adicionadas ao histório do repositório no próximo *commit*;
 4. Em um *commit* local  
 Com um *commit*, você coloca as suas modificações adicionadas no histórico do repositório. É como se os seus arquivos na *staging area* estivessem escritos a lápis - você ainda pode reverter essas mudanças facilmente. Quando você realiza um *commit*, você escerve à caneta - fica um registro mais permanente do que você fez; 
 5. Em um *commit* remoto  
-Se um commit local é escrever à caneta, um *commit* remoto é como talhar em uma pedra. Qualquer um com acesso ao repositório pode ver exatamente o que você fez, e isso fica registrado praticamente "para sempre";
+Se um commit local é escrever à caneta, um *commit* remoto é como talhar em uma pedra. Qualquer um com acesso ao repositório pode ver exatamente o que você fez, e isso fica registrado praticamente para sempre* ;
 
-(O "para sempre" está entre aspas porque de fato é possível, mas é extremamente não recomendado por poder causar vários problemas.)
+(* é possível modificar um commit remoto, mas é extremamente não recomendado por poder causar vários problemas.)
 
 ### Na prática
 
@@ -69,8 +71,6 @@ $ ls -a1
 2.  Adicione umarquivo na pasta do repositório
 ```bash
 $ echo "Hello, world!" > hello.txt
-$ ls
-hello.txt
 ```
 3. Verifique o estado do repositório usando o comando `git status`
 ```bash
@@ -109,6 +109,7 @@ $ git commit -m "Initial commit"
  create mode 100644 hello.txt
 ``` 
 
+
 ## Por que meu repositório tem galhos?
 
 Repositórios do Git tem *branches*. Essas estruturas são uma forma de organizar o desenvolvimento de uma aplicação com várias partes. Assim, você pode trabalhar em diversas funcionalidades ao mesmo tempo sem que uma prejudique a outra. Por exemplo, um algoritmo de desvio de obstáculos para drones tem pelo menos duas partes que precisam trabalhar juntas: a detecção do obstáculo e o controle do drone em si. O desenvolvimento do algoritmo poderia ser separado então nas *branches* de `obstacle_detection` e `control`.
@@ -141,6 +142,7 @@ $ git checkout linux_basics
 ```bash
 $ git fetch
 $ git merge # mesmo que git merge origin/master
+# git pull é equivalente a git fetch && git merge
 ```
 4. Faça *upload* de seus commits com `git push`
 ```bash
