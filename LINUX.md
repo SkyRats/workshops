@@ -4,10 +4,6 @@
 
 A maior parte das pessoas (infelizmente) ainda usa rotineiramente sistemas operacionais (SOs) de códido fechado, como o Windows. Eles focam em criar uma experiência de usuário coesa ao custo de customização. Resumidamente, o SO faz tudo "por baixo dos panos". Como a filosofia de sistemas GNU-Linux é bem diferente, vamos falar brevemente sobre como ele gerencia arquivos e permissões.
 
-### Por que o Ubuntu?
-
-TODO @soph
-
 ### O que é esse ext4?
 
 Durante a instalação do Ubuntu de vocês, provavelmente viram em alguns lugares escrito "partição ext4" ou algo do tipo. Isso se refere à forma como o seu computador organiza os arquivos no seu disco, e tem alguns aspectos que valem saber para quando (não se) voce tiver algum problema com o sistema.
@@ -25,12 +21,9 @@ fsck.ext4 /dev/sda1/ -y
 
 ### Caminhos
 
-​	Para se referir a diretórios dentro de diretórios podemos adicionar uma barra `/` e escrever o nome do próximo diretório em seguida. 
-
-**Exemplo:**
-
+​Para se referir a diretórios dentro de diretórios podemos adicionar uma barra `/` e escrever o nome do próximo diretório em seguida:
 ```
-/home/Documents/poli/skyrats
+/home/user/Documents/poli/skyrats
 ```
 
 ### Permissões
@@ -84,28 +77,29 @@ $ sudo rm protected_file.txt
 
 Assim, quando você quiser executar um comando que reclame de falta de permissões, **e souber o que você está fazendo**, você deve rodar `sudo <comando>`.
 
+### Por que o Ubuntu?
 
-Mas aí fica a pergunta: como você manda o computador fazer isso? Como vamos ver a seguir, você usa um dos principais componentes do Linux para desenvolvedores, o **terminal**.
+TODO @soph
+
+
+Mas aí fica a pergunta: de que forma você manda o computador executar todos esses comandos que a gente citou? Como vamos ver a seguir, você usa um dos principais componentes do Linux para desenvolvedores, o **terminal**.
 
 
 ## Introdução ao Terminal
 
 ### O que é?
 
-​	O Terminal é uma interface não gráfica que aceita comandos digitados e os usa para realizar determinadas tarefas. Parece complicado de inicio, mas estou aqui pra te ajudar a entender como ele funciona e te mostrar que é bem simples.
-
-
+​O Terminal é uma interface não gráfica que aceita comandos digitados e os usa para realizar determinadas tarefas. Parece complicado de inicio, mas estou aqui pra te ajudar a entender como ele funciona e te mostrar que é bem simples.
 
 ### Como abrir o Terminal?
 
-​	Você pode buscar por ele na barra de busca, ou usar o atalho `CTRL + ALT + T`. Este atalho irá abrir uma nova janela com o terminal. Se você já tiver uma janela aberta tente usar o `CTRL + SHIFT + T` para abrir uma nova subjanela.
+​Você pode buscar por ele na barra de busca, ou usar o atalho `CTRL + ALT + T`. Este atalho irá abrir uma nova janela com o terminal. Se você já tiver uma janela aberta tente usar o `CTRL + SHIFT + T` para abrir uma nova subjanela.
 
+### Argumentos de linha de comando
 
-### Argumentos
+​Alguns comandos do terminal possuem **argumentos**. Estes afetam o comando em questão de diversas maneiras. eles são escritos após o comando, seguido de um `-`. 
 
-​	Alguns comandos do terminal possuem **argumentos**. Estes afetam o comando em questão de diversas maneiras. eles são escritos após o comando, seguido de um `-`. 
-
-​	**Exemplo:** O comando `ls` possui diversos argumentos possíveis de serem usados como `-a` (*all*) e `-l`.  O argumento `-a` faz com que o Terminal liste, além dos dados já listados, arquivos ocultos enquanto o argumento `-l` mostra dados de permissão dos arquivos, tamanho dos arquivos entre outras informações. Para a sintaxe apenas digite o argumento ao lado do comando: `ls -a` ou `ls -l`. 
+​**Exemplo:** O comando `ls` possui diversos argumentos possíveis de serem usados como `-a` (*all*) e `-l`.  O argumento `-a` faz com que o Terminal liste, além dos dados já listados, arquivos ocultos enquanto o argumento `-l` mostra dados de permissão dos arquivos, tamanho dos arquivos entre outras informações. Para a sintaxe apenas digite o argumento ao lado do comando: `ls -a` ou `ls -l`. 
 Caso você queira usar dois argumentos você pode apenas escrever um em sequência do outro:`ls -al`
 
 Para obter inforações dos diversos argumentos de um comando, existe o argumento `--help` ou `-h`. O Terminal irá lhe mostrar todos os argumentos existentes para o determinado comando: `ls --help`.
@@ -113,37 +107,29 @@ Para obter inforações dos diversos argumentos de um comando, existe o argument
 
 ## Comandos de Navegação
 
-​	O principal comando para mudança de diretório é o `cd` (*Change Directory*). Para navegar entre os diretórios é necessário respeitar a ordem de hierarquia. Assim, seguindo o exemplo acima, se estivermos no diretório `/home/Documents`  e quisermos ir para o diretório `/home/Documents/poli/skyrats`  temos que digitar:
-
-```
+​O principal comando para mudança de diretório é o `cd` (*Change Directory*). Para navegar entre os diretórios é necessário respeitar a ordem de hierarquia. Assim, seguindo o exemplo acima, se estivermos no diretório `/home/Documents`  e quisermos ir para o diretório `/home/Documents/poli/skyrats`  temos que digitar:
+```bash
 cd poli
 cd skyrats
 ```
 
-​	Ou então podemos passar o endereço em apenas uma linha:
-
-```
+​Ou então podemos passar o endereço em apenas uma linha:
+```bash
 cd poli/skyrats
 ```
 
-​	Em ambos os casos acima o resultado é o mesmo.
+​Em ambos os casos acima o resultado é o mesmo.
 
-​	Mas e se estivermos no diretório `/home/Documents/poli/skyrats` e quisermos voltar para o diretório `/home/Documents` ? Para "subir" na hierarquia, ou seja, voltar nos diretórios usamos o `cd ..`.
-
-**Exemplo:**
-
-```
+​Mas e se estivermos no diretório `/home/Documents/poli/skyrats` e quisermos voltar para o diretório `/home/Documents` ? Para "subir" na hierarquia, ou seja, voltar nos diretórios usamos o `cd ..`.
+```bash
 cd ..
 cd ..
 ```
 
-​	Podemos também dar o endereço em uma linha assim como no caso anterior:
-
-```
+​Podemos também dar o endereço em uma linha assim como no caso anterior:
+```bash
 cd ../..
 ```
-
-
 
 ### Dicas de Navegação
 
@@ -153,123 +139,92 @@ cd ../..
 
   * **Nota:** Para que o [*TAB*] funcione é necessário que exista algum arquivo ou diretório com o nome que você deseja dentro do seu diretório atual. O comando não adivinha o que você quer;
 
-* O diretório `/home` pode ser chamado de `/~`. Podemos reescrever o exemplo do tópico **1.** como:
-
+* O diretório `/home` pode ser chamado de `~/`. Assim, estes dois exemplos são equivalentes:
   ```
+  /home/user/Documents/poli/skyrats
   ~/Documents/poli/skyrats
   ```
 
 * Digitar apenas `cd` no terminal irá te levar até a sua `/home`;
 
 
-
 ## Criando e Removendo Arquivos e Diretórios
-
 
 ### Criando Diretórios
 
-Para criar diretórios é usado o comando `mkdir` (*make directory*).
-
-**Exemplo:**
-
-```
+Para criar diretórios é usado o comando `mkdir` (*make directory*):
+```bash
 mkdir MeuDiretorio
 ```
 
-​	Assim, é criado um novo diretório chamado MeuDiretorio dentro do diretório em que você está localizado.
-
+​Assim, é criado um novo diretório chamado MeuDiretorio dentro do diretório em que você está localizado.
 
 ### Removendo Arquivos e Diretórios
 
-Para remover um arquivo usamos o comando `rm` (*remove*) e logo em seguida o nome do arquivo que queremos apagar.
-
-**Exemplo:**
+Para remover um arquivo usamos o comando `rm` (*remove*) e logo em seguida o nome do arquivo que queremos apagar:
 ```bash
 rm meuArquivo.pdf
 ```
 
-Para remover diretórios usamos o comando `rm` junto com o argumento `-r` (*recursive*) e em seguida o nome do diretório a ser removido.
-
-**Exemplo:**
-
+Para remover diretórios usamos o comando `rm` junto com o argumento `-r` (*recursive*) e em seguida o nome do diretório a ser removido:
 ```bash
 rm -r MeuDiretorio
 ```
 
-​	**Atenção:** Após remover um diretório com `rm -r` você apagará todos os arquivos que ele contém, portanto use o comando com cuidado!
-
+​**Atenção:** Após remover um diretório com `rm -r` você apagará todos os arquivos que ele contém para sempre, portanto use o comando com cuidado!
 
 
 ## Movendo, Copiando e Renomeando Arquivos e Diretórios
 
-
 ### Copiando Arquivos e Diretórios
 
-Para copiar um arquivo é usado o comando `cp` (*copy*). Esse comando recebe como primeiro argumento o nome do arquivo que será copiado e, como segundo argumento, o nome que queremos dar à sua cópia. 
-
-**Exemplo:**
-
-```
+Para copiar um arquivo é usado o comando `cp` (*copy*). Esse comando recebe como primeiro argumento o nome do arquivo que será copiado e, como segundo argumento, o nome que queremos dar à sua cópia:
+```bash
+# copia o arquivo1 para um novo arquivo de nome arquivo2
 cp arquivo1 arquivo2
 ```
 
-​	No exemplo acima estamos copiando o conteúdo de `arquivo1` e renomeando como `arquivo2`. Ambos os arquivos estarão no diretório em que você está localizado. Para copiar um arquivo para outro diretório devemos dar o caminho, além do nome.
-
-**Exemplo:**
-
-```
+Ambos os arquivos estarão no diretório em que você está localizado. Para copiar um arquivo para outro diretório devemos dar o caminho, além do nome.
+```bash
 cp arquivo1 ~/Documents/arquivo2
 ```
 
-​	Acima o `arquivo1` foi copiado para o diretório `Documents` e renomeado como `arquivo2`.  Da mesma forma podemos copiar um arquivo de outro diretório para o diretório atual ou até mesmo copiar um arquivo de um diretório qualquer para outro diretório qualquer, basta apenas dar o caminho antes do nome do arquivo. Toda a teoria de **Caminhos** se aplica aqui.
+​Acima o `arquivo1` foi copiado para o diretório `Documents` e renomeado como `arquivo2`.  Da mesma forma podemos copiar um arquivo de outro diretório para o diretório atual ou até mesmo copiar um arquivo de um diretório qualquer para outro diretório qualquer, basta apenas dar o caminho antes do nome do arquivo. Toda a teoria de caminhos se aplica aqui.
 
-​	O comando `cp` apenas consegue copiar arquivos. Para copiar um diretório é necessário usar o argumento `-r` (*recursive*). 
-
-**Exemplo:**
-
-```
+​O comando `cp` apenas consegue copiar arquivos. Assim como no comando `rm`, para copiar um diretório é necessário usar o argumento `-r` (*recursive*)`:
+```bash
 cp -r dir1 dir2
 ```
 
 ### Movendo e Renomeando Arquivos e Diretórios
 
-​	De maneira análoga ao `cp` aqui iremos usar o `mv` (*move*). Esse comando recebe no primeiro argumento o nome do arquivo que será movido e, como segundo argumento, o caminho de destino desse arquivo. 
-
-**Exemplo:**
-
-```
+​De maneira análoga ao `cp` aqui iremos usar o `mv` (*move*). Esse comando recebe no primeiro argumento o nome do arquivo que será movido e, como segundo argumento, o caminho de destino desse arquivo:
+```bash
 mv caio.py ~/Documents/FariaLima
 ```
 
-​	Aqui estamos movendo o arquivo `caio.py` para o diretório `FariaLima`.
+​Aqui estamos movendo o arquivo `caio.py` para o diretório `FariaLima`.
 
-​	O terminal não possui um comando específico para renomear. Para realizar essa função usamos o próprio comando `mv` pois sempre que você move um arquivo/diretório você tem a opção de **renomear** ele (igual no comando`cp`). Imagine que estamos movendo um arquivo de um diretório para o mesmo diretório mas no processo estamos mudando o nome dele.
-
-**Exemplo:**
-
-```
+​O terminal não possui um comando específico para renomear. Para realizar essa função usamos o próprio comando `mv` pois sempre que você move um arquivo/diretório você tem a opção de **renomear** ele (igual no comando`cp`). Imagine que estamos movendo um arquivo de um diretório para o mesmo diretório mas no processo estamos mudando o nome dele:
+```bash
 mv caio.py farialimer.py
 ```
 
-​	No exemplo acima estamos renomeando o arquivo `caio.py` para `farialimer.py`. O que estamos fazendo de fato é mover o arquivo para o mesmo diretório em que estamos, mas no processo mudamos o nome dele.
+​No exemplo acima estamos renomeando o arquivo `caio.py` para `farialimer.py`. O que estamos fazendo de fato é mover o arquivo para o mesmo diretório em que estamos, mas no processo mudamos o nome dele.
 
-​	Se quisermos mover para outro diretório, mas mudar o nome no processo é só dar o caminho do diretório de destino.
-
-**Exemplo:**
-
-```
+​Se quisermos mover para outro diretório, mas mudar o nome no processo é só dar o caminho do diretório de destino:
+```bash
 mv caio.py ~/Documents/FariaLima/farialimer.py
 ```
 
-**Dica:** para os comandos `cp`, `mv`, `rm` recomendo usar o argumento `-v` (*verbose*). Ele mostra no seu terminal o que foi feito (qual arquivo foi copiado, movido e para onde ele foi), assim você consegue ter maior certeza e segurança no que você está fazendo.
-
+**Dica:** para os comandos `cp`, `mv`, `rm` é recomendado usar o argumento `-v` (*verbose*). Ele mostra no seu terminal o que foi feito (qual arquivo foi copiado, movido e para onde ele foi), assim você consegue ter maior certeza e segurança no que você está fazendo.
 
 
 ## File Globbing - Caracteres Coringa
 
-​	Os *Caracteres Coringa* auxiliam a filtrar arquivos e diretórios que possuem semlhanças nos nomes. Assim, você consegue mover, renomear, listar ou copiar uma série de arquivos de uma vez só se todos estes possuírem nomes ou formato semelhantes. Darei aqui exemplos usando o comando `ls` mas saiba que o mesmo pode ser aplicado ao `cp` , `mv` também.
+​Os caracteres coringa auxiliam a filtrar arquivos e diretórios que possuem semlhanças nos nomes. Assim, você consegue mover, renomear, listar ou copiar uma série de arquivos de uma vez só se todos estes possuírem nomes ou formato semelhantes. Nos próximos exemplos, usamos o comando `ls`, mas é importante notar que os caracteres coringa podem ser usados com qualquer comando do terminal.
 
-​	Imagine que temos um diretório com os seguintes arquivos:
+​Imagine que temos um diretório com os seguintes arquivos:
 
 ```
 exemplo12
@@ -284,33 +239,27 @@ Arquivo100
 Arquivo5
 ```
 
-​	O principal caracter coringa que usamos é o `*`. Tente ler esse comando como "qualquer coisa". 
-	
-Se usamos ele no começo, tudo que está depois dele é obrigatoriamente considerado, sem importar o que vem antes. Nesse caso, ele faria referência a arquivos ou diretórios com o mesmo final. 
+​O principal caracter coringa que usamos é o `*`. Tente ler esse caracter como "qualquer coisa". 
 
-**Exemplo:**
+Se usamos ele no começo, tudo que está depois dele é obrigatoriamente considerado, sem importar o que vem antes. Nesse caso, ele faria referência a arquivos ou diretórios com o mesmo final:
+```bash
+$ ls *12
+exemplo12
+arquivo12
 ```
-Input: ls *12
-Output: exemplo12
-		arquivo12
-```
-Aqui estão listados arquivos que possuem **qualquer coisa** no começo, mas terminam com "*12*".
+Aqui estão listados arquivos que possuem qualquer coisa no começo, mas terminam com "12".
 
-Se usamos o caracter no final, ele fará referência a arquivos ou diretórios com o mesmo começo. 
-
-**Exemplos:** 
-
-```
-Input: ls Exemplo*
-Output: Exemplo
-		Exemplo1
-		Exemplo23
+Se usamos o caracter no final, ele fará referência a arquivos ou diretórios com o mesmo começo:
+```bash
+$ ls Exemplo*
+Exemplo
+Exemplo1
+Exemplo23
 ```
 
-​	Aqui estão sendo listados todos os arquivos que começam com "*Exemplo*" e possuem **qualquer coisa** depois.
+​Aqui estão sendo listados todos os arquivos que começam com "Exemplo" e possuem qualquer coisa depois.
 
-
-​	Lembrando que existe diferença entre caracteres maiúsculos e minúsculos ainda que eles representem a mesma letra do alfabeto.
+​Lembrando que existe diferença entre caracteres maiúsculos e minúsculos ainda que eles representem a mesma letra do alfabeto.
 
 
 ## Instalando aplicativos
@@ -339,130 +288,108 @@ Mas às vezes, o programa que você quer não está nos repositórios padrão. E
 
 ### Conceitos
 
-​	Antes de sair aprendendo comandos vamos entender conceitualmente a diferença entre **agrupar** e **compactar**.
+​Antes de sair aprendendo comandos vamos entender conceitualmente a diferença entre **agrupar** e **compactar**.
 
 * **Agrupar**  - Quando agrupamos uma série de arquivos nós geramos um novo arquivo que contém todos os arquivos que agrupamos. Assim o **tamanho** do arquivo gerado será a **soma** dos tamanhos de todos os arquivos agrupados.
-* **Compactar** - Quando compactamos uma série de arquivos estamos, assim como quando agrupamos, gerando um novo arquivo que contém todos os arquivos compactados mas com a diferença de que eles serão comprimidos, de maneira a deixar o tamanho do arquivo gerado menor que quando agrupado. É importante ressaltar que existem diversos tipos de algoritmos diferentes para compactação. Aqui iremos trabalhar o GZip.
+* **Compactar** - Quando compactamos uma série de arquivos estamos gerando um novo arquivo que contém todos os arquivos compactados, assim como quando agrupamos, mas eles serão comprimidos, de maneira a deixar o tamanho do arquivo gerado menor que quando agrupado. É importante ressaltar que existem diversos tipos de algoritmos diferentes para compactação. Aqui iremos trabalhar o GZip.
 
 ### Agrupando
 
 Quando se quer fazer uso de algum documento dentro de algum arquivo agrupado ou compactado deve-se extrair esse arquivo. 
 
-Para agrupar é usado o comando `tar` (Tape Archive), mas é necessário passar algumas informações ao terminal para usar esse comando. Vamos dar uma olhada em como funciona a sintaxe e vou explicando com mais calma o que cada coisa significa:
+Para agrupar é usado o comando `tar` (*tape archive*), mas é necessário passar algumas informações ao terminal para usar esse comando. Vamos dar uma olhada em como funciona a sintaxe e vou explicando com mais calma o que cada coisa significa:
 
 ```
-tar [o_que_deseja_fazer][f] [nome_do_arquivo_a_ser_criado][.tar] [arquivos_a_serem_agrupados] 
+tar [o_que_deseja_fazer]f [nome_do_arquivo_a_ser_criado].tar [arquivos_a_serem_agrupados] 
 ```
 
-​	CALMA, OK? Eu sei que parece muita coisa, mas é bem mais tranquilo do que parece. Antes de mais nada saiba que aqui os colchetes `[]` estão apenas indicando o espaço onde vão os comandos. Eles não fazem parte do comando em si. Dito isso vamos por partes:
+Parece muita coisa, mas é bem mais tranquilo do que parece. Antes de mais nada saiba que aqui os colchetes `[]` estão apenas indicando o espaço onde vão os comandos. Eles não fazem parte do comando em si. Dito isso vamos por partes:
 
 * o_que_deseja_fazer: Aqui você vai ter algumas opções, mas só vamos trabalhar duas delas:
-  * c (*create*) - usado para criar um arquivo agrupado;
-  * x (*extract*) - usado para extrair um arquivo agrupado ja criado;
+  * `c` (*create*): Usado para criar um arquivo agrupado;
+  * `x` (*extract*): Usado para extrair um arquivo agrupado ja criado;
 
-* f (*file*): só escreve `f` que é sucesso. É obrigatório;
-* nome_do_arquivo_a_ser_criado: sugestivo, não?;
-* .tar: todo arquivo agrupado pelo comando `tar` é de extensão `.tar`, então tem que ter no final do nome do arquivo criado;
-* arquivos_a_serem_agrupados: sugestivo parte2 o retorno;
+* `f` (*file*): o **último** argumento deve ser`f`, seguido do nome do arquivo. É obrigatório;
+* `.tar`: todo arquivo agrupado pelo comando `tar` é de extensão `.tar`, então tem que ter no final do nome do arquivo criado;
 
-**Exemplo:**
-
+Por exemplo, para agrupar as imagens `.png` em um arquivo `exemplo1.tar`, digitamos:  
+```bash
+tar cf exemplo1.tar *.png
 ```
-tar cf exemplo1.tar *png
-```
+Os conceitos de caracteres coringa podem ser úteis pra filtrar os arquivos que você quer agrupar.
 
-​	No exemplo acima estamos **criando** um arquivo agrupado `.tar` chamado `exemplo1` que contém todos os arquivos de extensão `.png` do diretório em que estamos. Aqui os conceitos de *Caracteres Coringa* podem ser úteis pra filtrar os arquivos que você quer agrupar.
-
-```
+Para extrair os arquivos no diretório atual, digite:
+```bash
 tar xf exemplo1.tar
 ```
 
-​		Acima estamos **extraindo** todo os arquivos do `exemplo1.tar` pro diretório atual. Podíamos dar um caminho no final, ou até mesmo extrair arquivos específicos:
-
-```
-tar xf exemplo1.tar foto1.png
-```
-
-```
+Podemos dar um caminho no final para extrair em outro diretório. Para isso, passamos o diretório com a *flag* `-C`: 
+```bash
 tar xf exemplo1.tar -C ~/Documents/ExtractedFiles
 ```
 
-​	Como visto no exemplo, para dar o caminho é necessário adicinoar o `-C`.
-
-
+Ou até mesmo extrair arquivos específicos:
+```bash
+tar xf exemplo1.tar foto1.png
+```
 
 ### Compactando
 
-​	Para compactar é bem mais fácil. Usamos apenas o comando `gzip` com o argumento `-k` (*keep*)  e escrevemos o nome do arquivo/diretório que queremos compactar. Não estranhe, mas seu arquivo compactado terá duas extensões sendo uma a original do arquivo e uma `.gz`.
-
-**Exemplo:**
-
-```
+Para compactar, usamos o comando `gzip` com o argumento `-k` (*keep*)  e escrevemos o nome do arquivo/diretório que queremos compactar. Seu arquivo compactado terá duas extensões sendo uma a original do arquivo e uma `.gz`:
+```bash
 gzip -k foto1.png
 ```
 
-​	Usamos o `-k`  para criar um backup do nosso arquivo original. Caso não usemos ele o gzip irá sobreescrever o arquivo original. É muito mais seguro mantermos uma cópia do original, copiarmos ele e compactarmos a cópia.
+​Usamos o `-k`  para criar um backup do nosso arquivo original. Caso não usemos ele o gzip irá sobreescrever o arquivo original. É muito mais seguro mantermos uma cópia do original, copiarmos ele e compactarmos a cópia.
 
-​	Para descompactar o processo é o mesmo mas é usado o comando `gunzip`
-
-**Exemplo:**
-
-```
-gunzip *gz
+​Para descompactar o processo é o mesmo mas é usado o comando `gunzip`:
+```bash
+gunzip *.gz
 ```
 
-​	No exemplo acima estamos descompactando todos os arquivos compactados do diretório, mas você pode descompactar um arquivo específico ou uma série de arquivos que você filtrar.
+Você pode descompactar um arquivo específico ou uma série de arquivos que você filtrar assim como com o comando `tar`.
 
-​	Você pode ainda agrupar e compactar arquivos num comando só. Para isso usamos o `tar` de maneira semelhante ao agrupamento mas acrescentamos um `z`(*zip*) e alteramos a extensão para `.tgz`.
-
-**Exemplo:**
-
-```
-tar czf exemplo.tgz *png
+​Você pode ainda agrupar e compactar arquivos num comando só. Para isso usamos o `tar` de maneira semelhante ao agrupamento mas acrescentamos um `z`(*zip*) e alteramos a extensão para `.tar.gz` ou`.tgz`:
+```bash
+tar czf exemplo.tgz *.png
+# Equivalente a tar czf exemplo.tar.gz *.png
 ```
 
 
 ## Procurando Arquivos
 
-Para realizar a busca por um arquivo é usado o comando `find`. Logo após o comando é necessário dizer o diretório em que você irá realizar a busca. Em seguida existem várias opções de busca. Veremos aqui a mais usada que é filtrar por nome. Para isso é usada a flag `-name`.
-
-**Exemplo:**
-
-```
+Para realizar a busca por um arquivo é usado o comando `find`. Logo após o comando é necessário dizer o diretório em que você irá realizar a busca. Em seguida existem várias opções de busca. Veremos aqui a mais usada que é filtrar por nome. Para isso é usada a flag `-name`:
+```bash
 find ~/Documents -name colombini.py
 ```
 
-​	Estamos realizando uma busca por um arquivo chamado `colombini.py` no diretório `Documents`. Tente sempre ser o mais preciso no diretório de busca. Apesar de você poder procurar por um arquivo desde a `root` sua pesquisa pode ser mais demorada e com maior gasto computacional. 
+​Estamos realizando uma busca por um arquivo chamado `colombini.py` no diretório `Documents`. Tente sempre ser o mais preciso no diretório de busca. Apesar de você poder procurar por um arquivo desde a `root` sua pesquisa pode ser mais demorada e com maior gasto computacional. 
 
-​	Outra ferramenta que temos para realizar buscar é o `locate`. Apenas digite o comando e o arquivo/diretório que deseja buscar.
-
-**Exemplo:**
-
-```
+​Outra ferramenta que temos para realizar buscar é o `locate`. Apenas digite o comando e o arquivo/diretório que deseja buscar:
+```bash
 locate colombini.py
 ```
 
-​	Aqui estamos procurando em todos os lugares do computador pelo arquivo `colombini.py`
+​Aqui estamos procurando em todos os lugares do computador pelo arquivo `colombini.py`
 
-```
+​Já no exemplo abaixo, estamos procurando por qualquer arquivo `.py`
+```bash
 locate .py
 ```
 
-​	Já no exemplo acima estamos procurando por todo o qualquer arquivo `.py`
+TODO Explicar diferença entre `find` e `locate`.
 
 
 ## Misc
 
-
 ### .bashrc
 
-​	Sempre que você abre uma janela de Terminal um *script* é executado com uma série de comandos. O nome dele é `.bashrc` e você pode acessá-lo usando um editor de texto. Tente usar o editor `nano` digitando no seu terminal `nano .bashrc`. Desca até o final, digite `echo Hello World!` e feche o `nano` com `CTRL + X`. Não se esqueça de salvar as alterações! Abra uma nova janela do Terminal e  divirta-se!
+​Sempre que você abre uma janela de Terminal um *script* é executado com uma série de comandos. O nome dele é `.bashrc` e você pode acessá-lo usando um editor de texto. Tente usar o editor `nano` digitando no seu terminal `nano .bashrc`. Desca até o final, digite `echo Hello World!` e feche o `nano` com `CTRL + X`. Não se esqueça de salvar as alterações! Abra uma nova janela do Terminal e  divirta-se!
 
 ### Links simbólicos (*symlinks*)
 
-
 `ln -s [endereço global do repositório] [endereço global do workspace]`
 
-#### Best argument ever
+### Best argument ever
 
 `--help` ou `-h`, quando usado com qualquer comando te lista as possibilidades do comando e te ajuda a usá-lo.
