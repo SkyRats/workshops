@@ -150,6 +150,7 @@ $ git merge # mesmo que git merge origin/master
 $ git push origin master
 ```
 
+**Importante:** antes de dar `push` em um repositório, é recomendado dar `pull` para coletar *commits* que outras pessoas possam ter dado antes de você e, assim, impedir um conflito.
 
 ## É só isso?
 
