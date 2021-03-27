@@ -1,20 +1,27 @@
 # Linux Basics
 
-## 1. Árvore de Diretórios
+## Conhecendo o sistema operacional
 
-​	O que talvez você conheça como "pastas" aqui no Linux iremos nos referir como "diretórios". Os diretórios são organizados em hierarquia como uma árvore, e todos partem da *root* (raíz) represetada por uma barra  `/`. Os diretórios indicados abaixo já estão no seu sistema operacional e é legal que você conheca alguns deles.
+A maior parte das pessoas (infelizmente) ainda usa rotineiramente sistemas operacionais (SOs) de códido fechado, como o Windows. Eles focam em criar uma experiência de usuário coesa ao custo de customização. Resumidamente, o SO faz tudo "por baixo dos panos". Como a filosofia de sistemas GNU-Linux é bem diferente, vamos falar brevemente sobre como ele gerencia arquivos e permissões.
 
-![Linux Directory Structure](http://researchhubs.com/uploads/linux-cmd-directory-1.png)
+### Por que o Ubuntu?
 
-### **Principais Diretórios** 
+TODO @soph
 
-* `/` - "Root". É o primeiro diretório da hierarquia.
-* `/bin` - "Binaries". Diretório que armazena códigos primitivos e comandos básicos do sistema.
-* `/home`  - Diretório que você mais vai usar. Aqui é onde estão armazenados diretórios como "Downloads", "Documents", "Desktop", etc.
-* `/opt` - "Optional" ou "Third Party Software". Diretório onde se encontram softwares de terceiros (não relacionados diretamente com o Linux) como "Google Chrome".
-* `/tmp` - "Temporary Space" - Diretório de arquivos temporários. Sempre que o computador inicia esse diretório será limpado, portanto evite salvar arquivos neste diretório.
+### O que é esse ext4?
 
+Durante a instalação do Ubuntu de vocês, provavelmente viram em alguns lugares escrito "partição ext4" ou algo do tipo. Isso se refere à forma como o seu computador organiza os arquivos no seu disco, e tem alguns aspectos que valem saber para quando (não se) voce tiver algum problema com o sistema.
 
+Você pode pensar no sistema de arquivos com uma analogia. Vamos imaginar que você quer organizar suas anotações de Cálculo 1; você tem duas formas principais: escrever em um caderno ou em um fichário. Desses dois jeitos, as folhas seguem uma ordem, permitindo que você as ache com facilidade. 
+
+Agora, o caderno e o fichário diferem de uma maneira importante: no caderno você só pode escrever de forma linear, então não dá para colocar uma folha do futuro entre duas folhas passadas; no fichário isso é bem simples. Então no caderno, as suas anotações podem ficar fragmentadas, dificultando a procura por uma anotação específica.
+
+Voltando para o computador: o sistema de arquivos do Windows é mais antigo, e é como um caderno na nossa analogia; o ext4 do Linux é como o fichário. Por isso que você não precisa desfragmentar o disco no Ubuntu, mas precisa no Windows.
+
+O ext4 também é mais "esperto" que o FAT32 ou o NTFS do Windows - ele possui ferramentas de autocorreção. É como se, no ext4, antes de escrever na folha à caneta, você escrevesse a lápis; se alguém esbarrar na sua mão, vai riscar a folha, mas você pode apagar depois. Esse "apagar depois" e "passar a limpo" estão emcapsulados no comando
+```bash
+fsck.ext4 /dev/sda1/ -y
+```
 
 ### Caminhos
 
@@ -26,6 +33,59 @@
 /home/Documents/poli/skyrats
 ```
 
+### Permissões
+
+Agora que já sabemos um pouco mais sobre como os arquivos são organizados em um sistema Linux, vamos falar de quem pode acessar o quê.
+
+Em um sistema Linux, tudo é um arquivo ou um diretório, o que pode parecer estranho à primeira vista. Sua webcam, mouse, disco rídigo, antena WiFi, pendrive, todos existem no seu sistema na forma de arquivo ou diretório. Por isso que é muito importante controlar o acesso a certas pastas e arquivos: se qualquer usuário tivesse acesso, poderia gerar caos no seu PC.
+
+Uma forma bem simples de ver as permissões associadas aos itens do seu diretório atual é usando o comando `ls -l`. Você vai perceber que aparecer várias letras antes do nome de cada arquivo:
+```bash
+$ ls -l
+total 52
+-rw-r--r-- 1 owner group  5439 mar 20 11:49 GIT-en.md
+-rw-rw-r-- 1 owner group 15186 mar 25 19:22 GIT.md
+-rw-rw-r-- 1 owner group 22121 mar 27 14:50 LINUX.md
+drwxr-xr-x 2 owner group  4096 mar 24 17:51 media
+```
+
+Todo arquivo e diretório tem 12 letras associadas a ele. São 3 grupos de 4 letras, que podem conter:
+* `d`: Se presente, indica que é diretório; senão, arquivo;
+* `r`: Permissão de ler;
+* `w`: Permissão de escrever, ou seja, modificar o conteúdo;
+* `x`: Permissão de executar (só é importante se o arquivo for um programa);
+* `-`: Indica que a permissão não foi concedida para esse grupo.
+
+Não vamos abordar o significado dos grupos aqui. Mas é importante saber que você pode modificar as permissões associadas a um arquivo usando o comando `chmod`:
+```bash
+$ ls -l
+-rw-rw-r--  1 owner group     0 mar 27 15:01 test.txt
+$ chmod -777 test.txt
+$ ls -l
+----------  1 owner group     0 mar 27 15:01 test.txt
+$ chmod +777 test.txt
+$ ls -l
+-rwxrwxrwx  1 owner group     0 mar 27 15:01 test.txt*
+```
+
+#### *root*: o administrador do Linux
+
+No Winodws, quando você vai instalar um programa ou mexer com uma configuração de sistema, o seu computador pede permissão de uma conta de "administrador". Isso impede que qualquer pessoa, ou até mesmo um vírus, destrua o seu computador acidentalmente. No Linux, o mesmo conteito existe na forma do *super user*, também chamado de *root*; esse usuário tem permisão de relizar qualuqer operação no seu sistema, alterando arquivos criados por qualquer outro usuário, além de ser o único que pode mexer nos diretórios que contém arquivos de sistema.
+
+À primeira vista, o "administrador" e o *root* não diferem tanto assim. Mas o usuário *root* é especial porque ele possui poderes muito menos restritos que a sua contrapartida no Windows.
+
+Como eu disse, ele pode realizar **qualquer** operação. Ele pode, entre outras coisas, apagar todos os arquivos do seu computador, formatar uma partição no seu disco... em suma, transformar o seu computador em um tijolo. Por isso, nunca é recomandado operar como *root*.
+
+Agora, se você quiser editar arquivos do sistema ou instalar aplicativos, você pode rodar comandos específicos como *root* usando o comando `sudo`. Ele executa só o comando especificado como *root* e volta para o seu usuário. Por exemplo, para apagar um arquivo protegido, você faria:
+```bash
+$ sudo rm protected_file.txt
+[sudo] password for user:
+```
+
+Assim, quando você quiser executar um comando que reclame de falta de permissões, **e souber o que você está fazendo**, você deve rodar `sudo <comando>`.
+
+
+Mas aí fica a pergunta: como você manda o computador fazer isso? Como vamos ver a seguir, você usa um dos principais componentes do Linux para desenvolvedores, o **terminal**.
 
 
 ## 2. Introdução ao Terminal
