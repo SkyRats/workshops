@@ -329,19 +329,14 @@ Por exemplo, para instalar o `htop`, você digitaria:
 sudo apt install htop
 ```
 
-## 7. Agrupando e Compactando Arquivos e Diretórios
-
 Mas às vezes, o programa que você quer não está nos repositórios padrão. Existem 3 possibilidades de instalar nesses casos:
 1. Adicionar o repositório `apt` do programa ao seu sistema. Assim, você vai conseguir dar um `apt install` como em qualquer pacote em repositório padrão;
 2. Instalar usando um arquivo `.deb`. Esse caso é como instalar do `.exe` do Windows; basta rodar `apt install nome_do_programa.deb` que o gerenciador cuida do resto;
 3. Instalar a partir do código fonte (*source*). Você vai ter que compilar o programa do zero no seu computador, o que é bem mais complicado e demorado do que instalar as versões pré compiladas pelo `apt`. Cada programa vai ter instruções de instalação diferentes.
 
-<<<<<<< HEAD
-=======
 
 ## Agrupando e Compactando Arquivos e Diretórios
 
->>>>>>> General refactoring
 ### Conceitos
 
 ​	Antes de sair aprendendo comandos vamos entender conceitualmente a diferença entre **agrupar** e **compactar**.
@@ -427,14 +422,7 @@ tar czf exemplo.tgz *png
 ```
 
 
-<<<<<<< HEAD
-
-## 8. Procurando Arquivos
-
-
-=======
 ## Procurando Arquivos
->>>>>>> General refactoring
 
 Para realizar a busca por um arquivo é usado o comando `find`. Logo após o comando é necessário dizer o diretório em que você irá realizar a busca. Em seguida existem várias opções de busca. Veremos aqui a mais usada que é filtrar por nome. Para isso é usada a flag `-name`.
 
