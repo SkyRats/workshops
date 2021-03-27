@@ -88,7 +88,7 @@ Assim, quando você quiser executar um comando que reclame de falta de permissõ
 Mas aí fica a pergunta: como você manda o computador fazer isso? Como vamos ver a seguir, você usa um dos principais componentes do Linux para desenvolvedores, o **terminal**.
 
 
-## 2. Introdução ao Terminal
+## Introdução ao Terminal
 
 ### O que é?
 
@@ -101,14 +101,17 @@ Mas aí fica a pergunta: como você manda o computador fazer isso? Como vamos ve
 ​	Você pode buscar por ele na barra de busca, ou usar o atalho `CTRL + ALT + T`. Este atalho irá abrir uma nova janela com o terminal. Se você já tiver uma janela aberta tente usar o `CTRL + SHIFT + T` para abrir uma nova subjanela.
 
 
+### Argumentos
 
-### .bashrc
+​	Alguns comandos do terminal possuem **argumentos**. Estes afetam o comando em questão de diversas maneiras. eles são escritos após o comando, seguido de um `-`. 
 
-​	Sempre que você abre uma janela de Terminal um *script* é executado com uma série de comandos. O nome dele é `.bashrc` e você pode acessá-lo usando um editor de texto. Tente usar o editor `nano` digitando no seu terminal `nano .bashrc`. Desca até o final, digite `echo Hello World!` e feche o `nano` com `CTRL + X`. Não se esqueça de salvar as alterações! Abra uma nova janela do Terminal e  divirta-se!
+​	**Exemplo:** O comando `ls` possui diversos argumentos possíveis de serem usados como `-a` (*all*) e `-l`.  O argumento `-a` faz com que o Terminal liste, além dos dados já listados, arquivos ocultos enquanto o argumento `-l` mostra dados de permissão dos arquivos, tamanho dos arquivos entre outras informações. Para a sintaxe apenas digite o argumento ao lado do comando: `ls -a` ou `ls -l`. 
+Caso você queira usar dois argumentos você pode apenas escrever um em sequência do outro:`ls -al`
+
+Para obter inforações dos diversos argumentos de um comando, existe o argumento `--help` ou `-h`. O Terminal irá lhe mostrar todos os argumentos existentes para o determinado comando: `ls --help`.
 
 
-
-## 3. Comandos de Navegação
+## Comandos de Navegação
 
 ​	O principal comando para mudança de diretório é o `cd` (*Change Directory*). Para navegar entre os diretórios é necessário respeitar a ordem de hierarquia. Assim, seguindo o exemplo acima, se estivermos no diretório `/home/Documents`  e quisermos ir para o diretório `/home/Documents/poli/skyrats`  temos que digitar:
 
@@ -160,7 +163,7 @@ cd ../..
 
 
 
-## 4. Criando e Removendo Arquivos e Diretórios
+## Criando e Removendo Arquivos e Diretórios
 
 
 ### Criando Diretórios
@@ -174,18 +177,6 @@ mkdir MeuDiretorio
 ```
 
 ​	Assim, é criado um novo diretório chamado MeuDiretorio dentro do diretório em que você está localizado.
-
-
-
-### Argumentos
-
-​	Alguns comandos do terminal possuem **argumentos**. Estes afetam o comando em questão de diversas maneiras. eles são escritos após o comando, seguido de um `-`. 
-
-​	**Exemplo:** O comando `ls` possui diversos argumentos possíveis de serem usados como `-a` (*all*) e `-l`.  O argumento `-a` faz com que o Terminal liste, além dos dados já listados, arquivos ocultos enquanto o argumento `-l` mostra dados de permissão dos arquivos, tamanho dos arquivos entre outras informações. Para a sintaxe apenas digite o argumento ao lado do comando: `ls -a` ou `ls -l`. 
-Caso você queira usar dois argumentos você pode apenas escrever um em sequência do outro:`ls -al`
-
-Para obter inforações dos diversos argumentos de um comando, existe o argumento `--help` ou `-h`. O Terminal irá lhe mostrar todos os argumentos existentes para o determinado comando: `ls --help`.
-
 
 
 ### Removendo Arquivos e Diretórios
@@ -209,7 +200,7 @@ rm -r MeuDiretorio
 
 
 
-## 5. Movendo, Copiando e Renomeando Arquivos e Diretórios
+## Movendo, Copiando e Renomeando Arquivos e Diretórios
 
 
 ### Copiando Arquivos e Diretórios
@@ -274,7 +265,7 @@ mv caio.py ~/Documents/FariaLima/farialimer.py
 
 
 
-## 6. File Globbing - Caracteres Coringa
+## File Globbing - Caracteres Coringa
 
 ​	Os *Caracteres Coringa* auxiliam a filtrar arquivos e diretórios que possuem semlhanças nos nomes. Assim, você consegue mover, renomear, listar ou copiar uma série de arquivos de uma vez só se todos estes possuírem nomes ou formato semelhantes. Darei aqui exemplos usando o comando `ls` mas saiba que o mesmo pode ser aplicado ao `cp` , `mv` também.
 
@@ -345,6 +336,12 @@ Mas às vezes, o programa que você quer não está nos repositórios padrão. E
 2. Instalar usando um arquivo `.deb`. Esse caso é como instalar do `.exe` do Windows; basta rodar `apt install nome_do_programa.deb` que o gerenciador cuida do resto;
 3. Instalar a partir do código fonte (*source*). Você vai ter que compilar o programa do zero no seu computador, o que é bem mais complicado e demorado do que instalar as versões pré compiladas pelo `apt`. Cada programa vai ter instruções de instalação diferentes.
 
+<<<<<<< HEAD
+=======
+
+## Agrupando e Compactando Arquivos e Diretórios
+
+>>>>>>> General refactoring
 ### Conceitos
 
 ​	Antes de sair aprendendo comandos vamos entender conceitualmente a diferença entre **agrupar** e **compactar**.
@@ -430,10 +427,14 @@ tar czf exemplo.tgz *png
 ```
 
 
+<<<<<<< HEAD
 
 ## 8. Procurando Arquivos
 
 
+=======
+## Procurando Arquivos
+>>>>>>> General refactoring
 
 Para realizar a busca por um arquivo é usado o comando `find`. Logo após o comando é necessário dizer o diretório em que você irá realizar a busca. Em seguida existem várias opções de busca. Veremos aqui a mais usada que é filtrar por nome. Para isso é usada a flag `-name`.
 
@@ -461,27 +462,19 @@ locate .py
 
 ​	Já no exemplo acima estamos procurando por todo o qualquer arquivo `.py`
 
-​	Mas afinal, qual a diferença entre o `find` e o `locate`? O `find` faz uma varredura nos seus diretórios até achar o que você pediu. Assim, as coisas são atualizadas em tempo real. Se você criar um diretório novo o `find` irá buscar ele.
-​	 O locate é um pouco diferente. Ele faz uso de um **banco de dados interno** do seu computador. Esse banco de dados é atualizado toda vez que seu computador é inicializado. Assim, se você criar um diretório ele ainda não vai estar registrado nesse banco de dados e você não irá encontrá-lo com o `locate`. 
 
-Caso você queira, você pode atualizar na mão esse banco de dados. Apenas use o comando `updatedb`. Caso você apenas digite o comando irá perceber que deu erro. Isso é porque você não tem permissão para acessar esse comando. Vamos entender como isso funciona.
-
-### Permissões
-
-​	O seu sistema operacional te priva de executar alguns comandos como forma de te proteger de si mesmo. Isso porque você pode acidentalmente remover arquivos importantes ou instalar o que não deve. Lembra quando você executava arquivos como administrador no Windows? É algo próximo. 
-​	Mas como eu uso isso no Linux? Simples! Existe o comando mágico `sudo` (*Super User Do*). Assim conseguimos atualizar nosso banco de dados da seguinte maneira.
-
-**Exemplo:**
-
-```
-sudo updatedb
-```
-
-​	Perceba que sempre que você usar o `sudo` o Terminal irá pedir sua senha. 
-​	**Atenção:** Você ganha permissão pra fazer quase tudo no seu computador com o `sudo`. Portanto use com cuidado! Tome **muito** cuidado com o `sudo autoremove` e coisas do tipo.
+## Misc
 
 
+### .bashrc
 
-### Best argument ever
+​	Sempre que você abre uma janela de Terminal um *script* é executado com uma série de comandos. O nome dele é `.bashrc` e você pode acessá-lo usando um editor de texto. Tente usar o editor `nano` digitando no seu terminal `nano .bashrc`. Desca até o final, digite `echo Hello World!` e feche o `nano` com `CTRL + X`. Não se esqueça de salvar as alterações! Abra uma nova janela do Terminal e  divirta-se!
+
+### Links simbólicos (*symlinks*)
+
+
+`ln -s [endereço global do repositório] [endereço global do workspace]`
+
+#### Best argument ever
 
 `--help` ou `-h`, quando usado com qualquer comando te lista as possibilidades do comando e te ajuda a usá-lo.
