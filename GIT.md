@@ -36,15 +36,15 @@ Dentro de um repositório do Git, qualquer arquivo seu está em um de 5 estados:
 
 ![Os 5 estados de um arquivo no Git](./media/git.jpg)
 
-1. Não versionado (*untracked*)
+1. Não versionado (*untracked*)  
 Esses são os arquivos que não foram adicionados ao repositório ainda. É como se eles não existissem para o Git, então quase nenhum comando vai afetá-los;
-2. Versionado
+2. Versionado  
 Depois que você adiciona um arquivo ao seu repositório pela primeira vez, ele entra no seu *working directory*, e o Git começa a "ver" esse arquivo. Depois que você der o primeiro *commit* contendo esse arquivo, o Git vai conseguir guardar as modificações que ele sofre;
-3. Adicionado (*staged*)
+3. Adicionado (*staged*)  
 Aqui os arquivos estão na *staging area*. As modificações colocadas aqui vão ser adicionadas ao histórico do repositório no próximo *commit*;
-4. Em um *commit* local
+4. Em um *commit* local  
 Com um *commit*, você coloca as suas modificações adicionadas no histórico do repositório. É como se os seus arquivos na *staging area* estivessem escritos a lápis - você ainda pode reverter essas mudanças facilmente. Quando você realiza um *commit*, você escerve à caneta - fica um registro mais permanente do que você fez, mas ainda relativamente fácil de voltar atrás;
-5. Em um *commit* remoto
+5. Em um *commit* remoto  
 Se um commit local é escrever à caneta, um *commit* remoto é como gravar em uma pedra. Qualquer um com acesso ao repositório pode ver exatamente o que você fez, e isso fica registrado praticamente para sempre* ;
 
 (* é possível modificar um commit remoto, mas é extremamente não recomendado por causar vários problemas.)
