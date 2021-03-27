@@ -321,8 +321,29 @@ Output: Exemplo
 
 ​	Lembrando que existe diferença entre caracteres maiúsculos e minúsculos ainda que eles representem a mesma letra do alfabeto.
 
+
+## Instalando aplicativos
+
+No Windows, em que cada programa que você quer instalar precisa de um instalador específico, geralmente um `.exe`. Sistemas operacionais Linux, por outro lado, geralmente tem um gerenciador de pacotes, um servidor unificado do qual você pode instalar programas. Digas-se de passagem, a maior diferença entre distos de Linux é exatamente o gerenciador de pacotes.
+
+Sistemas baseados em Debian, como o Ubuntu, usam um *package manager* chamado `apt`, que é também um comando que você pode digitar no seu terminal. Ele tem vários subcomandos que de fato realizam as funções do `apt`. Os principais são:
+* `install <nome dos pacote>`: se estiver nos servidores, instala o programa especificado no seu computador. Antes de instalar, ele mostra as dependências (outros pacotes que você precisa para rodar aquele que quer) e o tamanho do download, além de pedir confirmação;
+* `remove <nome dos pacotes>`: deleta o pacote instalado do seu sistema;
+* `purge <nome dos pacotes>`: deleta o pacote e todos os arquivos de configuração associados a ele. **Este comando é muito perigoso**;
+* `update`: confere se no servidor existem atualizações para os pacotes instalados;
+* `upgrade`: de fato instala as atualizações nos pacotes instalados.
+
+Por exemplo, para instalar o `htop`, você digitaria: 
+```bash
+sudo apt install htop
+```
+
 ## 7. Agrupando e Compactando Arquivos e Diretórios
 
+Mas às vezes, o programa que você quer não está nos repositórios padrão. Existem 3 possibilidades de instalar nesses casos:
+1. Adicionar o repositório `apt` do programa ao seu sistema. Assim, você vai conseguir dar um `apt install` como em qualquer pacote em repositório padrão;
+2. Instalar usando um arquivo `.deb`. Esse caso é como instalar do `.exe` do Windows; basta rodar `apt install nome_do_programa.deb` que o gerenciador cuida do resto;
+3. Instalar a partir do código fonte (*source*). Você vai ter que compilar o programa do zero no seu computador, o que é bem mais complicado e demorado do que instalar as versões pré compiladas pelo `apt`. Cada programa vai ter instruções de instalação diferentes.
 
 ### Conceitos
 
