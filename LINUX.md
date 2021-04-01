@@ -79,8 +79,11 @@ Assim, quando você quiser executar um comando que reclame de falta de permissõ
 
 ### Por que o Ubuntu?
 
-TODO @soph
+Depois de descobrir que, no Ubuntu, você pode mudar tão facilmente as configurações ~~e até apagar tudo~~ do seu sistema, fica mais claro de ver as vantagens de usarmos o Ubuntu. 
 
+Primeiro, tem o fato de o sistema ser robusto, estável e personalizável. Quando se trabalha com desenvolvimento, precisamos de diversas configurações personalizadas para cada projeto, ou cada parte do projeto. 
+
+Outro ponto importante que faz com que desenvolver softwares no Ubuntu seja prático é a linha de comando. Vamos ver mais sobre isso, mas basicamente podemos dizer qualquer comando para o PC executar pelo terminal, em uma linguagem relativamente de fácil compreensão. Isso torna muito mais fácil fazer instalações, mudar configurações e, de modo geral, conversar com o seu computador diretamente. 
 
 Mas aí fica a pergunta: de que forma você manda o computador executar todos esses comandos que a gente citou? Como vamos ver a seguir, você usa um dos principais componentes do Linux para desenvolvedores, o **terminal**.
 
