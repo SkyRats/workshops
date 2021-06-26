@@ -1,0 +1,400 @@
+# Linux Basics
+
+## Conhecendo o sistema operacional
+
+A maior parte das pessoas (infelizmente) ainda usa rotineiramente sistemas operacionais (SOs) de códido fechado, como o Windows. Eles focam em criar uma experiência de usuário coesa ao custo de customização. Resumidamente, o SO faz tudo "por baixo dos panos". Como a filosofia de sistemas GNU-Linux é bem diferente, vamos falar brevemente sobre como ele gerencia arquivos e permissões.
+
+### O que é esse ext4?
+
+Durante a instalação do Ubuntu de vocês, provavelmente viram em alguns lugares escrito "partição ext4" ou algo do tipo. Isso se refere à forma como o seu computador organiza os arquivos no seu disco, e tem alguns aspectos que valem saber para quando (não se) voce tiver algum problema com o sistema.
+
+Você pode pensar no sistema de arquivos com uma analogia. Vamos imaginar que você quer organizar suas anotações de Cálculo 1; você tem duas formas principais: escrever em um caderno ou em um fichário. Desses dois jeitos, as folhas seguem uma ordem, permitindo que você as ache com facilidade. 
+
+Agora, o caderno e o fichário diferem de uma maneira importante: no caderno você só pode escrever de forma linear, então não dá para colocar uma folha do futuro entre duas folhas passadas; no fichário isso é bem simples. Então no caderno, as suas anotações podem ficar fragmentadas, dificultando a procura por uma anotação específica.
+
+Voltando para o computador: o sistema de arquivos do Windows é mais antigo, e é como um caderno na nossa analogia; o ext4 do Linux é como o fichário. Por isso que você não precisa desfragmentar o disco no Ubuntu, mas precisa no Windows.
+
+O ext4 também é mais "esperto" que o FAT32 ou o NTFS do Windows - ele possui ferramentas de autocorreção. É como se, no ext4, antes de escrever na folha à caneta, você escrevesse a lápis; se alguém esbarrar na sua mão, vai riscar a folha, mas você pode apagar depois. Esse "apagar depois" e "passar a limpo" estão emcapsulados no comando
+```bash
+fsck.ext4 /dev/sda1/ -y
+```
+
+### Caminhos
+
+​Para se referir a diretórios dentro de diretórios podemos adicionar uma barra `/` e escrever o nome do próximo diretório em seguida:
+```
+/home/user/Documents/poli/skyrats
+```
+
+### Permissões
+
+Agora que já sabemos um pouco mais sobre como os arquivos são organizados em um sistema Linux, vamos falar de quem pode acessar o quê.
+
+Em um sistema Linux, tudo é um arquivo ou um diretório, o que pode parecer estranho à primeira vista. Sua webcam, mouse, disco rídigo, antena WiFi, pendrive, todos existem no seu sistema na forma de arquivo ou diretório. Por isso que é muito importante controlar o acesso a certas pastas e arquivos: se qualquer usuário tivesse acesso, poderia gerar caos no seu PC.
+
+Uma forma bem simples de ver as permissões associadas aos itens do seu diretório atual é usando o comando `ls -l`. Você vai perceber que aparecer várias letras antes do nome de cada arquivo:
+```bash
+$ ls -l
+total 52
+-rw-r--r-- 1 owner group  5439 mar 20 11:49 GIT-en.md
+-rw-rw-r-- 1 owner group 15186 mar 25 19:22 GIT.md
+-rw-rw-r-- 1 owner group 22121 mar 27 14:50 LINUX.md
+drwxr-xr-x 2 owner group  4096 mar 24 17:51 media
+```
+
+Todo arquivo e diretório tem 12 letras associadas a ele. São 3 grupos de 4 letras, que podem conter:
+* `d`: Se presente, indica que é diretório; senão, arquivo;
+* `r`: Permissão de ler;
+* `w`: Permissão de escrever, ou seja, modificar o conteúdo;
+* `x`: Permissão de executar (só é importante se o arquivo for um programa);
+* `-`: Indica que a permissão não foi concedida para esse grupo.
+
+Não vamos abordar o significado dos grupos aqui. Mas é importante saber que você pode modificar as permissões associadas a um arquivo usando o comando `chmod`:
+```bash
+$ ls -l
+-rw-rw-r--  1 owner group     0 mar 27 15:01 test.txt
+$ chmod -777 test.txt
+$ ls -l
+----------  1 owner group     0 mar 27 15:01 test.txt
+$ chmod +777 test.txt
+$ ls -l
+-rwxrwxrwx  1 owner group     0 mar 27 15:01 test.txt*
+```
+
+#### *root*: o administrador do Linux
+
+No Winodws, quando você vai instalar um programa ou mexer com uma configuração de sistema, o seu computador pede permissão de uma conta de "administrador". Isso impede que qualquer pessoa, ou até mesmo um vírus, destrua o seu computador acidentalmente. No Linux, o mesmo conteito existe na forma do *super user*, também chamado de *root*; esse usuário tem permisão de relizar qualuqer operação no seu sistema, alterando arquivos criados por qualquer outro usuário, além de ser o único que pode mexer nos diretórios que contém arquivos de sistema.
+
+À primeira vista, o "administrador" e o *root* não diferem tanto assim. Mas o usuário *root* é especial porque ele possui poderes muito menos restritos que a sua contrapartida no Windows.
+
+Como eu disse, ele pode realizar **qualquer** operação. Ele pode, entre outras coisas, apagar todos os arquivos do seu computador, formatar uma partição no seu disco... em suma, transformar o seu computador em um tijolo. Por isso, nunca é recomandado operar como *root*.
+
+Agora, se você quiser editar arquivos do sistema ou instalar aplicativos, você pode rodar comandos específicos como *root* usando o comando `sudo`. Ele executa só o comando especificado como *root* e volta para o seu usuário. Por exemplo, para apagar um arquivo protegido, você faria:
+```bash
+$ sudo rm protected_file.txt
+[sudo] password for user:
+```
+
+Assim, quando você quiser executar um comando que reclame de falta de permissões, **e souber o que você está fazendo**, você deve rodar `sudo <comando>`.
+
+### Por que o Ubuntu?
+
+Depois de descobrir que, no Ubuntu, você pode mudar tão facilmente as configurações ~~e até apagar tudo~~ do seu sistema, fica mais claro de ver as vantagens de usarmos o Ubuntu. 
+
+Primeiro, tem o fato de o sistema ser robusto, estável e personalizável. Quando se trabalha com desenvolvimento, precisamos de diversas configurações personalizadas para cada projeto, ou cada parte do projeto. 
+
+Outro ponto importante que faz com que desenvolver softwares no Ubuntu seja prático é a linha de comando. Vamos ver mais sobre isso, mas basicamente podemos dizer qualquer comando para o PC executar pelo terminal, em uma linguagem relativamente de fácil compreensão. Isso torna muito mais fácil fazer instalações, mudar configurações e, de modo geral, conversar com o seu computador diretamente. 
+
+Mas aí fica a pergunta: de que forma você manda o computador executar todos esses comandos que a gente citou? Como vamos ver a seguir, você usa um dos principais componentes do Linux para desenvolvedores, o **terminal**.
+
+
+## Introdução ao Terminal
+
+### O que é?
+
+​O Terminal é uma interface não gráfica que aceita comandos digitados e os usa para realizar determinadas tarefas. Parece complicado de inicio, mas estou aqui pra te ajudar a entender como ele funciona e te mostrar que é bem simples.
+
+### Como abrir o Terminal?
+
+​Você pode buscar por ele na barra de busca, ou usar o atalho `CTRL + ALT + T`. Este atalho irá abrir uma nova janela com o terminal. Se você já tiver uma janela aberta tente usar o `CTRL + SHIFT + T` para abrir uma nova subjanela.
+
+### Argumentos de linha de comando
+
+​Alguns comandos do terminal possuem **argumentos**. Estes afetam o comando em questão de diversas maneiras. eles são escritos após o comando, seguido de um `-`. 
+
+​**Exemplo:** O comando `ls` possui diversos argumentos possíveis de serem usados como `-a` (*all*) e `-l`.  O argumento `-a` faz com que o Terminal liste, além dos dados já listados, arquivos ocultos enquanto o argumento `-l` mostra dados de permissão dos arquivos, tamanho dos arquivos entre outras informações. Para a sintaxe apenas digite o argumento ao lado do comando: `ls -a` ou `ls -l`. 
+Caso você queira usar dois argumentos você pode apenas escrever um em sequência do outro:`ls -al`
+
+Para obter inforações dos diversos argumentos de um comando, existe o argumento `--help` ou `-h`. O Terminal irá lhe mostrar todos os argumentos existentes para o determinado comando: `ls --help`.
+
+
+## Comandos de Navegação
+
+​O principal comando para mudança de diretório é o `cd` (*Change Directory*). Para navegar entre os diretórios é necessário respeitar a ordem de hierarquia. Assim, seguindo o exemplo acima, se estivermos no diretório `/home/Documents`  e quisermos ir para o diretório `/home/Documents/poli/skyrats`  temos que digitar:
+```bash
+cd poli
+cd skyrats
+```
+
+​Ou então podemos passar o endereço em apenas uma linha:
+```bash
+cd poli/skyrats
+```
+
+​Em ambos os casos acima o resultado é o mesmo.
+
+​Mas e se estivermos no diretório `/home/Documents/poli/skyrats` e quisermos voltar para o diretório `/home/Documents` ? Para "subir" na hierarquia, ou seja, voltar nos diretórios usamos o `cd ..`.
+```bash
+cd ..
+cd ..
+```
+
+​Podemos também dar o endereço em uma linha assim como no caso anterior:
+```bash
+cd ../..
+```
+
+### Dicas de Navegação
+
+* O comando  `ls` (*list*) lista arquivos e diretórios existentes no diretório em que você se encontra. Use com frequência para se localizar em qual diretório você precisa entrar ou qual arquivo acessar;
+
+* A tecla [*TAB*] completa o que você está escrevendo. Assim, se você já tiver escrito `Docu` e apertar a tecla [*TAB*] o Terminal irá completar para `Documents` para você;
+
+  * **Nota:** Para que o [*TAB*] funcione é necessário que exista algum arquivo ou diretório com o nome que você deseja dentro do seu diretório atual. O comando não adivinha o que você quer;
+
+* O diretório `/home` pode ser chamado de `~/`. Assim, estes dois exemplos são equivalentes:
+  ```
+  /home/user/Documents/poli/skyrats
+  ~/Documents/poli/skyrats
+  ```
+
+* Digitar apenas `cd` no terminal irá te levar até a sua `/home`;
+
+
+## Criando e Removendo Arquivos e Diretórios
+
+### Criando Diretórios
+
+Para criar diretórios é usado o comando `mkdir` (*make directory*):
+```bash
+mkdir MeuDiretorio
+```
+
+​Assim, é criado um novo diretório chamado MeuDiretorio dentro do diretório em que você está localizado.
+
+### Removendo Arquivos e Diretórios
+
+Para remover um arquivo usamos o comando `rm` (*remove*) e logo em seguida o nome do arquivo que queremos apagar:
+```bash
+rm meuArquivo.pdf
+```
+
+Para remover diretórios usamos o comando `rm` junto com o argumento `-r` (*recursive*) e em seguida o nome do diretório a ser removido:
+```bash
+rm -r MeuDiretorio
+```
+
+​**Atenção:** Após remover um diretório com `rm -r` você apagará todos os arquivos que ele contém para sempre, portanto use o comando com cuidado!
+
+
+## Movendo, Copiando e Renomeando Arquivos e Diretórios
+
+### Copiando Arquivos e Diretórios
+
+Para copiar um arquivo é usado o comando `cp` (*copy*). Esse comando recebe como primeiro argumento o nome do arquivo que será copiado e, como segundo argumento, o nome que queremos dar à sua cópia:
+```bash
+# copia o arquivo1 para um novo arquivo de nome arquivo2
+cp arquivo1 arquivo2
+```
+
+Ambos os arquivos estarão no diretório em que você está localizado. Para copiar um arquivo para outro diretório devemos dar o caminho, além do nome.
+```bash
+cp arquivo1 ~/Documents/arquivo2
+```
+
+​Acima o `arquivo1` foi copiado para o diretório `Documents` e renomeado como `arquivo2`.  Da mesma forma podemos copiar um arquivo de outro diretório para o diretório atual ou até mesmo copiar um arquivo de um diretório qualquer para outro diretório qualquer, basta apenas dar o caminho antes do nome do arquivo. Toda a teoria de caminhos se aplica aqui.
+
+​O comando `cp` apenas consegue copiar arquivos. Assim como no comando `rm`, para copiar um diretório é necessário usar o argumento `-r` (*recursive*)`:
+```bash
+cp -r dir1 dir2
+```
+
+### Movendo e Renomeando Arquivos e Diretórios
+
+​De maneira análoga ao `cp` aqui iremos usar o `mv` (*move*). Esse comando recebe no primeiro argumento o nome do arquivo que será movido e, como segundo argumento, o caminho de destino desse arquivo:
+```bash
+mv caio.py ~/Documents/FariaLima
+```
+
+​Aqui estamos movendo o arquivo `caio.py` para o diretório `FariaLima`.
+
+​O terminal não possui um comando específico para renomear. Para realizar essa função usamos o próprio comando `mv` pois sempre que você move um arquivo/diretório você tem a opção de **renomear** ele (igual no comando`cp`). Imagine que estamos movendo um arquivo de um diretório para o mesmo diretório mas no processo estamos mudando o nome dele:
+```bash
+mv caio.py farialimer.py
+```
+
+​No exemplo acima estamos renomeando o arquivo `caio.py` para `farialimer.py`. O que estamos fazendo de fato é mover o arquivo para o mesmo diretório em que estamos, mas no processo mudamos o nome dele.
+
+​Se quisermos mover para outro diretório, mas mudar o nome no processo é só dar o caminho do diretório de destino:
+```bash
+mv caio.py ~/Documents/FariaLima/farialimer.py
+```
+
+**Dica:** para os comandos `cp`, `mv`, `rm` é recomendado usar o argumento `-v` (*verbose*). Ele mostra no seu terminal o que foi feito (qual arquivo foi copiado, movido e para onde ele foi), assim você consegue ter maior certeza e segurança no que você está fazendo.
+
+
+## File Globbing - Caracteres Coringa
+
+​Os caracteres coringa auxiliam a filtrar arquivos e diretórios que possuem semlhanças nos nomes. Assim, você consegue mover, renomear, listar ou copiar uma série de arquivos de uma vez só se todos estes possuírem nomes ou formato semelhantes. Nos próximos exemplos, usamos o comando `ls`, mas é importante notar que os caracteres coringa podem ser usados com qualquer comando do terminal.
+
+​Imagine que temos um diretório com os seguintes arquivos:
+
+```
+exemplo12
+Exemplo
+Exemplo1
+Exemplo2
+Exemplo231
+Exemplo3
+arquivo12
+arquivo123
+Arquivo100
+Arquivo5
+```
+
+​O principal caracter coringa que usamos é o `*`. Tente ler esse caracter como "qualquer coisa". 
+
+Se usamos ele no começo, tudo que está depois dele é obrigatoriamente considerado, sem importar o que vem antes. Nesse caso, ele faria referência a arquivos ou diretórios com o mesmo final:
+```bash
+$ ls *12
+exemplo12
+arquivo12
+```
+Aqui estão listados arquivos que possuem qualquer coisa no começo, mas terminam com "12".
+
+Se usamos o caracter no final, ele fará referência a arquivos ou diretórios com o mesmo começo:
+```bash
+$ ls Exemplo*
+Exemplo
+Exemplo1
+Exemplo23
+```
+
+​Aqui estão sendo listados todos os arquivos que começam com "Exemplo" e possuem qualquer coisa depois.
+
+​Lembrando que existe diferença entre caracteres maiúsculos e minúsculos ainda que eles representem a mesma letra do alfabeto.
+
+
+## Instalando aplicativos
+
+No Windows, em que cada programa que você quer instalar precisa de um instalador específico, geralmente um `.exe`. Sistemas operacionais Linux, por outro lado, geralmente tem um gerenciador de pacotes, um servidor unificado do qual você pode instalar programas. Digas-se de passagem, a maior diferença entre distos de Linux é exatamente o gerenciador de pacotes.
+
+Sistemas baseados em Debian, como o Ubuntu, usam um *package manager* chamado `apt`, que é também um comando que você pode digitar no seu terminal. Ele tem vários subcomandos que de fato realizam as funções do `apt`. Os principais são:
+* `install <nome dos pacote>`: se estiver nos servidores, instala o programa especificado no seu computador. Antes de instalar, ele mostra as dependências (outros pacotes que você precisa para rodar aquele que quer) e o tamanho do download, além de pedir confirmação;
+* `remove <nome dos pacotes>`: deleta o pacote instalado do seu sistema;
+* `purge <nome dos pacotes>`: deleta o pacote e todos os arquivos de configuração associados a ele. **Este comando é muito perigoso**;
+* `update`: confere se no servidor existem atualizações para os pacotes instalados;
+* `upgrade`: de fato instala as atualizações nos pacotes instalados.
+
+Por exemplo, para instalar o `htop`, você digitaria: 
+```bash
+sudo apt install htop
+```
+
+Mas às vezes, o programa que você quer não está nos repositórios padrão. Existem 3 possibilidades de instalar nesses casos:
+1. Adicionar o repositório `apt` do programa ao seu sistema. Assim, você vai conseguir dar um `apt install` como em qualquer pacote em repositório padrão;
+2. Instalar usando um arquivo `.deb`. Esse caso é como instalar do `.exe` do Windows; basta rodar `apt install nome_do_programa.deb` que o gerenciador cuida do resto;
+3. Instalar a partir do código fonte (*source*). Você vai ter que compilar o programa do zero no seu computador, o que é bem mais complicado e demorado do que instalar as versões pré compiladas pelo `apt`. Cada programa vai ter instruções de instalação diferentes.
+
+
+## Agrupando e Compactando Arquivos e Diretórios
+
+### Conceitos
+
+​Antes de sair aprendendo comandos vamos entender conceitualmente a diferença entre **agrupar** e **compactar**.
+
+* **Agrupar**  - Quando agrupamos uma série de arquivos nós geramos um novo arquivo que contém todos os arquivos que agrupamos. Assim o **tamanho** do arquivo gerado será a **soma** dos tamanhos de todos os arquivos agrupados.
+* **Compactar** - Quando compactamos uma série de arquivos estamos gerando um novo arquivo que contém todos os arquivos compactados, assim como quando agrupamos, mas eles serão comprimidos, de maneira a deixar o tamanho do arquivo gerado menor que quando agrupado. É importante ressaltar que existem diversos tipos de algoritmos diferentes para compactação. Aqui iremos trabalhar o GZip.
+
+### Agrupando
+
+Quando se quer fazer uso de algum documento dentro de algum arquivo agrupado ou compactado deve-se extrair esse arquivo. 
+
+Para agrupar é usado o comando `tar` (*tape archive*), mas é necessário passar algumas informações ao terminal para usar esse comando. Vamos dar uma olhada em como funciona a sintaxe e vou explicando com mais calma o que cada coisa significa:
+
+```
+tar [o_que_deseja_fazer]f [nome_do_arquivo_a_ser_criado].tar [arquivos_a_serem_agrupados] 
+```
+
+Parece muita coisa, mas é bem mais tranquilo do que parece. Antes de mais nada saiba que aqui os colchetes `[]` estão apenas indicando o espaço onde vão os comandos. Eles não fazem parte do comando em si. Dito isso vamos por partes:
+
+* o_que_deseja_fazer: Aqui você vai ter algumas opções, mas só vamos trabalhar duas delas:
+  * `c` (*create*): Usado para criar um arquivo agrupado;
+  * `x` (*extract*): Usado para extrair um arquivo agrupado ja criado;
+
+* `f` (*file*): o **último** argumento deve ser`f`, seguido do nome do arquivo. É obrigatório;
+* `.tar`: todo arquivo agrupado pelo comando `tar` é de extensão `.tar`, então tem que ter no final do nome do arquivo criado;
+
+Por exemplo, para agrupar as imagens `.png` em um arquivo `exemplo1.tar`, digitamos:  
+```bash
+tar cf exemplo1.tar *.png
+```
+Os conceitos de caracteres coringa podem ser úteis pra filtrar os arquivos que você quer agrupar.
+
+Para extrair os arquivos no diretório atual, digite:
+```bash
+tar xf exemplo1.tar
+```
+
+Podemos dar um caminho no final para extrair em outro diretório. Para isso, passamos o diretório com a *flag* `-C`: 
+```bash
+tar xf exemplo1.tar -C ~/Documents/ExtractedFiles
+```
+
+Ou até mesmo extrair arquivos específicos:
+```bash
+tar xf exemplo1.tar foto1.png
+```
+
+### Compactando
+
+Para compactar, usamos o comando `gzip` com o argumento `-k` (*keep*)  e escrevemos o nome do arquivo/diretório que queremos compactar. Seu arquivo compactado terá duas extensões sendo uma a original do arquivo e uma `.gz`:
+```bash
+gzip -k foto1.png
+```
+
+​Usamos o `-k`  para criar um backup do nosso arquivo original. Caso não usemos ele o gzip irá sobreescrever o arquivo original. É muito mais seguro mantermos uma cópia do original, copiarmos ele e compactarmos a cópia.
+
+​Para descompactar o processo é o mesmo mas é usado o comando `gunzip`:
+```bash
+gunzip *.gz
+```
+
+Você pode descompactar um arquivo específico ou uma série de arquivos que você filtrar assim como com o comando `tar`.
+
+​Você pode ainda agrupar e compactar arquivos num comando só. Para isso usamos o `tar` de maneira semelhante ao agrupamento mas acrescentamos um `z`(*zip*) e alteramos a extensão para `.tar.gz` ou`.tgz`:
+```bash
+tar czf exemplo.tgz *.png
+# Equivalente a tar czf exemplo.tar.gz *.png
+```
+
+
+## Procurando Arquivos
+
+Para realizar a busca por um arquivo é usado o comando `find`. Logo após o comando é necessário dizer o diretório em que você irá realizar a busca. Em seguida existem várias opções de busca. Veremos aqui a mais usada que é filtrar por nome. Para isso é usada a flag `-name`:
+```bash
+find ~/Documents -name colombini.py
+```
+
+​Estamos realizando uma busca por um arquivo chamado `colombini.py` no diretório `Documents`. Tente sempre ser o mais preciso no diretório de busca. Apesar de você poder procurar por um arquivo desde a `root` sua pesquisa pode ser mais demorada e com maior gasto computacional. 
+
+​Outra ferramenta que temos para realizar buscar é o `locate`. Apenas digite o comando e o arquivo/diretório que deseja buscar:
+```bash
+locate colombini.py
+```
+
+​Aqui estamos procurando em todos os lugares do computador pelo arquivo `colombini.py`
+
+​Já no exemplo abaixo, estamos procurando por qualquer arquivo `.py`
+```bash
+locate .py
+```
+
+​	Mas afinal, qual a diferença entre o `find` e o `locate`? O `find` faz uma varredura nos seus diretórios até achar o que você pediu. Assim, as coisas são atualizadas em tempo real. Se você criar um diretório novo o `find` irá buscar ele.
+​	 O `locate` é um pouco diferente. Ele faz uso de um **banco de dados interno** do seu computador. Esse banco de dados é atualizado toda vez que seu computador é inicializado. Assim, se você criar um diretório ele ainda não vai estar registrado nesse banco de dados e você não irá encontrá-lo com o `locate`, a menos que reinicie o computador.
+
+Caso você queira, você pode atualizar na mão esse banco de dados. Apenas use o comando `updatedb`. Caso você apenas digite o comando irá perceber que deu erro. Isso é porque você não tem permissão para acessar esse comando, mas pode fazê-lo com o `sudo`. 
+
+## Misc
+
+### .bashrc
+
+​Sempre que você abre uma janela de Terminal um *script* é executado com uma série de comandos. O nome dele é `.bashrc` e você pode acessá-lo usando um editor de texto. Tente usar o editor `nano` digitando no seu terminal `nano .bashrc`. Desca até o final, digite `echo Hello World!` e feche o `nano` com `CTRL + X`. Não se esqueça de salvar as alterações! Abra uma nova janela do Terminal e  divirta-se!
+
+### Links simbólicos (*symlinks*)
+
+`ln -s [endereço global do repositório] [endereço global do workspace]`
+
+### Best argument ever
+
+`--help` ou `-h`, quando usado com qualquer comando te lista as possibilidades do comando e te ajuda a usá-lo.
