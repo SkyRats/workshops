@@ -463,7 +463,7 @@ ros2 action send_goal /turtle1/rotate_absolute turtlesim/action/RotateAbsolute "
 
 Isso fará a tartaruga girar e também, em seu terminal, aparecerá informações sobre o processamento da action, para ver todos os feedbacks durante o processo, rode:
 
-````
+```
 ros2 action send_goal /turtle1/rotate_absolute turtlesim/action/RotateAbsolute "{theta: -1.57}" --feedback
 ```
 
