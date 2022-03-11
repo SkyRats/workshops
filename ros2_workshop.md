@@ -468,10 +468,3 @@ ros2 action send_goal /turtle1/rotate_absolute turtlesim/action/RotateAbsolute "
 ```
 
 E com isso terminamos o básico sobre **nodes, topics, services, parameters e action**. Não esqueça de matar os programas rodando com o `CTRL+C`.
-
-
-
-
-
-
-
