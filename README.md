@@ -471,143 +471,143 @@ E com isso terminamos o básico sobre **nodes, topics, services, parameters e ac
 
 ### Rqt Console
 
-Já falamos brevemente sobre ‘rqt_console’ quando apresentamos ros2 através do ‘/turtlesim’, agora vamos ver um pouco mais do que ela é capaz. 
+Já falamos brevemente sobre `rqt_console` quando apresentamos ros2 através do `/turtlesim`, agora vamos ver um pouco mais do que ela é capaz. 
 
 #### Setup	
-Inicialize um um novo ‘rqt_console’ com o comando:
+Inicialize um um novo `rqt_console` com o comando:
 
-‘’’
+```
 ros2 run rqt_console rqt_console
-‘’’
+```
 
 A primeira seção do console é onde as mensagens de log aparecem no display. Na do meio é possível filtrar mensagens ao excluir níveis que você não quer ver no momento. A última é uma área de mensagens destacadas, inclusive strings colocadas por você, além dela também permitir adição de filtros. 
 
-Inicialize o ‘/turtlesim’:
-‘’’
+Inicialize o `/turtlesim`:
+```
 ros2 run turtlesim turtlesim_node
-‘’’
+```
 
 #### Menssages no rqt_console	
 
 Para ver algumas mensagens, rode o topic para a tartaruga andar em direção e bater na parede:
 
-‘’’
+```
 ros2 topic pub -r 1 /turtle1/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}"
-‘’’
+```
 
-Como o topic é postado constantemente, ela continuará andando ao chegar na parede e no console aparecerá um *warn* diversas vezes. De um ‘Ctrl+c’ no terminal do topic para fechá-lo.
+Como o topic é postado constantemente, ela continuará andando ao chegar na parede e no console aparecerá um *warn* diversas vezes. De um `Ctrl+c` no terminal do topic para fechá-lo.
 
 #### Níveis de log 	
 
 Logger levels são separados por severidade:
 
-‘’’
+```
 Fatal
 Error
 Warn
 Info
 Debug
-‘’’
+```
  
 geralmente, elas significam:
 
-‘Fatal’ o sistema terminara para tentar se proteger
+`Fatal` o sistema terminara para tentar se proteger
 
-‘Error’ indicam problemas que não vão obrigatoriamente danificar o sistema, mas ele não funcionará corretamente  
+`Error` indicam problemas que não vão obrigatoriamente danificar o sistema, mas ele não funcionará corretamente  
 
-‘Warn’ mostram atividade inesperadas ou não ideias no sistema, porem nao danificam a funcionalidade do programa
+`Warn` mostram atividade inesperadas ou não ideias no sistema, porem nao danificam a funcionalidade do programa
 
-‘Info’ dão atualizações do programa para mostrar de forma visual que tudo está correndo como o esperado
+`Info` dão atualizações do programa para mostrar de forma visual que tudo está correndo como o esperado
 
-‘Debug’ detalham o passo a passo da execução do sistema 
+`Debug` detalham o passo a passo da execução do sistema 
 
 Você pode filtrar quais desses níveis de mensagens gostaria de ver.
 
 #### Escolher o nível do log desejado	
 
-Você pode settar o nível do log ao começar um ‘/turtlesim’ através do comando:
+Você pode settar o nível do log ao começar um `/turtlesim` através do comando:
 
-‘’’
+```
 ros2 run turtlesim turtlesim_node --ros-args --log-level WARN
-‘’’
+```
 
 Assim, apenas warns ou superiores aparecem na tela. 
 
 
 ### Salvando e rodando dados
 
-Através do ‘ros2 bag’ é possível salvar dados publicados em topics do sistema. Isso permite refazer testes de forma rápida e certeira, além de facilitar o compartilhamento de trabalhos feitos.
+Através do `ros2 bag` é possível salvar dados publicados em topics do sistema. Isso permite refazer testes de forma rápida e certeira, além de facilitar o compartilhamento de trabalhos feitos.
 
 #### Pré Requisitos 
 
-Se seu computador não reconhecer ‘ros2 bag’, instale-o com o comando:
+Se seu computador não reconhecer `ros2 bag`, instale-o com o comando:
 
-‘’’
+```
 sudo apt-get install ros-galactic-ros2bag \
                      ros-galactic-rosbag2-storage-default-plugins
-‘’’
+```
 
 #### Setup
 
-Vamos salvar algumas entradas do teclado feitas no ‘/turtlesim’, para isso rode em termiais diferentes:
+Vamos salvar algumas entradas do teclado feitas no `/turtlesim`, para isso rode em termiais diferentes:
 
-‘’’
+```
 ros2 run turtlesim turtlesim_node
-‘’’
+```
 
-‘’’
+```
 ros2 run turtlesim turtle_teleop_key
-‘’’
+```
 
 Além disso, crie um diretório para salvar as mensagens: 
 
-‘’’
+```
 mkdir bag_files
 cd bag_files
-‘’’
+```
 
 #### Escolha um topic
 
 Rode um topic já visto antes:
 
-‘’’
+```
 ros2 topic echo /turtle1/cmd_vel
-‘’’
+```
 
 Ele publica dados de quando a tartaruga se movimenta, assim, vá para o terminal de controle da tartaruga, movimente-a e veja as publicações.
 
 #### gravação com ros2 bag
 
-Para salvar os dados de um topic, a estrutura é ‘ros2 bag record <topic_name>’. Para não salvar em qualquer lugar, entre no diretório ‘bag_giles’ e rode:
+Para salvar os dados de um topic, a estrutura é `ros2 bag record <topic_name>`. Para não salvar em qualquer lugar, entre no diretório `bag_giles` e rode:
 
-‘’’
+```
 ros2 bag record /turtle1/cmd_vel
-‘’’
+```
 
-Agora informações do cmd vel serão salvas no ‘bag_files’. Vá para o ‘/turtle_teleop’ e movimente a tartaruga em um padrão reconhecível posteriormente. Quando quiser parar de salvar, dê 'Ctrl+c' no terminal do ‘ros2 bag’. O documento salvo terá a estrutura ‘rosbag2_year_month_day-hour_minute_second’.
+Agora informações do cmd vel serão salvas no `bag_files`. Vá para o `/turtle_teleop` e movimente a tartaruga em um padrão reconhecível posteriormente. Quando quiser parar de salvar, dê 'Ctrl+c' no terminal do `ros2 bag`. O documento salvo terá a estrutura `rosbag2_year_month_day-hour_minute_second`.
 
 #### gravação de vários topics
 
 É possível salvar vários topics e também mudar o nome do arquivo salvo, para isso:
 
-‘’’
+```
 ros2 bag record -o skyTest /turtle1/cmd_vel /turtle1/pose
-‘’’
+```
 
-O ‘-o’ permite escolher o nome do arquivo, nesse caso ‘skyTest’. Para salvar mais de um topic basta lista-los, separando-os por um espaço. Mova a tartaruga e depois dê 'Ctrl+c' no terminal do ‘ros2 bag’ para finalizar. 
+O `-o` permite escolher o nome do arquivo, nesse caso `skyTest`. Para salvar mais de um topic basta lista-los, separando-os por um espaço. Mova a tartaruga e depois dê 'Ctrl+c' no terminal do `ros2 bag` para finalizar. 
 
-**Nota**: o comando ‘-a’ salvará todos os topics do sistema
+**Nota**: o comando `-a` salvará todos os topics do sistema
 
 #### Rodando ros2 bag
 
-Antes de rodar, de ‘Cntrl+c’ no terminal do ‘/turtle_teleop’. Então, rode: 
+Antes de rodar, de `Cntrl+c` no terminal do `/turtle_teleop`. Então, rode: 
 
-‘’’
+```
 ros2 bag play skyTest
-‘’’
+```
 
-A tartaruga irá reproduzir o movimento com no máximo pequenas oscilações. Como o ‘skyTest’ salvou o ‘/turtle1/pose’, o comando continuará rodando mesmo com a tartaruga parada. Enquanto o ‘/turtle1/cmf_vel’ foi salvo poucas vezes (numero de teclas pressionadas), o ‘/turtle1/pose’ foi salvo muitas vezes mais, para ter uma noção de quantas publicações são feitas por tempo, rode:
+A tartaruga irá reproduzir o movimento com no máximo pequenas oscilações. Como o `skyTest` salvou o `/turtle1/pose`, o comando continuará rodando mesmo com a tartaruga parada. Enquanto o `/turtle1/cmf_vel` foi salvo poucas vezes (numero de teclas pressionadas), o `/turtle1/pose` foi salvo muitas vezes mais, para ter uma noção de quantas publicações são feitas por tempo, rode:
 
-‘’’
+```
 ros2 topic hz /turtle1/pose
-‘’’
+```
