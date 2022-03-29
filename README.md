@@ -611,3 +611,83 @@ A tartaruga irá reproduzir o movimento com no máximo pequenas oscilações. Co
 ```
 ros2 topic hz /turtle1/pose
 ```
+
+##  Criando um worskpace
+
+
+Lembre-se de dar um "source" na sua instalação caso não tenha adicionado o comando ao bash (que é o mais indicado).
+O workspace é um diretório contendo pacotes de ROS2, iremos aprender a criar um aqui para exemplificação. É boa prática criar um diretório novo destinado a cada novo workspace. Assim, crie o seu workspace entitulado "workspace de desenvolvimento":
+```
+mkdir -p ~/dev_ws/src
+cd ~/dev_ws/src
+```
+
+**Obs**: É boa prática criar quaisquer pacotes em seu worspace de ROS 2 já dentro da pasta `src`, assim os comandos acima já criam esta pasta e navegam para ela.
+
+### Sobre underlays e overlays
+É possível criar junto à sua instalação um "overlay" - um segundo workspace no qual você pode adicionar pacotes e fazer alterações sem interferir com o worskpace base, ou underlay. Como faz o papel de base, o underlay deve conter as depenências de todos os pacotes criados no overlay. O overlay tem preferência sobre o underlay, no sentido de que seus pacotes irão se sobrepor aos do underlay.
+
+### Clonando um repositório amostral
+A medida que desenvolver as suas habilidades em ROS2,você criará os seus próprios pacotes. Como uma primeira vez, você vai montar o seu workspace usando pacotes já existentes, do repositório `ros_tutorials` (que contém, por exemplo, o pacote `turtlesim`) no GitHub. Dentro de `dev_ws/src`, rode o seguinte comando (após a flag -b vc deve adicionar a **branch correspondente à sua versão do ROS 2**):
+
+```
+git clone https://github.com/ros/ros_tutorials.git -b galactic-devel
+```
+Embora seu seu workspace contenha agora o respositório amostral, ele ainda não está completamente funcional. Você deve resolver dependências e buildar o seu repositório primeiro.
+
+### Resolvendo dependências 
+É importante verificar as dependências sempre que for clonar algum pacote, para se ter certeza que o seu build não falhará. Retorne à root do seu workspace (`cd ..`) e rode:
+
+```
+rosdep install -i --from-path src --rosdistro galactic -y
+```
+Caso esteja tudo certo com as dependência, seu terminal retornará:
+```
+#All required rosdeps installed successfully
+```
+### Buildando seu workspace com colcon
+Ainda na root (`dev_ws`), você pode agora buildar seus pacotes:
+```
+colcon build
+```
+Seu terminal deve retornar:
+
+```
+Starting >>> turtlesim
+Finished <<< turtlesim [5.49s]
+
+Summary: 1 package finished [5.58s]
+
+```
+Se você der um `ls` na root do seu workspace verá os seguintes diretórios, criados pelo `colcon`:
+
+```
+build  install  log  src
+
+```
+### Dando source no overlay
+
+Abra um novo terminal. Você construirá seu overlay por cima do underlay, por isso se não tiver adicionado o comando ao seu bash dê source no seu ambiente principal no ROS2 - o overlay. 
+```
+source /opt/ros/galactic/setup.bash
+```
+Agora retorne a root de seu workspace e dê source no overlay:
+```
+cd ~/dev_ws
+. install/local_setup.bash
+```
+
+Se você rodasse `ros2 run turtlesim turtlesim_node` nesse mesmo terminal, estaria rodando o pacote turtlesim **no overlay**.
+
+Para exemplificar isso e o que foi dito em **Sobre underlays e overlays** , vamos alterar o overlay.
+
+### Modificando o overlay
+Você pode mudar o texto que aparece na barra de título da janela do turtlesim. Para isso, abra o arquivo `turtle_frame.cpp` em `~/dev_ws/src/ros_tutorials/turtlesim/src`. Na linha 22 há a função `setWindowTitle("TurtleSim")`, altere `"TurtleSim"` para outro título (por exemplo, `"MyTurtleSim"`) e salve o arquivo. Dê `colcon build` no mesmo terminal em que fez isso pela primeira vez, e no terminal onde você deu source no overlay, rode o turtlesim novamente:
+
+```
+ros2 run turtlesim turtlesim_node
+```
+Você deve ver agora a janela com o título "MyTurtleSim": embora você tenha dado source em ambos underlay e overlay neste terminal, o último possui precedência.
+
+E para ver que a alteração feita no turtlesim do overlay não interferiu com o pacote no underlay, abre um novo terminal e rode `turtlesim_node` novamente. Você deve ver o título usual na janela dessa vez.
+
