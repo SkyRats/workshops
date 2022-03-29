@@ -612,11 +612,11 @@ A tartaruga irá reproduzir o movimento com no máximo pequenas oscilações. Co
 ros2 topic hz /turtle1/pose
 ```
 
-##  Criando um worskpace
+##  Criando um workspace
 
 
 Lembre-se de dar um "source" na sua instalação caso não tenha adicionado o comando ao bash (que é o mais indicado).
-O workspace é um diretório contendo pacotes de ROS2, iremos aprender a criar um aqui para exemplificação. É boa prática criar um diretório novo destinado a cada novo workspace. Assim, crie o seu workspace entitulado "workspace de desenvolvimento":
+O workspace é um diretório contendo pacotes de ROS2, iremos aprender a criar um aqui para exemplificação. É interessante criar um diretório novo destinado a cada novo workspace. Assim, crie o seu workspace entitulado "workspace de desenvolvimento":
 ```
 mkdir -p ~/dev_ws/src
 cd ~/dev_ws/src
@@ -625,7 +625,7 @@ cd ~/dev_ws/src
 **Obs**: É boa prática criar quaisquer pacotes em seu worspace de ROS 2 já dentro da pasta `src`, assim os comandos acima já criam esta pasta e navegam para ela.
 
 ### Sobre underlays e overlays
-É possível criar junto à sua instalação um "overlay" - um segundo workspace no qual você pode adicionar pacotes e fazer alterações sem interferir com o worskpace base, ou underlay. Como faz o papel de base, o underlay deve conter as depenências de todos os pacotes criados no overlay. O overlay tem preferência sobre o underlay, no sentido de que seus pacotes irão se sobrepor aos do underlay.
+É possível criar junto à sua instalação um "overlay" - um segundo workspace no qual você pode adicionar pacotes e fazer alterações sem interferir com o workspace base, ou underlay. Como faz o papel de base, o underlay deve conter as dependências de todos os pacotes criados no overlay. O overlay tem preferência sobre o underlay, no sentido de que seus pacotes irão se sobrepor aos do underlay.
 
 ### Clonando um repositório amostral
 A medida que desenvolver as suas habilidades em ROS2,você criará os seus próprios pacotes. Como uma primeira vez, você vai montar o seu workspace usando pacotes já existentes, do repositório `ros_tutorials` (que contém, por exemplo, o pacote `turtlesim`) no GitHub. Dentro de `dev_ws/src`, rode o seguinte comando (após a flag -b vc deve adicionar a **branch correspondente à sua versão do ROS 2**):
