@@ -691,3 +691,47 @@ Você deve ver agora a janela com o título "MyTurtleSim": embora você tenha da
 
 E para ver que a alteração feita no turtlesim do overlay não interferiu com o pacote no underlay, abre um novo terminal e rode `turtlesim_node` novamente. Você deve ver o título usual na janela dessa vez.
 
+## Arquivos Launch
+
+Os arquivos de launch em ROS 2 permitem que vários nodes comecem a rodar ao mesmo tempo com suas respectivas configurações, sem que precisemos ativá-los um a um. Esses arquivos têm uma estrutura em Python que lembra html.
+
+A estrutura básica de um arquivo launch é a seguinte:
+
+```py
+from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    return LaunchDescription([
+        Node(
+            package='package1',
+            namespace='node1',
+            executable='exec',
+            name='node_name'
+        ),
+        Node(
+            package='package2',
+            namespace='node2',
+            executable='exec2',
+            name='node2_name'
+        ),
+        Node(
+            package='turtlesim',
+            executable='turtlesim1',
+            name='turtlesim',
+            remappings=[
+                ('/input/pose', '/turtlesim1/turtle1/pose'),
+                ('/output/cmd_vel', '/turtlesim2/turtle1/cmd_vel'),
+            ]
+        )
+    ])
+```
+
+Para criar um arquivo launch, é preciso importar configurações para termos as funções que o ROS reconhece como essenciais para o arquivo. No código, temos apenas uma função que retorna direto o uso da função ```LaunchDescription```, a qual recebe como parâmetros os nodes que serão rodados. 
+
+Para definir cada node:
+- ```package```: é o pacote de origem do node
+- ```namespace```: é um nome que deve ser único para cada node para que não haja sobreposição de mensagens
+- ```exectutable```: é o nome do arquivo no qual o node está descrito (se for em Python, é o nome do arquivo ```.py```, se for em C++ é o nome do arquivo executável gerado na compilação)
+- ```name```: é o nome do node, normalmente definido no código onde ele é inicializado
+- ```remappings```: é onde podemos definir configurações específicas para o node, nomeando, por exemplo, topics que são usados muitas vezes para facilitar a escrita e entendimento do código
