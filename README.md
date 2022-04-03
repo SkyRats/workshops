@@ -667,7 +667,7 @@ build  install  log  src
 ```
 ### Dando source no overlay
 
-Abra um novo terminal. Você construirá seu overlay por cima do underlay, por isso se não tiver adicionado o comando ao seu bash dê source no seu ambiente principal no ROS2 - o overlay. 
+Abra um novo terminal. Você buildará seu overlay por cima do underlay. Por isso, se não tiver adicionado o comando ao seu bash, dê source no seu ambiente principal no ROS2 - o overlay. 
 ```
 source /opt/ros/galactic/setup.bash
 ```
@@ -690,6 +690,138 @@ ros2 run turtlesim turtlesim_node
 Você deve ver agora a janela com o título "MyTurtleSim": embora você tenha dado source em ambos underlay e overlay neste terminal, o último possui precedência.
 
 E para ver que a alteração feita no turtlesim do overlay não interferiu com o pacote no underlay, abre um novo terminal e rode `turtlesim_node` novamente. Você deve ver o título usual na janela dessa vez.
+
+## Criando o seu primeiro pacote de ROS 2
+
+### Preliminares
+Pacotes são meios de armazenar o seu código, e também de compartilhá-lo convenientemente. A criação de pacotes em ROS 2 utiliza ament como sistema de build e ament como ferramenta, e é feita em CMake ou Python. Nesta documentação utiliza o CMake, por ser mais usual, mas não há diferenças significativas entre ambas.
+
+Todos os pacotes em CMake (e Python) têm um conteúdo mínimo necessário:
+- arquivo `package.xml`: contém informações sobre o pacote
+- arquivo `CMakeLists.Text`: descreve como buildar o código contido no pacote
+
+Um único workspace pode conter um número arbitrário de pacotes, cada um em seu próprio diretório. Usualmente tem-se uma pasta `src` dentro do workspace e criam-se os pacotes dentro dela.
+
+### Criando um pacote
+Vá na pasta `src` do workspace criado no tutorial anterior:
+```
+cd ~/dev_ws/src
+```
+A sintaxe para criação de pacotes em ROS 2 é a seguinte:
+```
+ros2 pkg create --build-type ament_cmake <package_name>
+```
+Nesse tutorial usaremos o argumento `--node-name`, que cria um executável "Hello World" no pacote:
+
+```
+ros2 pkg create --build-type ament_cmake --node-name my_node my_package
+```
+
+Após rodar o comando acima, haverá dentro do diretório `src` do seu workspace uma nova pasta de nome `my_package` e o seu terminal deve retornar:
+
+```
+going to create a new package
+package name: my_package
+destination directory: /home/user/dev_ws/src
+package format: 3
+version: 0.0.0
+description: TODO: Package description
+maintainer: ['<name> <email>']
+licenses: ['TODO: License declaration']
+build type: ament_cmake
+dependencies: []
+node_name: my_node
+creating folder ./my_package
+creating ./my_package/package.xml
+creating source and include folder
+creating folder ./my_package/src
+creating folder ./my_package/include/my_package
+creating ./my_package/CMakeLists.txt
+creating ./my_package/src/my_node.cpp
+```
+
+É possível ver acima os (já citados) arquivos gerados automaticamente para o novo pacote.
+
+### Buildando um pacote
+Uma grande vantagem de se colocar os pacotes em um workspace é a possibilidade de buildar vários deles em conjunto rodando `colcon build` na root de seu workspace. Caso contrário, seria necessário buildar cada pacote individualmente.
+
+Retorne à root de seu wokspace (`cd ~/dev_ws`) e rode:
+```
+colcon build
+```
+
+Lembre que o `dev_ws` contém também os pacotes `ros_tutorials` do último tutorial. Assim, o `colcon build` buildou estes também, como o `turtlesim`. Quando um workspace contém muitos pacotes, não é vantajoso rodar `colcon_build` para buildar um pacote individual contido nele. Para economizar tempo, pode-se usar o seguinte comando:
+
+```
+colcon build --packages-select <name_of_the_package>
+
+```
+### Usando o pacote
+Primeiro abra um novo terminal e dentro do `dev_ws` dê um source no seu workspace (lembre-se que como estamos fazendo modificações no workspace, o source a ser dado é no **overlay**):
+```
+. install/local_setup.bash
+```
+Para rodar o executável "Hello World" criado juntamente ao pacote com o argumento `--node-name`, rode o comando:
+```
+ros2 run my_package my_node
+
+```
+Você verá em seu terminal:
+```
+hello world my_package package
+```
+### Conteúdos do pacote
+Dentro de `dev_ws/src/my_package`, você verá os arquivos e pastas que o comando `ros2 pkg create` gerou automaticamente:
+
+```
+CMakeLists.txt  include  package.xml  src
+```
+
+A descrição e declaração de licensa do pacote não são configuradas automaticamente na criação do pacote, porém são necessárias se você desejar publicá-lo. O campo `maintainer` também deve ser preenchido. 
+
+De `dev_ws/src/my_package`, abra o `package.xml`:
+
+```
+<?xml version="1.0"?>
+<?xml-model
+   href="http://download.ros.org/schema/package_format3.xsd"
+   schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+ <name>my_package</name>
+ <version>0.0.0</version>
+ <description>TODO: Package description</description>
+ <maintainer email="user@todo.todo">user</maintainer>
+ <license>TODO: License declaration</license>
+
+ <buildtool_depend>ament_cmake</buildtool_depend>
+
+ <test_depend>ament_lint_auto</test_depend>
+ <test_depend>ament_lint_common</test_depend>
+
+ <export>
+   <build_type>ament_cmake</build_type>
+ </export>
+</package>
+```
+
+Preencha com seu nome e e-mail na linha `maintainer` caso não estejam lá, então altere a linha `description`:
+```
+<description>Beginner client libraries tutorials practice package</description>
+```
+Atualize a linha `license`:
+
+```
+<description>Beginner client libraries tutorials practice package</description>
+```
+
+Salve após terminar.
+Abaixo da marcação da licença, você verá algumas marcações terminando com `_depend`. Nesse local é que o seu `package_xml` listaria as suas dependências (nesse caso não há) em outros pacotes, para que o colcon as procure.
+
+
+
+
+
+
 
 ## Arquivos Launch
 
