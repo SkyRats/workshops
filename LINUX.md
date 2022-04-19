@@ -1,92 +1,20 @@
 # Linux Basics
 
-## Conhecendo o sistema operacional
-
-A maior parte das pessoas (infelizmente) ainda usa rotineiramente sistemas operacionais (SOs) de códido fechado, como o Windows. Eles focam em criar uma experiência de usuário coesa ao custo de customização. Resumidamente, o SO faz tudo "por baixo dos panos". Como a filosofia de sistemas GNU-Linux é bem diferente, vamos falar brevemente sobre como ele gerencia arquivos e permissões.
-
-### O que é esse ext4?
-
-Durante a instalação do Ubuntu de vocês, provavelmente viram em alguns lugares escrito "partição ext4" ou algo do tipo. Isso se refere à forma como o seu computador organiza os arquivos no seu disco, e tem alguns aspectos que valem saber para quando (não se) voce tiver algum problema com o sistema.
-
-Você pode pensar no sistema de arquivos com uma analogia. Vamos imaginar que você quer organizar suas anotações de Cálculo 1; você tem duas formas principais: escrever em um caderno ou em um fichário. Desses dois jeitos, as folhas seguem uma ordem, permitindo que você as ache com facilidade. 
-
-Agora, o caderno e o fichário diferem de uma maneira importante: no caderno você só pode escrever de forma linear, então não dá para colocar uma folha do futuro entre duas folhas passadas; no fichário isso é bem simples. Então no caderno, as suas anotações podem ficar fragmentadas, dificultando a procura por uma anotação específica.
-
-Voltando para o computador: o sistema de arquivos do Windows é mais antigo, e é como um caderno na nossa analogia; o ext4 do Linux é como o fichário. Por isso que você não precisa desfragmentar o disco no Ubuntu, mas precisa no Windows.
-
-O ext4 também é mais "esperto" que o FAT32 ou o NTFS do Windows - ele possui ferramentas de autocorreção. É como se, no ext4, antes de escrever na folha à caneta, você escrevesse a lápis; se alguém esbarrar na sua mão, vai riscar a folha, mas você pode apagar depois. Esse "apagar depois" e "passar a limpo" estão emcapsulados no comando
-```bash
-fsck.ext4 /dev/sda1/ -y
-```
-
-### Caminhos
-
-​Para se referir a diretórios dentro de diretórios podemos adicionar uma barra `/` e escrever o nome do próximo diretório em seguida:
-```
-/home/user/Documents/poli/skyrats
-```
-
-### Permissões
-
-Agora que já sabemos um pouco mais sobre como os arquivos são organizados em um sistema Linux, vamos falar de quem pode acessar o quê.
-
-Em um sistema Linux, tudo é um arquivo ou um diretório, o que pode parecer estranho à primeira vista. Sua webcam, mouse, disco rídigo, antena WiFi, pendrive, todos existem no seu sistema na forma de arquivo ou diretório. Por isso que é muito importante controlar o acesso a certas pastas e arquivos: se qualquer usuário tivesse acesso, poderia gerar caos no seu PC.
-
-Uma forma bem simples de ver as permissões associadas aos itens do seu diretório atual é usando o comando `ls -l`. Você vai perceber que aparecer várias letras antes do nome de cada arquivo:
-```bash
-$ ls -l
-total 52
--rw-r--r-- 1 owner group  5439 mar 20 11:49 GIT-en.md
--rw-rw-r-- 1 owner group 15186 mar 25 19:22 GIT.md
--rw-rw-r-- 1 owner group 22121 mar 27 14:50 LINUX.md
-drwxr-xr-x 2 owner group  4096 mar 24 17:51 media
-```
-
-Todo arquivo e diretório tem 12 letras associadas a ele. São 3 grupos de 4 letras, que podem conter:
-* `d`: Se presente, indica que é diretório; senão, arquivo;
-* `r`: Permissão de ler;
-* `w`: Permissão de escrever, ou seja, modificar o conteúdo;
-* `x`: Permissão de executar (só é importante se o arquivo for um programa);
-* `-`: Indica que a permissão não foi concedida para esse grupo.
-
-Não vamos abordar o significado dos grupos aqui. Mas é importante saber que você pode modificar as permissões associadas a um arquivo usando o comando `chmod`:
-```bash
-$ ls -l
--rw-rw-r--  1 owner group     0 mar 27 15:01 test.txt
-$ chmod -777 test.txt
-$ ls -l
-----------  1 owner group     0 mar 27 15:01 test.txt
-$ chmod +777 test.txt
-$ ls -l
--rwxrwxrwx  1 owner group     0 mar 27 15:01 test.txt*
-```
-
-#### *root*: o administrador do Linux
-
-No Winodws, quando você vai instalar um programa ou mexer com uma configuração de sistema, o seu computador pede permissão de uma conta de "administrador". Isso impede que qualquer pessoa, ou até mesmo um vírus, destrua o seu computador acidentalmente. No Linux, o mesmo conteito existe na forma do *super user*, também chamado de *root*; esse usuário tem permisão de relizar qualuqer operação no seu sistema, alterando arquivos criados por qualquer outro usuário, além de ser o único que pode mexer nos diretórios que contém arquivos de sistema.
-
-À primeira vista, o "administrador" e o *root* não diferem tanto assim. Mas o usuário *root* é especial porque ele possui poderes muito menos restritos que a sua contrapartida no Windows.
-
-Como eu disse, ele pode realizar **qualquer** operação. Ele pode, entre outras coisas, apagar todos os arquivos do seu computador, formatar uma partição no seu disco... em suma, transformar o seu computador em um tijolo. Por isso, nunca é recomandado operar como *root*.
-
-Agora, se você quiser editar arquivos do sistema ou instalar aplicativos, você pode rodar comandos específicos como *root* usando o comando `sudo`. Ele executa só o comando especificado como *root* e volta para o seu usuário. Por exemplo, para apagar um arquivo protegido, você faria:
-```bash
-$ sudo rm protected_file.txt
-[sudo] password for user:
-```
-
-Assim, quando você quiser executar um comando que reclame de falta de permissões, **e souber o que você está fazendo**, você deve rodar `sudo <comando>`.
+## História do UNIX e origem do Linux
 
 ### Por que o Ubuntu?
 
-Depois de descobrir que, no Ubuntu, você pode mudar tão facilmente as configurações ~~e até apagar tudo~~ do seu sistema, fica mais claro de ver as vantagens de usarmos o Ubuntu. 
+Depois de descobrir que, no Ubuntu, você pode mudar tão facilmente as configurações ~~e até apagar tudo~~ do seu sistema, fica mais claro de ver as vantagens de usarmos o Ubuntu.
 
-Primeiro, tem o fato de o sistema ser robusto, estável e personalizável. Quando se trabalha com desenvolvimento, precisamos de diversas configurações personalizadas para cada projeto, ou cada parte do projeto. 
+Primeiro, tem o fato de o sistema ser robusto, estável e personalizável. Quando se trabalha com desenvolvimento, precisamos de diversas configurações personalizadas para cada projeto, ou cada parte do projeto.
 
-Outro ponto importante que faz com que desenvolver softwares no Ubuntu seja prático é a linha de comando. Vamos ver mais sobre isso, mas basicamente podemos dizer qualquer comando para o PC executar pelo terminal, em uma linguagem relativamente de fácil compreensão. Isso torna muito mais fácil fazer instalações, mudar configurações e, de modo geral, conversar com o seu computador diretamente. 
+Outro ponto importante que faz com que desenvolver softwares no Ubuntu seja prático é a linha de comando. Vamos ver mais sobre isso, mas basicamente podemos dizer qualquer comando para o PC executar pelo terminal, em uma linguagem relativamente de fácil compreensão. Isso torna muito mais fácil fazer instalações, mudar configurações e, de modo geral, conversar com o seu computador diretamente.
 
 Mas aí fica a pergunta: de que forma você manda o computador executar todos esses comandos que a gente citou? Como vamos ver a seguir, você usa um dos principais componentes do Linux para desenvolvedores, o **terminal**.
 
+## Conhecendo o sistema operacional
+
+A maior parte das pessoas (infelizmente) ainda usa rotineiramente sistemas operacionais (SOs) de códido fechado, como o Windows. Eles focam em criar uma experiência de usuário coesa ao custo de customização. Resumidamente, o SO faz tudo "por baixo dos panos". Como a filosofia de sistemas GNU-Linux é bem diferente, vamos falar brevemente sobre como ele gerencia arquivos e permissões.
 
 ## Introdução ao Terminal
 
@@ -100,13 +28,39 @@ Mas aí fica a pergunta: de que forma você manda o computador executar todos es
 
 ### Argumentos de linha de comando
 
-​Alguns comandos do terminal possuem **argumentos**. Estes afetam o comando em questão de diversas maneiras. eles são escritos após o comando, seguido de um `-`. 
+​Alguns comandos do terminal possuem **argumentos**. Estes afetam o comando em questão de diversas maneiras. eles são escritos após o comando, seguido de um `-`.
 
-​**Exemplo:** O comando `ls` possui diversos argumentos possíveis de serem usados como `-a` (*all*) e `-l`.  O argumento `-a` faz com que o Terminal liste, além dos dados já listados, arquivos ocultos enquanto o argumento `-l` mostra dados de permissão dos arquivos, tamanho dos arquivos entre outras informações. Para a sintaxe apenas digite o argumento ao lado do comando: `ls -a` ou `ls -l`. 
+​**Exemplo:** O comando `ls` possui diversos argumentos possíveis de serem usados como `-a` (*all*) e `-l`.  O argumento `-a` faz com que o Terminal liste, além dos dados já listados, arquivos ocultos enquanto o argumento `-l` mostra dados de permissão dos arquivos, tamanho dos arquivos entre outras informações. Para a sintaxe apenas digite o argumento ao lado do comando: `ls -a` ou `ls -l`.
 Caso você queira usar dois argumentos você pode apenas escrever um em sequência do outro:`ls -al`
 
 Para obter inforações dos diversos argumentos de um comando, existe o argumento `--help` ou `-h`. O Terminal irá lhe mostrar todos os argumentos existentes para o determinado comando: `ls --help`.
 
+## Explicar diretórios da root e paradigma de tudo ser arquivos
+
+<!---
+### O que é esse ext4?
+
+Durante a instalação do Ubuntu de vocês, provavelmente viram em alguns lugares escrito "partição ext4" ou algo do tipo. Isso se refere à forma como o seu computador organiza os arquivos no seu disco, e tem alguns aspectos que valem saber para quando (não se) voce tiver algum problema com o sistema.
+
+Você pode pensar no sistema de arquivos com uma analogia. Vamos imaginar que você quer organizar suas anotações de Cálculo 1; você tem duas formas principais: escrever em um caderno ou em um fichário. Desses dois jeitos, as folhas seguem uma ordem, permitindo que você as ache com facilidade.
+
+Agora, o caderno e o fichário diferem de uma maneira importante: no caderno você só pode escrever de forma linear, então não dá para colocar uma folha do futuro entre duas folhas passadas; no fichário isso é bem simples. Então no caderno, as suas anotações podem ficar fragmentadas, dificultando a procura por uma anotação específica.
+
+Voltando para o computador: o sistema de arquivos do Windows é mais antigo, e é como um caderno na nossa analogia; o ext4 do Linux é como o fichário. Por isso que você não precisa desfragmentar o disco no Ubuntu, mas precisa no Windows.
+
+O ext4 também é mais "esperto" que o FAT32 ou o NTFS do Windows - ele possui ferramentas de autocorreção. É como se, no ext4, antes de escrever na folha à caneta, você escrevesse a lápis; se alguém esbarrar na sua mão, vai riscar a folha, mas você pode apagar depois. Esse "apagar depois" e "passar a limpo" estão emcapsulados no comando
+```bash
+fsck.ext4 /dev/sda1/ -y
+```
+--->
+
+
+### Caminhos
+
+​Para se referir a diretórios dentro de diretórios podemos adicionar uma barra `/` e escrever o nome do próximo diretório em seguida:
+```
+/home/user/Documents/poli/skyrats
+```
 
 ## Comandos de Navegação
 
@@ -149,6 +103,57 @@ cd ../..
   ```
 
 * Digitar apenas `cd` no terminal irá te levar até a sua `/home`;
+
+### Permissões
+
+Agora que já sabemos um pouco mais sobre como os arquivos são organizados em um sistema Linux, vamos falar de quem pode acessar o quê.
+
+Em um sistema Linux, tudo é um arquivo ou um diretório, o que pode parecer estranho à primeira vista. Sua webcam, mouse, disco rídigo, antena WiFi, pendrive, todos existem no seu sistema na forma de arquivo ou diretório. Por isso que é muito importante controlar o acesso a certas pastas e arquivos: se qualquer usuário tivesse acesso, poderia gerar caos no seu PC.
+
+Uma forma bem simples de ver as permissões associadas aos itens do seu diretório atual é usando o comando `ls -l`. Você vai perceber que aparecer várias letras antes do nome de cada arquivo:
+```bash
+$ ls -l
+total 52
+-rw-r--r-- 1 owner group  5439 mar 20 11:49 GIT-en.md
+-rw-rw-r-- 1 owner group 15186 mar 25 19:22 GIT.md
+-rw-rw-r-- 1 owner group 22121 mar 27 14:50 LINUX.md
+drwxr-xr-x 2 owner group  4096 mar 24 17:51 media
+```
+
+Todo arquivo e diretório tem 12 letras associadas a ele. São 3 grupos de 4 letras, que podem conter:
+* `d`: Se presente, indica que é diretório; senão, arquivo;
+* `r`: Permissão de ler;
+* `w`: Permissão de escrever, ou seja, modificar o conteúdo;
+* `x`: Permissão de executar (só é importante se o arquivo for um programa);
+* `-`: Indica que a permissão não foi concedida para esse grupo.
+
+Não vamos abordar o significado dos grupos aqui. Mas é importante saber que você pode modificar as permissões associadas a um arquivo usando o comando `chmod`:
+```bash
+$ ls -l
+-rw-rw-r--  1 owner group     0 mar 27 15:01 test.txt
+$ chmod -777 test.txt
+$ ls -l
+----------  1 owner group     0 mar 27 15:01 test.txt
+$ chmod +777 test.txt
+$ ls -l
+-rwxrwxrwx  1 owner group     0 mar 27 15:01 test.txt*
+```
+
+#### *root*: o administrador do Linux
+
+No Windows, quando você vai instalar um programa ou mexer com uma configuração de sistema, o seu computador pede permissão de uma conta de "administrador". Isso impede que qualquer pessoa, ou até mesmo um vírus, destrua o seu computador acidentalmente. No Linux, o mesmo conteito existe na forma do *super user*, também chamado de *root*; esse usuário tem permisão de relizar qualuqer operação no seu sistema, alterando arquivos criados por qualquer outro usuário, além de ser o único que pode mexer nos diretórios que contém arquivos de sistema.
+
+À primeira vista, o "administrador" e o *root* não diferem tanto assim. Mas o usuário *root* é especial porque ele possui poderes muito menos restritos que a sua contrapartida no Windows.
+
+Como eu disse, ele pode realizar **qualquer** operação. Ele pode, entre outras coisas, apagar todos os arquivos do seu computador, formatar uma partição no seu disco... em suma, transformar o seu computador em um tijolo. Por isso, nunca é recomandado operar como *root*.
+
+Agora, se você quiser editar arquivos do sistema ou instalar aplicativos, você pode rodar comandos específicos como *root* usando o comando `sudo`. Ele executa só o comando especificado como *root* e volta para o seu usuário. Por exemplo, para apagar um arquivo protegido, você faria:
+```bash
+$ sudo rm protected_file.txt
+[sudo] password for user:
+```
+
+Assim, quando você quiser executar um comando que reclame de falta de permissões, **e souber o que você está fazendo**, você deve rodar `sudo <comando>`.
 
 
 ## Criando e Removendo Arquivos e Diretórios
@@ -242,7 +247,7 @@ Arquivo100
 Arquivo5
 ```
 
-​O principal caracter coringa que usamos é o `*`. Tente ler esse caracter como "qualquer coisa". 
+​O principal caracter coringa que usamos é o `*`. Tente ler esse caracter como "qualquer coisa".
 
 Se usamos ele no começo, tudo que está depois dele é obrigatoriamente considerado, sem importar o que vem antes. Nesse caso, ele faria referência a arquivos ou diretórios com o mesmo final:
 ```bash
@@ -269,6 +274,7 @@ Exemplo23
 
 No Windows, em que cada programa que você quer instalar precisa de um instalador específico, geralmente um `.exe`. Sistemas operacionais Linux, por outro lado, geralmente tem um gerenciador de pacotes, um servidor unificado do qual você pode instalar programas. Digas-se de passagem, a maior diferença entre distos de Linux é exatamente o gerenciador de pacotes.
 
+TODO: * Repositório: explicar o que é
 Sistemas baseados em Debian, como o Ubuntu, usam um *package manager* chamado `apt`, que é também um comando que você pode digitar no seu terminal. Ele tem vários subcomandos que de fato realizam as funções do `apt`. Os principais são:
 * `install <nome dos pacote>`: se estiver nos servidores, instala o programa especificado no seu computador. Antes de instalar, ele mostra as dependências (outros pacotes que você precisa para rodar aquele que quer) e o tamanho do download, além de pedir confirmação;
 * `remove <nome dos pacotes>`: deleta o pacote instalado do seu sistema;
@@ -276,7 +282,7 @@ Sistemas baseados em Debian, como o Ubuntu, usam um *package manager* chamado `a
 * `update`: confere se no servidor existem atualizações para os pacotes instalados;
 * `upgrade`: de fato instala as atualizações nos pacotes instalados.
 
-Por exemplo, para instalar o `htop`, você digitaria: 
+Por exemplo, para instalar o `htop`, você digitaria:
 ```bash
 sudo apt install htop
 ```
@@ -298,12 +304,12 @@ Mas às vezes, o programa que você quer não está nos repositórios padrão. E
 
 ### Agrupando
 
-Quando se quer fazer uso de algum documento dentro de algum arquivo agrupado ou compactado deve-se extrair esse arquivo. 
+Quando se quer fazer uso de algum documento dentro de algum arquivo agrupado ou compactado deve-se extrair esse arquivo.
 
 Para agrupar é usado o comando `tar` (*tape archive*), mas é necessário passar algumas informações ao terminal para usar esse comando. Vamos dar uma olhada em como funciona a sintaxe e vou explicando com mais calma o que cada coisa significa:
 
 ```
-tar [o_que_deseja_fazer]f [nome_do_arquivo_a_ser_criado].tar [arquivos_a_serem_agrupados] 
+tar [o_que_deseja_fazer]f [nome_do_arquivo_a_ser_criado].tar [arquivos_a_serem_agrupados]
 ```
 
 Parece muita coisa, mas é bem mais tranquilo do que parece. Antes de mais nada saiba que aqui os colchetes `[]` estão apenas indicando o espaço onde vão os comandos. Eles não fazem parte do comando em si. Dito isso vamos por partes:
@@ -315,7 +321,7 @@ Parece muita coisa, mas é bem mais tranquilo do que parece. Antes de mais nada 
 * `f` (*file*): o **último** argumento deve ser`f`, seguido do nome do arquivo. É obrigatório;
 * `.tar`: todo arquivo agrupado pelo comando `tar` é de extensão `.tar`, então tem que ter no final do nome do arquivo criado;
 
-Por exemplo, para agrupar as imagens `.png` em um arquivo `exemplo1.tar`, digitamos:  
+Por exemplo, para agrupar as imagens `.png` em um arquivo `exemplo1.tar`, digitamos:
 ```bash
 tar cf exemplo1.tar *.png
 ```
@@ -326,7 +332,7 @@ Para extrair os arquivos no diretório atual, digite:
 tar xf exemplo1.tar
 ```
 
-Podemos dar um caminho no final para extrair em outro diretório. Para isso, passamos o diretório com a *flag* `-C`: 
+Podemos dar um caminho no final para extrair em outro diretório. Para isso, passamos o diretório com a *flag* `-C`:
 ```bash
 tar xf exemplo1.tar -C ~/Documents/ExtractedFiles
 ```
@@ -335,6 +341,35 @@ Ou até mesmo extrair arquivos específicos:
 ```bash
 tar xf exemplo1.tar foto1.png
 ```
+
+
+## Procurando Arquivos
+
+Para realizar a busca por um arquivo é usado o comando `find`. Logo após o comando é necessário dizer o diretório em que você irá realizar a busca. Em seguida existem várias opções de busca. Veremos aqui a mais usada que é filtrar por nome. Para isso é usada a flag `-name`:
+```bash
+find ~/Documents -name colombini.py
+```
+
+​Estamos realizando uma busca por um arquivo chamado `colombini.py` no diretório `Documents`. Tente sempre ser o mais preciso no diretório de busca. Apesar de você poder procurar por um arquivo desde a `root` sua pesquisa pode ser mais demorada e com maior gasto computacional.
+
+​Outra ferramenta que temos para realizar buscar é o `locate`. Apenas digite o comando e o arquivo/diretório que deseja buscar:
+```bash
+locate colombini.py
+```
+
+​Aqui estamos procurando em todos os lugares do computador pelo arquivo `colombini.py`
+
+​Já no exemplo abaixo, estamos procurando por qualquer arquivo `.py`
+```bash
+locate .py
+```
+
+​	Mas afinal, qual a diferença entre o `find` e o `locate`? O `find` faz uma varredura nos seus diretórios até achar o que você pediu. Assim, as coisas são atualizadas em tempo real. Se você criar um diretório novo o `find` irá buscar ele.
+​	 O `locate` é um pouco diferente. Ele faz uso de um **banco de dados interno** do seu computador. Esse banco de dados é atualizado toda vez que seu computador é inicializado. Assim, se você criar um diretório ele ainda não vai estar registrado nesse banco de dados e você não irá encontrá-lo com o `locate`, a menos que reinicie o computador.
+
+Caso você queira, você pode atualizar na mão esse banco de dados. Apenas use o comando `updatedb`. Caso você apenas digite o comando irá perceber que deu erro. Isso é porque você não tem permissão para acessar esse comando, mas pode fazê-lo com o `sudo`.
+
+## Misc
 
 ### Compactando
 
@@ -357,36 +392,6 @@ Você pode descompactar um arquivo específico ou uma série de arquivos que voc
 tar czf exemplo.tgz *.png
 # Equivalente a tar czf exemplo.tar.gz *.png
 ```
-
-
-## Procurando Arquivos
-
-Para realizar a busca por um arquivo é usado o comando `find`. Logo após o comando é necessário dizer o diretório em que você irá realizar a busca. Em seguida existem várias opções de busca. Veremos aqui a mais usada que é filtrar por nome. Para isso é usada a flag `-name`:
-```bash
-find ~/Documents -name colombini.py
-```
-
-​Estamos realizando uma busca por um arquivo chamado `colombini.py` no diretório `Documents`. Tente sempre ser o mais preciso no diretório de busca. Apesar de você poder procurar por um arquivo desde a `root` sua pesquisa pode ser mais demorada e com maior gasto computacional. 
-
-​Outra ferramenta que temos para realizar buscar é o `locate`. Apenas digite o comando e o arquivo/diretório que deseja buscar:
-```bash
-locate colombini.py
-```
-
-​Aqui estamos procurando em todos os lugares do computador pelo arquivo `colombini.py`
-
-​Já no exemplo abaixo, estamos procurando por qualquer arquivo `.py`
-```bash
-locate .py
-```
-
-​	Mas afinal, qual a diferença entre o `find` e o `locate`? O `find` faz uma varredura nos seus diretórios até achar o que você pediu. Assim, as coisas são atualizadas em tempo real. Se você criar um diretório novo o `find` irá buscar ele.
-​	 O `locate` é um pouco diferente. Ele faz uso de um **banco de dados interno** do seu computador. Esse banco de dados é atualizado toda vez que seu computador é inicializado. Assim, se você criar um diretório ele ainda não vai estar registrado nesse banco de dados e você não irá encontrá-lo com o `locate`, a menos que reinicie o computador.
-
-Caso você queira, você pode atualizar na mão esse banco de dados. Apenas use o comando `updatedb`. Caso você apenas digite o comando irá perceber que deu erro. Isso é porque você não tem permissão para acessar esse comando, mas pode fazê-lo com o `sudo`. 
-
-## Misc
-
 ### .bashrc
 
 ​Sempre que você abre uma janela de Terminal um *script* é executado com uma série de comandos. O nome dele é `.bashrc` e você pode acessá-lo usando um editor de texto. Tente usar o editor `nano` digitando no seu terminal `nano .bashrc`. Desca até o final, digite `echo Hello World!` e feche o `nano` com `CTRL + X`. Não se esqueça de salvar as alterações! Abra uma nova janela do Terminal e  divirta-se!
@@ -398,3 +403,6 @@ Caso você queira, você pode atualizar na mão esse banco de dados. Apenas use 
 ### Best argument ever
 
 `--help` ou `-h`, quando usado com qualquer comando te lista as possibilidades do comando e te ajuda a usá-lo.
+### Manuais de uso de comandos
+
+`man`, busca e apresenta o manual de um comando/função
