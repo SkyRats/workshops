@@ -4,17 +4,17 @@
 
 No começo, havia o UNIX, um sistema operacional muito utilizado e amado por empresas e universidades ao redor do mundo. No entanto, o software era propriedade da empresa AT&T, que não disponibilizava o seu código-fonte. Numa tentativa de criar um sistema operacional UNIX-like , mas de software aberto, (parecido com o UNIX), a Universidade da Califórnia em Berkeley desenvolveu o BSD (Berkeley Software Distribution), mas foi processada pela AT&T.
 
-![Criadores do UNIX](./media/ritchie_thompson_kernighan.png)
+![Criadores do UNIX](./media/ritchie_thompson_kernighan.png){:.centered}
 
 Da demanda por softwares gratuitos, o programador Richard Stallman criou a GNU Software Foundation, que promoveu o desenvolvimento de aplicativos similares aos do UNIX, mas de código aberto. O projeto recriou muitas ferramentas utilziadas no UNIX e que sobrevivem até os dias de hoje no Linux (Tar, Grep, Bash, Emacs, etc.).
 
-![Richard Stallman](./media/richard_stallman.jpeg)
+![Richard Stallman](./media/richard_stallman.jpeg){:.centered}
 
 Ok, mas do que adianta os aplicativos se há não sistema operacional para executá-los?
 
 Nesse mesmo período, um estudante universitário finlandês estava trabalhando no exato componente o qual a GNU necessitava. Linus Torvalds anunciou o sistema operacional Freax (alterado para Linux sem seu consentimento) em um fórum na web e milhares de programadores adotaram o projeto.
 
-![Linus Torvalds](./media/linus_torvalds.jpeg)
+![Linus Torvalds](./media/linus_torvalds.jpeg){:.centered}
 
 Desde o começo, o Linux é um sistema operacional de software livre e de código aberto que foi e é construído por milhares de pessoas ao redor do globo. O Linux é altamente customizável e sanou a demanda por um SO gratuito e UNIX-like. Há diversas distribuições do SO ("distros") para os mais diversos tipos de aplicações (sistemas embarcados, computadores pessoais, dispositivos móveis, servidores, etc).
 
