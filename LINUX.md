@@ -30,7 +30,7 @@ Mas aí fica a pergunta: de que forma você manda o computador executar todos es
 
 ## Conhecendo o sistema operacional
 
-A maior parte das pessoas (infelizmente) ainda usa rotineiramente sistemas operacionais (SOs) de códido fechado, como o Windows. Eles focam em criar uma experiência de usuário coesa ao custo de customização. Resumidamente, o SO faz tudo "por baixo dos panos". Como a filosofia de sistemas GNU-Linux é bem diferente, vamos falar brevemente sobre como ele gerencia arquivos e permissões.
+A maior parte das pessoas (*infelizmente*) ainda usa rotineiramente sistemas operacionais (SOs) de códido fechado, como o Windows. Eles focam em criar uma experiência de usuário coesa ao custo de customização. Para iss, resumidamente, o SO faz tudo "por baixo dos panos". Contudo, como a filosofia de sistemas GNU-Linux é bem diferente, vamos falar brevemente sobre como ele gerencia arquivos e permissões.
 
 ## Introdução ao Terminal
 
@@ -52,6 +52,39 @@ Caso você queira usar dois argumentos você pode apenas escrever um em sequênc
 Para obter inforações dos diversos argumentos de um comando, existe o argumento `--help` ou `-h`. O Terminal irá lhe mostrar todos os argumentos existentes para o determinado comando: `ls --help`.
 
 ## Explicar diretórios da root e paradigma de tudo ser arquivos
+
+### O que é paradigma
+
+Como eu não conhecia essa palavra antes de entrar na universidade, achei interessante colocar aqui a definição que conheci:
+
+    "Forma de enxergar o mundo"
+    
+### Tudo é arquivo
+
+Nos sistemas Linux, existe uma forma de organizar os dados que estrutura tudo como se fosse arquivos. Então, na árvore de diretórios existem tanto arquivos clássicos como so PDFs e fotos, até pseudo arquivos e informação momentâneas que quardam estados da máquina (e quem nem no HD estão, e sim, vem direto da RAM). Isso para não dizer que existem variáveis em forma de arquivo, mas deixo isso para depois!
+
+### Árvore de diretórios
+
+/
+
+/boot
+
+/etc
+
+/home
+
+/bin e sbin
+
+/usr
+
+/dev
+
+/proc
+
+/sys
+
+/var
+
 
 <!---
 ### O que é esse ext4?
