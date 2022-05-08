@@ -53,24 +53,6 @@ Para obter inforações dos diversos argumentos de um comando, existe o argument
 
 ## Explicar diretórios da root e paradigma de tudo ser arquivos
 
-<!---
-### O que é esse ext4?
-
-Durante a instalação do Ubuntu de vocês, provavelmente viram em alguns lugares escrito "partição ext4" ou algo do tipo. Isso se refere à forma como o seu computador organiza os arquivos no seu disco, e tem alguns aspectos que valem saber para quando (não se) voce tiver algum problema com o sistema.
-
-Você pode pensar no sistema de arquivos com uma analogia. Vamos imaginar que você quer organizar suas anotações de Cálculo 1; você tem duas formas principais: escrever em um caderno ou em um fichário. Desses dois jeitos, as folhas seguem uma ordem, permitindo que você as ache com facilidade.
-
-Agora, o caderno e o fichário diferem de uma maneira importante: no caderno você só pode escrever de forma linear, então não dá para colocar uma folha do futuro entre duas folhas passadas; no fichário isso é bem simples. Então no caderno, as suas anotações podem ficar fragmentadas, dificultando a procura por uma anotação específica.
-
-Voltando para o computador: o sistema de arquivos do Windows é mais antigo, e é como um caderno na nossa analogia; o ext4 do Linux é como o fichário. Por isso que você não precisa desfragmentar o disco no Ubuntu, mas precisa no Windows.
-
-O ext4 também é mais "esperto" que o FAT32 ou o NTFS do Windows - ele possui ferramentas de autocorreção. É como se, no ext4, antes de escrever na folha à caneta, você escrevesse a lápis; se alguém esbarrar na sua mão, vai riscar a folha, mas você pode apagar depois. Esse "apagar depois" e "passar a limpo" estão emcapsulados no comando
-```bash
-fsck.ext4 /dev/sda1/ -y
-```
---->
-
-
 ### Caminhos
 
 ​Para se referir a diretórios dentro de diretórios podemos adicionar uma barra `/` e escrever o nome do próximo diretório em seguida:
@@ -157,7 +139,7 @@ $ ls -l
 
 #### *root*: o administrador do Linux
 
-No Windows, quando você vai instalar um programa ou mexer com uma configuração de sistema, o seu computador pede permissão de uma conta de "administrador". Isso impede que qualquer pessoa, ou até mesmo um vírus, destrua o seu computador acidentalmente. No Linux, o mesmo conteito existe na forma do *super user*, também chamado de *root*; esse usuário tem permisão de relizar qualuqer operação no seu sistema, alterando arquivos criados por qualquer outro usuário, além de ser o único que pode mexer nos diretórios que contém arquivos de sistema.
+No Windows, quando você vai instalar um programa ou mexer com uma configuração de sistema, o seu computador pede permissão de uma conta de "administrador". Isso impede que qualquer pessoa, ou até mesmo um vírus, destrua o seu computador acidentalmente. No Linux, o mesmo conteito existe na forma do *super user*, também chamado de *root*; esse usuário tem permisão de relizar qualquer operação no seu sistema, alterando arquivos criados por qualquer outro usuário, além de ser o único que pode mexer nos diretórios que contém arquivos de sistema.
 
 À primeira vista, o "administrador" e o *root* não diferem tanto assim. Mas o usuário *root* é especial porque ele possui poderes muito menos restritos que a sua contrapartida no Windows.
 
@@ -309,6 +291,10 @@ Mas às vezes, o programa que você quer não está nos repositórios padrão. E
 3. Instalar a partir do código fonte (*source*). Você vai ter que compilar o programa do zero no seu computador, o que é bem mais complicado e demorado do que instalar as versões pré compiladas pelo `apt`. Cada programa vai ter instruções de instalação diferentes.
 
 
+
+## Misc
+### Manuais de uso de comandos
+
 ## Agrupando e Compactando Arquivos e Diretórios
 
 ### Conceitos
@@ -334,7 +320,7 @@ Parece muita coisa, mas é bem mais tranquilo do que parece. Antes de mais nada 
   * `c` (*create*): Usado para criar um arquivo agrupado;
   * `x` (*extract*): Usado para extrair um arquivo agrupado ja criado;
 
-* `f` (*file*): o **último** argumento deve ser`f`, seguido do nome do arquivo. É obrigatório;
+* `f` (*file*): o **último** argumento deve ser `f`, seguido do nome do arquivo. É obrigatório;
 * `.tar`: todo arquivo agrupado pelo comando `tar` é de extensão `.tar`, então tem que ter no final do nome do arquivo criado;
 
 Por exemplo, para agrupar as imagens `.png` em um arquivo `exemplo1.tar`, digitamos:
@@ -358,6 +344,27 @@ Ou até mesmo extrair arquivos específicos:
 tar xf exemplo1.tar foto1.png
 ```
 
+### Compactando
+
+Para compactar, usamos o comando `gzip` com o argumento `-k` (*keep*)  e escrevemos o nome do arquivo/diretório que queremos compactar. Seu arquivo compactado terá duas extensões sendo uma a original do arquivo e uma `.gz`:
+```bash
+gzip -k foto1.png
+```
+
+​Usamos o `-k`  para criar um backup do nosso arquivo original. Caso não usemos ele o gzip irá sobreescrever o arquivo original. É muito mais seguro mantermos uma cópia do original, copiarmos ele e compactarmos a cópia.
+
+​Para descompactar o processo é o mesmo mas é usado o comando `gunzip`:
+```bash
+gunzip *.gz
+```
+
+Você pode descompactar um arquivo específico ou uma série de arquivos que você filtrar assim como com o comando `tar`.
+
+​Você pode ainda agrupar e compactar arquivos num comando só. Para isso usamos o `tar` de maneira semelhante ao agrupamento mas acrescentamos um `z`(*zip*) e alteramos a extensão para `.tar.gz` ou`.tgz`:
+```bash
+tar czf exemplo.tgz *.png
+# Equivalente a tar czf exemplo.tar.gz *.png
+```
 
 ## Procurando Arquivos
 
@@ -385,29 +392,6 @@ locate .py
 
 Caso você queira, você pode atualizar na mão esse banco de dados. Apenas use o comando `updatedb`. Caso você apenas digite o comando irá perceber que deu erro. Isso é porque você não tem permissão para acessar esse comando, mas pode fazê-lo com o `sudo`.
 
-## Misc
-
-### Compactando
-
-Para compactar, usamos o comando `gzip` com o argumento `-k` (*keep*)  e escrevemos o nome do arquivo/diretório que queremos compactar. Seu arquivo compactado terá duas extensões sendo uma a original do arquivo e uma `.gz`:
-```bash
-gzip -k foto1.png
-```
-
-​Usamos o `-k`  para criar um backup do nosso arquivo original. Caso não usemos ele o gzip irá sobreescrever o arquivo original. É muito mais seguro mantermos uma cópia do original, copiarmos ele e compactarmos a cópia.
-
-​Para descompactar o processo é o mesmo mas é usado o comando `gunzip`:
-```bash
-gunzip *.gz
-```
-
-Você pode descompactar um arquivo específico ou uma série de arquivos que você filtrar assim como com o comando `tar`.
-
-​Você pode ainda agrupar e compactar arquivos num comando só. Para isso usamos o `tar` de maneira semelhante ao agrupamento mas acrescentamos um `z`(*zip*) e alteramos a extensão para `.tar.gz` ou`.tgz`:
-```bash
-tar czf exemplo.tgz *.png
-# Equivalente a tar czf exemplo.tar.gz *.png
-```
 ### .bashrc
 
 ​Sempre que você abre uma janela de Terminal um *script* é executado com uma série de comandos. O nome dele é `.bashrc` e você pode acessá-lo usando um editor de texto. Tente usar o editor `nano` digitando no seu terminal `nano .bashrc`. Desca até o final, digite `echo Hello World!` e feche o `nano` com `CTRL + X`. Não se esqueça de salvar as alterações! Abra uma nova janela do Terminal e  divirta-se!
@@ -419,6 +403,5 @@ tar czf exemplo.tgz *.png
 ### Best argument ever
 
 `--help` ou `-h`, quando usado com qualquer comando te lista as possibilidades do comando e te ajuda a usá-lo.
-### Manuais de uso de comandos
 
-`man`, busca e apresenta o manual de um comando/função
+`man` busca e apresenta o manual de um comando/função
