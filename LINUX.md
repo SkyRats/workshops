@@ -30,7 +30,7 @@ Mas aí fica a pergunta: de que forma você manda o computador executar todos es
 
 ## Conhecendo o sistema operacional
 
-A maior parte das pessoas (infelizmente) ainda usa rotineiramente sistemas operacionais (SOs) de códido fechado, como o Windows. Eles focam em criar uma experiência de usuário coesa ao custo de customização. Resumidamente, o SO faz tudo "por baixo dos panos". Como a filosofia de sistemas GNU-Linux é bem diferente, vamos falar brevemente sobre como ele gerencia arquivos e permissões.
+A maior parte das pessoas (*infelizmente*) ainda usa rotineiramente sistemas operacionais (SOs) de códido fechado, como o Windows. Eles focam em criar uma experiência de usuário coesa ao custo de customização. Para iss, resumidamente, o SO faz tudo "por baixo dos panos". Contudo, como a filosofia de sistemas GNU-Linux é bem diferente, vamos falar brevemente sobre como ele gerencia arquivos e permissões.
 
 ## Introdução ao Terminal
 
@@ -51,7 +51,37 @@ Caso você queira usar dois argumentos você pode apenas escrever um em sequênc
 
 Para obter inforações dos diversos argumentos de um comando, existe o argumento `--help` ou `-h`. O Terminal irá lhe mostrar todos os argumentos existentes para o determinado comando: `ls --help`.
 
-## Explicar diretórios da root e paradigma de tudo ser arquivos
+### O que é paradigma
+
+Como eu não conhecia essa palavra antes de entrar na universidade, achei interessante colocar aqui a definição que conheci:
+
+    "Forma de enxergar o mundo"
+
+### Tudo é arquivo
+
+Nos sistemas Linux, existe uma forma de organizar os dados que estrutura tudo como se fosse arquivos. Então, na árvore de diretórios existem tanto arquivos clássicos como so PDFs e fotos, até pseudo arquivos e informação momentâneas que quardam estados da máquina (e quem nem no HD estão, e sim, vem direto da RAM). Isso para não dizer que existem variáveis em forma de arquivo, mas deixo isso para depois!
+
+### Árvore de diretórios
+
+/
+
+/boot
+
+/etc
+
+/home
+
+/bin e sbin
+
+/usr
+
+/dev
+
+/proc
+
+/sys
+
+/var
 
 ### Caminhos
 
@@ -405,3 +435,18 @@ Caso você queira, você pode atualizar na mão esse banco de dados. Apenas use 
 `--help` ou `-h`, quando usado com qualquer comando te lista as possibilidades do comando e te ajuda a usá-lo.
 
 `man` busca e apresenta o manual de um comando/função
+
+### O que é esse ext4?
+
+Durante a instalação do Ubuntu de vocês, provavelmente viram em alguns lugares escrito "partição ext4" ou algo do tipo. Isso se refere à forma como o seu computador organiza os arquivos no seu disco, e tem alguns aspectos que valem saber para quando (não se) voce tiver algum problema com o sistema.
+
+Você pode pensar no sistema de arquivos com uma analogia. Vamos imaginar que você quer organizar suas anotações de Cálculo 1; você tem duas formas principais: escrever em um caderno ou em um fichário. Desses dois jeitos, as folhas seguem uma ordem, permitindo que você as ache com facilidade.
+
+Agora, o caderno e o fichário diferem de uma maneira importante: no caderno você só pode escrever de forma linear, então não dá para colocar uma folha do futuro entre duas folhas passadas; no fichário isso é bem simples. Então no caderno, as suas anotações podem ficar fragmentadas, dificultando a procura por uma anotação específica.
+
+Voltando para o computador: o sistema de arquivos do Windows é mais antigo, e é como um caderno na nossa analogia; o ext4 do Linux é como o fichário. Por isso que você não precisa desfragmentar o disco no Ubuntu, mas precisa no Windows.
+
+O ext4 também é mais "esperto" que o FAT32 ou o NTFS do Windows - ele possui ferramentas de autocorreção. É como se, no ext4, antes de escrever na folha à caneta, você escrevesse a lápis; se alguém esbarrar na sua mão, vai riscar a folha, mas você pode apagar depois. Esse "apagar depois" e "passar a limpo" estão emcapsulados no comando
+```bash
+fsck.ext4 /dev/sda1/ -y
+```
