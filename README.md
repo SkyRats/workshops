@@ -14,3 +14,7 @@ It assumes that the preson who is reading this is already used to programming in
 4. Contours
 5. Cascades
 6. Exercise
+
+## Slides
+
+https://docs.google.com/presentation/d/1fvrxQBNXtSqCKullCxXmf0hheMpQH-ArdV0kWqVlZbo/edit#slide=id.p 
