@@ -4,7 +4,7 @@ import cv2
 import numpy as np
   
 # Let's load a simple image with 3 black squares
-image = cv2.imread('C://Users//gfg//shapes.jpg')
+image = cv2.imread('YOUR_IMG_SRC')
 cv2.waitKey(0)
   
 # Grayscale
